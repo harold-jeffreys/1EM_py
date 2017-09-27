@@ -28,6 +28,18 @@ language that was conceived in the 1980s, but has undergone recent
 revision which has resulted in the more recent version Python 3.0 not
 being backward compatible with older versions, so beware!
 </div>
+
+<div>
+There are many different computing languages that we could use to
+teach scientific computing, such as Fortran or C/C++. Python has some
+advantages as it has a large community supporting the language
+development, and a many widely used libraries for data science. It is
+an interpreted language, and can be run on many different machines
+with different operating systems and hardware architectures. However,
+for many high performance computing systems it can be desirable to use
+Fortran or a C/C++.
+</div>
+
 <div>
 This first unit introduces the basics of the practical aspects of
 telling the computer about your programs, and how to run programs.
@@ -89,43 +101,36 @@ course is called <i>gedit</i>, and you can launch it by
 typing <tt class="bluecolor">gedit &amp;</tt>.  The ampersand tells
 the computer to give control back to the Terminal while gedit
 continues to run.  An editor window should appear, and you can start
-writing a program in it.
+writing a program in it. (NB: the terminal and the text editor gedit
+are not the same thing! The terminal is for issuing commands to the
+computer, and gedit is a text editor).
 <li>Now, type the following program into the editor:
-  <pre class="bluecolor">
-
-
-#Fibonacci series  
-print("Calculating the Fibonacci series")
-
-a = 0
-b = 1
-while b < 20:
-	  #print out the current fibonacci series number
-	  print(b)
-	  #calculate the next term in the series
-	  b = a+b
-	  #store the previous term in a
-	  a = b-a
-
-
-
-</pre>
+  <pre>
+    <tt>
+      #start of the program to print some lines
+      print("My first python program")
+      a = 1
+      b = 1.2
+      print("The integer a has a value ", a)
+      print("The floating point number b has a value ", b)
+    </tt>
+    </pre>
 <li>Save the program with a file
-name <tt class="bluecolor">fibonacci.py</tt>.  You should use the file
+name <tt class="bluecolor">firstprogram.py</tt>.  You should use the file
 extension <tt class="bluecolor">.py</tt> as this is the default file
 extension for python programs.
 <li>Now to run your program. Python is an interpreted language. To
 invoke the interpreter: Go to the Terminal, and
-type <tt class="bluecolor">python3 fibonacci.py</tt> (Note here we are
-using version 3 of python. If you type <tt>python fibonacci.py</tt>
-you will be using version 2 of python, which may give different
-results for some programs).
+type <tt class="bluecolor">python3 firstprogram.py</tt> (Note here we
+are using version 3 of python. If you type <tt>python
+firstprogram.py</tt> you will be using version 2 of python, which will
+give different results for some programs).
 </ol>
 </div>
 <div>
 Now let's look at the program itself to understand how it works.  The
 first line, beginning with the <tt class="bluecolor">#</tt> symbol is
-a comment.  Comments are ignored by the interpreter and are just there
+a comment. Comments are ignored by the interpreter and are just there
 for the benefit of both you and anyone else reading your code.  It is
 good practice to put comments in to explain the purpose of the
 program, and to comment on sections of the code that may not seem
@@ -135,29 +140,23 @@ time?&quot; If you think the answer is <i>no</i>, then a comment is
 probably in order.
 </div>
 <div>
-The lines <tt class="bluecolor">print("Calculating the Fibonacci
-series")</tt> print the text to the screen. The next few lines define
-two objects with names <tt class="bluecolor">a</tt>
-and <tt class="bluecolor">b</tt>. Python then assigns two integers to
-these names. Note you should be careful of the variable names you
-chose for your quantities. It is possible to use variable names that
-overwrite built-in functions, however there are some reserved words
-that you cannot use for variable names. It is good practice to use
-meaningful names, rather than algebraic names
-like <tt class="bluecolor">a</tt>. Variable names are case sensitive,
-and blanks spaces and full stops are not allowed.
-</div>
-<div>
-The final section is a loop over a block of code that prints out the
-numbers in the Fibonacci series. Note that each line of code that is
-part of this block is indented by the same amount. Statements are
-grouped together into a code block by indenting in this way.
+The line <tt class="bluecolor">print("My first python program")</tt>
+prints the text to the screen. The next few lines define two objects
+with names <tt class="bluecolor">a</tt>
+and <tt class="bluecolor">b</tt>. Python then assigns an integer to
+<tt>a</tt> and a floating point number to <tt>b</tt>. Note you should
+be careful of the variable names you chose for your quantities. It is
+possible to use variable names that overwrite built-in functions,
+however there are some reserved words that you cannot use for variable
+names. It is good practice to use meaningful names, rather than
+algebraic names like <tt class="bluecolor">a</tt>. Variable names are
+case sensitive, and blanks spaces and full stops are not allowed.
 </div>
 <div>
 Now that we have run our first programme we will finish by performing
-some basic calculator functions with python. You can enter literal
-numerical values such as integers <tt class="bluecolor">123</tt>
-floating points <tt class="bluecolor">1.2e3</tt> and complex
+some basic calculator functions with python. You can enter numerical
+values such as integers <tt class="bluecolor">123</tt> floating
+points <tt class="bluecolor">1.2e3</tt> and complex
 numbers <tt class="bluecolor">1+2j</tt> (note this is a j, not a
 letter i!). Python stores these values internally in the appropriate
 format (more on this later). There are a few basic operators available

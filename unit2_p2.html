@@ -20,9 +20,212 @@
 
 <h3>Introduction</h3>
 
-TODO
+<p>
+  Until now, all the programs we have written were sequential and linear : the sequence of instruction executed was always the same, regardless of the data. In programming, it is very often required to execute different instruction depending on the data we have. Let's take a very simple example, imagine we want to convert length units between millimetres and inches. We can imagine how the program would go :
 
+<ol>
+  <li>Ask the user if they want to convert from inches or from millimetres
+  <li>Ask the user a value</li>
+  <li>If the conversion is from inches, display the value converted in mm</li>
+  <li>Else, display the value converted in inches</li>
+</ol>
+</p>
 
+<p>
+  With what we learned before, we should be able to do everything except the if/else part. This is what we call <strong>conditional statements</strong> in computer science. For that, we will use the <code>if</code>, <code>else</code> and <code>elif</code> statements in Python. You can learn more on the <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements">official documentation</a>.
+</p>
+
+<p>
+  The general form of a conditional statement is the following in Python :
+</p>
+
+<pre><code>if condition:
+  do_something
+else:
+  do_something_else
+</code></pre>
+
+<hr>
+<h3>Boolean values</h3>
+<p>
+  There are multiple things to say about this small code example. First of all, the condition. The condition has a very specific type that we have not spoken about until now : it is called a <strong>boolean</strong>. A boolean is a truth value, it can only take two values : <code>True</code> or <code>False</code>. When writing an expression that resolves to a boolean, Python evaluates the truth of the statement and returns either <code>True</code> or <code>False</code>. Let's see an example of condition :
+</p>
+
+<pre><code>a = 10
+print(a &gt 0)   # True
+print(a &lt 0)   # False
+print(a == 10) # True
+print(a != 3)  # True</pre></code>
+
+<p>
+  There are a few testing operators that allow you to create conditions with any kind of variables. Here are the most common ones :
+</p>
+
+<p class="indexlink">
+  <table>
+    <tr>
+      <td><strong>Operator</strong></td>
+      <td><strong>Meaning</strong></td>
+      <td><strong>Comment</strong></td>
+    </tr>
+    <tr>
+      <td><code>a == b</code></td>
+      <td>Equality testing</td>
+      <td>Be careful not to mistake this with <code>a = b</code> which is the assignment operator. <code>a = b</code> will give <code>a</code> the same value as <code>b</code> while <code>a == b</code> will return <code>True</code> if <code>a</code> and <code>b</code> are equal.
+    </tr>
+    <tr>
+      <td><code>a != b</code></td>
+      <td>Different than</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &lt b</code></td>
+      <td>Less than</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &lt= b</code></td>
+      <td>Less or equal</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &gt b</code></td>
+      <td>Greater than</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &gt= b</code></td>
+      <td>Greater or equal</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a in b</code></td>
+      <td>Belongs to</td>
+      <td>If <code>b</code> is a collection (list, tuple, string, dictionary), then <code>a in b</code> will return <code>True</code> if the value of <code>a</code> can be found in the collection (the list of keys for a dictionary).</td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  It is possible to combine boolean expressions to form more complex tests. Consider we have two boolean values <code>a</code> and <code>b</code>, we can combine them to form another boolean value with the following operators :
+</p>
+
+<p class="indexlink">
+  <table>
+    <tr>
+      <td><strong>Operator</strong></td>
+      <td><strong>Meaning</strong></td>
+    </tr>
+    <tr>
+      <td><code>not a</code></td>
+      <td>Inverts the value of <code>a</code>. If <code>a</code> is <code>True</code> it becomes <code>False</code> and vice versa.</td>
+    </tr>
+    <tr>
+      <td><code>a or b</code></td>
+      <td>Returns <code>True</code> if either or both <code>a</code> or <code>b</code> are <code>True</code></td>
+    </tr>
+    <tr>
+      <td><code>a and b</code></td>
+      <td>Returns <code>True</code> if both <code>a</code> and <code>b</code> are <code>True</code></td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  With these operators we are ready to tackle every single condition testing.
+</p>
+
+<hr>
+
+<h3>Blocks of code :</h3>
+
+<p>
+  As you can see on the example (and might remember from unit 1) : after stating the condition, we have shifted the code to the right by adding a few spaces before. This is what we call <strong>indentation</strong>. In lots of programming language, indentation is only a cosmetic feature, helping you to read the code. But in Python, it has also a syntactic meaning : indenting creates a <strong>block</strong> of code. Python then knows what you want to be executed in your conditional statement, and what's to be executed after the conditional statement. Let's take two very simple examples to show you what blocks are :
+</p>
+
+<h4>Example 1</h4>
+<pre><code>a = int(input('Enter an integer value : '))
+b = int(input('Enter another integer value : '))
+
+if a &lt b:
+  print(a, ' is indeed less than ', b)
+  print('Basic addition : ', a, ' + ', b, ' = ', a+b)</pre></code>
+
+<h4>Example 2</h4>
+<pre><code>a = int(input('Enter an integer value : '))
+b = int(input('Enter another integer value : '))
+
+if a &lt b:
+  print(a, ' is indeed less than ', b)
+print('Basic addition : ', a, ' + ', b, ' = ', a+b)</pre></code>
+
+<p>
+  In the first example, the two print statements belong to the block of code of the if-statement. So they will be executed only if <code>a</code> is less than <code>b</code>. In the second example, you can see that the print displaying the sum of <code>a</code> and <code>b</code> is at the original indentation level. That means that this print statement will be executed regardless of the truth value of <code>a &lt b</code>, after the condition.
+</p>
+
+<hr>
+
+<h3>Back to the example</h3>
+
+<p> Now that we know all of this, we can write our unit converter in Python : </p>
+
+<pre><code>conversion = input('Converting from mm or from in ? ')
+value = float(input('Value to convert : '))
+
+mm_to_inches = 0.039 # We create a variable to hold the conversion factor
+    
+if conversion == 'mm':
+  print(value, 'mm ~', value * mm_to_inches, 'in')
+else:
+  print(value, 'in ~', value / mm_to_inches, 'mm')</code></pre>
+
+<hr>
+
+<h3>The <code>elif</code> statement</h3>
+
+<p>
+  As you can see, we execute different versions of our code depending on the value of <code>conversion</code>. Now this is not completely satisfying. If the user enters <code>'km'</code> for instance, the code will still treat the unit as inches. We want our user to only enter <code>'mm'</code> or <code>'in'</code>. That means we need a third condition :
+  <ul>
+    <li> If <code>conversion</code> is <code>'mm'</code> do something</li>
+    <li> If <code>conversion</code> is <code>'in'</code> do something else</li>
+    <li> If <code>conversion</code> is none of the above, then print an error message</li>
+  </ul>
+</p>
+
+<p>
+  The <code>elif</code> statement allows us to do so by chaining condition tests :
+</p>
+
+<pre><code>if condition_1:
+  # Do something if condition_1 is True
+elif condition_2:
+  # Do something if condition_1 is False but condition_2 is True
+elif condition_3:
+  # etc.
+else:
+  # Do something if all of the above are False</code></pre>
+
+<p>
+  Knowing this, our code can now be completed :
+</p>
+
+<pre><code>conversion = input('Converting from mm or from in ? ')
+value = float(input('Value to convert : '))
+
+mm_to_inches = 0.039 # We create a variable to hold the conversion factor
+    
+if conversion == 'mm':
+  print(value, 'mm ~', value * mm_to_inches, 'in')
+elif conversion == 'in':
+  print(value, 'in ~', value / mm_to_inches, 'mm')
+else:
+  print('Error, the conversion unit should be either mm or in')</code></pre>
+
+<hr>
+<p>
+  With all these information, you are ready to deal with the next batch of exercises on <a href="exercise2_p2.html">conditions</a>.
+</p>
+  
 <!--<script language="JavaScript" src="end.js" type="text/javascript"></script>-->
 </BODY>
 

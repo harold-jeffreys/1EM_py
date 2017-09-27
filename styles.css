@@ -1,0 +1,307 @@
+/*...ggg...*/
+
+body {
+       font-size: 0.9em;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 30px;
+}
+
+p {
+	color: #000000;
+	text-align: justify;
+}
+
+div {
+	color: #000000;
+	text-align: justify;
+	margin-bottom: 8px;
+}
+
+h1 {
+	font-size: 1.8em;
+	color: #285C81;
+	font-weight: bold;
+	line-height: normal;
+}
+
+h2 {
+	font-size: 1.4em;
+	color: #285C81;
+	line-height: normal;
+}
+
+h3 {
+	font-size: 1.2em;
+	color: #285C81;
+}
+
+h4 {
+	font-size: 1em;
+	color: #285C81;
+}
+
+h5 {
+	font-size: 0.9em;
+	color: #285C81;
+}
+
+
+/*...ggg...*/
+
+
+img {
+	float: none;
+	clear: none;
+	margin: 0px;
+}
+
+.imgLeft {
+	border: 0px solid #000000;
+	margin-top: 15px;
+	margin-right: 30px;
+	margin-bottom: 15px;
+	margin-left: 0px;
+	right: 0px;
+	float: left;
+}
+
+.imgRight {
+	border: 0px solid #000000;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 15px;
+	margin-left: 30px;
+	right: 0px;
+	float: right;
+}
+
+
+/*--- LISTS AND LIST ITEMS ------------------------------------------------------------------------------*/
+
+ol {
+	list-style-position: outside;
+	margin-bottom: 1em;
+	font-size: 100%;
+
+}
+
+ul {
+	list-style-type: disc;
+	margin-bottom: 1em;
+	font-size: 100%;
+
+}
+
+li {
+	list-style-position: outside;
+	margin: 0.5em;
+
+}
+
+
+/*--- INDENTED LIST AND LIST ITEM - UNORDERED(BULLETED) ------------------------------------------------------------------------------*/
+
+.ulIndent {
+	list-style-type: circle;
+	margin-bottom: 1.5em;
+	font-size: 1em;
+
+}
+
+.liUnorderedIndent {
+	list-style-position: outside;
+
+}
+
+
+/*--- INDENTED LIST AND LIST ITEM - ORDERED (NUMERIC) ------------------------------------------------------------------------------*/
+
+.olIndent {
+	list-style-type: lower-roman;
+	margin-bottom: 1.5em;
+	font-size: 1em;
+
+}
+
+.liOrderedIndent {
+	margin: 0.3em;
+	list-style-position: outside;
+	list-style-type: decimal;
+
+
+}
+
+.liOrderedIndentRoman {
+	margin: 0.3em;
+	list-style-position: outside;
+	font-size: medium;
+
+}
+
+
+/*--- TABLES ---------------------------------------------------------------------------------------*/
+
+table {
+        font-size: 1.0em;
+}
+
+.floatLeftTable {
+	float: left;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
+.floatRightTable {
+	float: right;
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
+
+td {
+	padding: 3px;
+}
+
+
+/*--- OTHER ---------------------------------------------------------------------------------------*/
+
+blockquote {
+	margin-right: 25px;
+	margin-left: 25px;
+}
+
+a:hover
+{
+  background-color: #ff6666;
+ }
+a {
+    color: #0000CC;
+    text-decoration: none;
+}
+
+hr {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #bbbbbb;
+	text-decoration: none;
+	margin-top: 0.8em;
+	margin-bottom: 0.8em;
+}
+
+sup {
+	bottom: -50px;
+	font-size: xx-small;
+}
+
+sub {
+	bottom: -50px;
+	font-size: xx-small;
+}
+
+.eqn
+{
+	font-family: monospace;
+	font-size: 120%;
+	font-weight: normal;
+	margin-top: 10;
+	margin-bottom: 10;
+	text-align: center;
+}
+
+.template_text {
+	font-size: 0.9em;
+	font-weight: bold;
+	color: red;
+	text-align: justify;
+}
+
+/* --- for programming matters: --- */
+
+.command { 
+           font-family : monospace, "Courier New", Courier ;
+           font-weight : bold;
+           font-size: medium;
+           color: #CC0000;
+           margin-left: 100px;
+           white-space : pre;
+}
+
+samp {
+	font-family : monospace, "Courier New", Courier ;
+	font-weight: bold;
+	color: Black;
+	font-size : medium;
+}
+
+.date {
+        font-family : sans-serif, Verdana, Geneva, Arial, Helvetica;
+        font-size: smaller;
+        color: White;
+        background-color: Black;
+        text-align: right;
+        padding: 3px;
+        border : 1px solid White;
+        width : 100%;
+        margin-left : 0px;
+        margin-right : 0px;
+}
+
+.stdout{
+	font-family : monospace, "Courier New", Courier ;
+	font-weight: bold;
+	font-size : medium;
+	color: Navy;
+	margin-left : 100px;
+}
+
+.exercise{ 
+           font-family : Flourish;
+           border : 3px solid Gray;
+           font-size : 0.8em;
+           margin-left : 40px;
+           margin-right : 40px;
+           background-color : #D4D4D4;
+}
+
+
+tt   {
+     color:6666DD;
+     font-family: monospace;
+     }
+
+TT.bluecolor
+     {
+     color:6666DD;
+     font-family: monospace;
+     }
+
+PRE.bluecolor
+     {
+     color:6666DD;
+     }
+
+
+.greencolor
+     {
+     color:339966;
+     font-weight:900;
+     font-style:normal;
+     }
+
+.greencolor A
+     {
+     color:339966;
+     font-weight:900;
+     font-style:normal;
+     }
+
+
+
+.indexlink td
+{ background-color:ffe6e6; }
+
+
+TD.menubar
+    { 
+      font-size:0.8em;
+      font-family:sans-serif
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+</HEAD>
+<body>
+
+<script language="JavaScript" src="menubar.js" type="text/javascript"></script>
+
+<div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
+
+<h3>Unit 5: Visualisation: Creating plots using matplotlib.
+</h3>
+
+<div>
+  There are python packages available to visualise data that you have
+  created, or manipulated (and indeed other comonly used plotting
+  programs such
+  as <a href="http://www.gnuplot.info/">gnuplot</a>). One of these
+  is <a href="https://matplotlib.org/">matplotlib</a>. There are many
+  tutorials for using this
+  package <a href="https://matplotlib.org/resources/index.html">here</a>.
+  
+  Let us start by looking at an example of how to plot some
+  trigonometric functions. 
+</div>
+<pre>
+  <tt>
+    import numpy as np, matplotlib.pyplot as plt
+
+    num_points = 100
+    x_min , x_max = 0, 10*np.pi
+
+    x_values = np.linspace(x_min, x_max, num_points)
+    y1_values = x_values*np.sin(x_values)
+    plt.plot(x_values, y1_values)
+
+    plt.show()
+
+    
+  </tt>
+</pre>
+
+<div>
+  There are a few new things to look through in this code. First of
+all we are importing a new package -- <tt>matplotlib</tt>. We are also
+specifying an array of points in a new way
+using <tt>linspace</tt>. Here we give a start and an end point, and
+then ask for <tt>num_points</tt> linearly spaced points. We have also
+used the <tt>sin</tt> function from numpy here. You can look up the
+details of this funciton using the in-built <tt>help</tt> function.
+When you run this code you should see a plot window appear with the
+function plotted. Note that the two arrays that you supply
+to <tt>plt.plot()</tt> must be the same length. You can check the
+lengths of you arrays using the <tt>len</tt> function.
+</div>
+
+<div>
+
+ Once you have produced a basic plot you can begin to modify it by
+ labelling the axes, changing the formatting of the plot, or the
+ formatting of the lines in the plot. For example
+</div>
+
+<pre>
+  <tt>
+import numpy as np, matplotlib.pyplot as plt
+
+num_points = 200
+x_min , x_max = 0, 10*np.pi
+
+x_values = np.linspace(x_min, x_max, num_points)
+
+y1_values = x_values*np.sin(x_values)
+y2_values = x_values
+y3_values = -x_values
+
+plt.plot(x_values, y1_values, color = 'red', linewidth=2.5 )
+
+plt.plot(x_values, y2_values, color = 'blue', linewidth=1.5, linestyle="--" )
+plt.plot(x_values, y3_values, color = 'blue', linewidth=1.5, linestyle = "--" )
+
+ax = plt.gca()
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+
+plt.show()
+    
+  </tt>
+</pre>
+
+<div>
+  This code plots three lines, whose points are stored
+  in <tt>y1_values, y2_values</tt> and <tt>y3_values</tt>. Each plot
+  is created, with some optional formatting to improve the
+  comprehension of the plot. The <tt>color</tt> keyword can be used to
+  select the line color, and the <tt>linestyle</tt> keyword can be
+  used to select the type of line drawn. The plot is an object in
+  python. To modify the labels of the axes we have to first create a
+  link to the plot object. This is done with the <tt>ax =
+  plt.gca()</tt> command, where gca denotes <em>get current axes</em>. Once we
+  have a link to this object we can use some methods to modify it. For
+  example the <tt>set_xlabel</tt> method can be used to modify the
+  label on the x axis. Once we have finished adding to our plot, we
+  can show it using <tt>plt.show()</tt>.
+</div>
+
+<div>
+  There are many more types of plot that we can produce using this
+  package. We will look at two more examples here.
+</div>
+
+<h4>Scatter plots</h4>
+
+<div>
+  Suppose we had measured two experimental quantities that we think
+  might be related -- the current and voltage of a circuit for
+  example. We could plot our current voltage pairs on a scatter plot
+  and determine their relation.
+</div>
+<pre>
+  <tt>
+
+
+import numpy as np, matplotlib.pyplot as plt
+
+#first create some data points
+n = 17
+current = np.random.uniform(0,2,n)
+voltage = np.random.normal(0,2,n)
+
+plt.scatter(current, voltage)
+
+
+  </tt>  
+</pre>
+
+<div>
+Here we have used two different types of random numbers to create some
+artificial data for the plot: uniform random numbers, and normally
+distributed random numbers.
+  
+  </div>
+
+<h4>Histograms</h4>
+<div>
+Our final example of a plot is a histogram. You might need this to
+characterise an experimental system -- perhaps the lengths of polymer
+chains, or the diameters of a population of nanoparticles. After
+making many measurements (or creating an array of random numbers as we
+use for this example!) we can create a histogram.
+</div>
+
+<pre>
+  <tt>
+import numpy as np, matplotlib.pyplot as plt
+
+# Fixing random state for reproducibility
+np.random.seed(19680801)
+
+#This draws 1000 random normally distributed samples
+
+x =  5+np.random.randn(1000)
+
+# the histogram of the data
+plt.hist(x, 50)
+
+
+plt.xlabel('diameter nm')
+plt.ylabel('Particle count')
+plt.title('Particle size distribution')
+
+
+plt.show()
+
+  </tt>
+  </pre>
+<P>
+ Now attempt <a href="exercise5.html">Exercise 5</a>.
+</P>
+
+<script language="JavaScript" src="end.js" type="text/javascript"></script>
+</BODY>
+
+</HTML>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>University of Surrey, Physics</TITLE>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+</HEAD>
+
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<body>
+<script language="JavaScript" src="menubar.js" type="text/javascript"></script>
+<div align="center"><h1>1EM - Essential Mathematics / Computing</h1></div>
+<P>
+<H2>Exercise 7: Algorithms</H2>
+</P>
+
+
+<P>
+Make sure you have read unit 7 before attempting the following exercise.
+</P>
+
+
+<div>
+This exercise involves writing a program to do something a bit more complicated than previous exercises, so the first step will be to sketch out a solution to the problem in your choice of pseudocode or a flow chart.
+</div>
+
+<div>
+Write a program to calculate the trajectory of an object. The object is located at the origin at <tt class="bluecolor">t=0</TT>.  The initial x- and y-components of the velocity should be entered at the keyboard.  You can set the acceleration in the x-direction to be zero, and in the y-direction to be -9.8 m/s<SUP>2</SUP> within the body of your program.  Your program should calculate the x and y positions of the object every 0.01s for 1000 time steps.  
+</div>
+
+<div>
+The object will move according to Newton's laws, but we will (later)
+have a non-constant acceleration so the &quot;suvat&quot; equations
+don't apply.  However, what we can do is use these equations and apply
+them many times over successive tiny time intervals over which we can
+assume the acceleration is constant.  The length of the small time
+interval can be made larger or smaller depending on how accurately we
+want the answer.
+</div>
+Newton's equations of motion are
+</div>
+
+<P>
+<tt class="bluecolor"> x_new = x + ux*tint + 0.5*ax*(tint**2) </TT><BR>
+<tt class="bluecolor"> ux_new = ux + ax*tint </TT><BR>
+</P>
+
+<P>
+where <tt class="bluecolor">x_new</TT> is the new value of <tt class="bluecolor">x</TT> at a time <tt class="bluecolor">tint=0.01</TT>
+seconds later.  <tt class="bluecolor">ux</TT>, <tt class="bluecolor">uy</TT>, <tt class="bluecolor">ax</TT> and <tt class="bluecolor">ay</TT> are 
+the velocity components and acceleration components respectively.  You should use these equations (and equivalent ones in the y direction) at each time step to update the coordinates and velocity components.
+</P>
+<P>
+Your program should ensure that only positive values of <TT>ux</TT>
+and <TT>uy</TT> are entered. You will need to use one or more <B> if
+...</B> statements here.  Arrange for your program to stop
+(i.e. <tt>break</tt> out of the loop) as soon as <TT>y</TT> is less
+than zero (we don't want our object burrowing through the ground!).
+</P>
+
+<div>
+Plan your program first on paper either as a flow chart or in
+pseudocode.  Think about the order in which you need to do things, and
+the quantities you need to calculate.
+</div>
+
+<H3><U>Program extensions</U></H3>
+</P>
+
+<P>
+Now let's assess the effect of air resistance.  Have the
+x component of acceleration, <TT>ax</TT>, dependent on <TT>ux</TT>.  For example
+<TT>ax = -0.05*ux</TT>.  This is an easy extension.
+
+<P>
+Try to get your object to bounce!  In other words, as soon as <TT>y</TT> is less than zero, change <TT>uy</TT> to be positive.  Halve the values of <TT>ux</TT>  and <TT>uy</TT> after a bounce.  This is not so easy to implement.
+</P>
+
+
+<BR><BR>
+<P>
+<TT CLASS="greencolor">
+<B>DOES YOUR PROGRAM WORK?</B><BR>  Test your program by putting both
+the <TT>x</TT> and <TT>y</TT> components of the initial velocity equal
+to 10 m/s, and do not have air resistance.  Find the total distance
+travelled before the object first strikes the ground.  The answer
+should be close to
+
+<P>
+20.4 m
+</P>
+
+<P>
+Now put <TT>ax = -0.05*ux</TT> as wind resistance.  Show that the
+total distance travelled before the object strikes the ground is now
+</P>
+
+<P>
+19.4 m
+</P>
+</tt>
+<P>
+Only if you get the correct answers should you progress
+to <a href="unit8.html"> unit 8</a>.
+</P>
+
+</TT>
+</P>
+
+
+
+
+<script language="JavaScript" src="end.js" type="text/javascript"></script>
+</BODY>
+
+</HTML>

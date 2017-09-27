@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>University of Surrey, Physics</TITLE>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+</HEAD>
+
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<body>
+<script language="JavaScript" src="menubar.js" type="text/javascript"></script>
+<div align="center"><h1>1EM - Essential Mathematics / Computing</h1></div>
+<P>
+<H2>Exercise 11: Consolidating</H2>
+</P>
+
+<div>
+<h4>A rational type</h4>
+Fortran does not handle fractions neatly in the same way that, say, an up-to-date hand-held calcualtor can.  In this exercise, the idea is to create a user-defined <tt><a href="glossary/type.html">TYPE</a></tt> which stores two integers, such that one is considered the numerator of a fraction, and another the denominator.
+</div>
+<div>
+With that type created, you should write a program which lets the user do the following things, by offering  a suitable menu:
+<ul>
+<li>Simplify a fraction
+<li>Add two fractions
+<li>Multiply two fractions
+<li>Quit the program
+</ul>
+</div>
+<div>
+Note that to simplify the fraction, you will need to work out the greatest common divisor of the numerator and the denominator.  The standard way of doing this is to use <a href="http://en.wikipedia.org/wiki/Euclidean_algorithm">Euclid's algorithm</a>.  It is worth putting the <tt>TYPE</tt> declaration in a <tt>MODULE</tt>, as detailed in <a href="unit11.html">Unit 11</a>, so any subroutines or functions can have the <tt>TYPE</tt> available to them more easily than defining it several times in different places.
+</div>
+
+<div>
+Once you are happy with your program, you can try any of the eXtra exercises (X1, X2 etc) linked to in the menu bar to the left.  They can be attempted in any order.
+</div>
+
+<script language="JavaScript" src="end.js" type="text/javascript"></script>
+</BODY>
+
+</HTML>

@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+</HEAD>
+<body>
+
+<script language="JavaScript" src="menubar.js" type="text/javascript"></script>
+
+<div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
+
+<h3>Unit 1: Introduction to the course: Meaning of computer
+programming.  Using the command line.  Editing and running a program.
+</h3>
+
+<div>
+This course is concerned with learning the basics of computer
+programming, up to a level at which you will have enough ability and
+confidence to tackle problems relevant to the study of physics.  You
+are no doubt familiar with many computer programs already - web
+browsers, word processors, and so on.  In this course you will learn
+how to write your own programs.  They will be simple programs, but
+nonetheless programs that could then be run by anyone you share them
+with.  The language we'll be using is called <i>Python</i>.  It is
+language that was conceived in the 1980s, but has undergone recent
+revision which has resulted in the more recent version Python 3.0 not
+being backward compatible with older versions, so beware!
+</div>
+<div>
+This first unit introduces the basics of the practical aspects of
+telling the computer about your programs, and how to run programs.
+We'll do this before learning how to actually write the programs
+themselves - we'll use a short sample program to learn the details.
+Follow the steps below to write your first program.  If anything
+doesn't appear to work, or you need help, please ask a demonstrator
+for assitance.</div>
+
+<div>
+<ol>
+<li>The main way of interacting with the computer that we'll use is
+via the <i>Terminal</i>.  This is a program that lets you type
+commands into the computer.  It's used for telling the computer about
+your programs.  To open the terminal, go to the <i>Applications</i>
+menu at the top of the screen, then select the &quot;Accessories&quot;
+item, then &quot;Terminal&quot;.  A window should open with a prompt
+that is waiting for you to type commands.</li>
+<li>Now, to learn some basic commands (You might want to also work
+through this <a href="http://www.ee.surrey.ac.uk/Teaching/Unix/">Unix
+Tutorial</a>, to get more familiar with the operating system).</li>
+<ul>
+<li>Type <tt class="bluecolor">pwd</tt> in the Terminal, and press
+return (from now on, we won't tell you to type return - it will be
+assumed).  The Terminal will respond by telling you
+the <i>directory</i> that you are currently situated in.  You each
+have a &quot;home&quot; directory in which to store data, files,
+programs etc., and the <tt class="bluecolor">pwd</tt> command (it
+stands for <i>print working directory</i>) has told you what that
+directory is.  You don't need to worry about most of it, but you
+should be able to identify your username in the directory.  To make
+organising files more managable, you should create
+a <i>sub</i>-directory in which to store your programs for this
+course:
+<li>Type <tt class="bluecolor">mkdir em</tt> (though you can pick a
+different name for the directory if you like).  This will make a
+directory (hence the name <tt class="bluecolor">mkdir</tt>)
+called <i>em</i>.  To see that it is there,
+type <tt class="bluecolor">ls</tt>.  This is short for
+&quot;list&quot;, and it lists all the files in your directory.  You
+should see that <tt class="bluecolor"> em</tt> is there.
+<li>Now, let's change our current working directory to be the
+newly-created <i>em</i>.  Type <tt class="bluecolor">cd em</tt>.  You
+should be able to see that there is nothing in this directory by
+typing <tt class="bluecolor">ls</tt>.  It should show nothing and
+return the Terminal prompt. You may like to look up some useful
+commands in managing your files <tt class="bluecolor">mkdir, cd,
+rmdir, rm</tt> (be very careful with <tt class="bluecolor">rm</tt>!)
+using the manual page e.g. <tt class="bluecolor">man mkdir</tt> will
+tell you more about the command. Other useful commands for job
+control <tt class="bluecolor">top, fg, bg, kill</tt> and disk space
+management <tt class="bluecolor">quota, du, df</tt> are also worth
+finding out about.
+</ul>
+<li>Okay, we've performed some basic interaction with the operating
+system.  Now to create a program.  We will write programs in text
+files using an <i>editor</i>. The suggested editor to use in this
+course is called <i>gedit</i>, and you can launch it by
+typing <tt class="bluecolor">gedit &amp;</tt>.  The ampersand tells
+the computer to give control back to the Terminal while gedit
+continues to run.  An editor window should appear, and you can start
+writing a program in it.
+<li>Now, type the following program into the editor:
+  <pre class="bluecolor">
+
+
+#Fibonacci series  
+print("Calculating the Fibonacci series")
+
+a = 0
+b = 1
+while b < 20:
+	  #print out the current fibonacci series number
+	  print(b)
+	  #calculate the next term in the series
+	  b = a+b
+	  #store the previous term in a
+	  a = b-a
+
+
+
+</pre>
+<li>Save the program with a file
+name <tt class="bluecolor">fibonacci.py</tt>.  You should use the file
+extension <tt class="bluecolor">.py</tt> as this is the default file
+extension for python programs.
+<li>Now to run your program. Python is an interpreted language. To
+invoke the interpreter: Go to the Terminal, and
+type <tt class="bluecolor">python3 fibonacci.py</tt> (Note here we are
+using version 3 of python. If you type <tt>python fibonacci.py</tt>
+you will be using version 2 of python, which may give different
+results for some programs).
+</ol>
+</div>
+<div>
+Now let's look at the program itself to understand how it works.  The
+first line, beginning with the <tt class="bluecolor">#</tt> symbol is
+a comment.  Comments are ignored by the interpreter and are just there
+for the benefit of both you and anyone else reading your code.  It is
+good practice to put comments in to explain the purpose of the
+program, and to comment on sections of the code that may not seem
+obvious.  The key question to ask is &quot;will I still understand how
+this section of code works when I take a look at it in six months
+time?&quot; If you think the answer is <i>no</i>, then a comment is
+probably in order.
+</div>
+<div>
+The lines <tt class="bluecolor">print("Calculating the Fibonacci
+series")</tt> print the text to the screen. The next few lines define
+two objects with names <tt class="bluecolor">a</tt>
+and <tt class="bluecolor">b</tt>. Python then assigns two integers to
+these names. Note you should be careful of the variable names you
+chose for your quantities. It is possible to use variable names that
+overwrite built-in functions, however there are some reserved words
+that you cannot use for variable names. It is good practice to use
+meaningful names, rather than algebraic names
+like <tt class="bluecolor">a</tt>. Variable names are case sensitive,
+and blanks spaces and full stops are not allowed.
+</div>
+<div>
+The final section is a loop over a block of code that prints out the
+numbers in the Fibonacci series. Note that each line of code that is
+part of this block is indented by the same amount. Statements are
+grouped together into a code block by indenting in this way.
+</div>
+<div>
+Now that we have run our first programme we will finish by performing
+some basic calculator functions with python. You can enter literal
+numerical values such as integers <tt class="bluecolor">123</tt>
+floating points <tt class="bluecolor">1.2e3</tt> and complex
+numbers <tt class="bluecolor">1+2j</tt> (note this is a j, not a
+letter i!). Python stores these values internally in the appropriate
+format (more on this later). There are a few basic operators available
+to manipulate these numbers <tt class="bluecolor">+, -, *, /, **</tt>
+i.e. addition, subtraction, multiplication, division and
+exponentiation. For example we can write perform some basic
+calculations in python as follows
+  <pre class="bluecolor">
+
+    a=2
+    b=3
+    c=a+b-a**b
+    print("2+3-2**3 = ", c)
+    
+</pre>
+</div>
+<div>
+Finally, we end with a few of useful tips: In the Terminal, you will
+find yourself wanting to type the same things over and over again.  An
+easy way to do this is to press the up arrow repeatedly to retrieve
+previous commands.  Also, if you start typing the name of a file, then
+the tab key, it will autocomplete the whole name of the file, or as
+much as it can if there are two similarly named files.  Finally, gedit
+will save backups of your programs with a tilde (<tt>~</tt>) at the
+end. Be careful not to edit these files. You can just ignore them, but
+if you edit them the real file will not get updated.
+</div>
+<div>
+Once you have worked through this page, go
+to <a href="exercise1.html">Exercise 1</a> to practice with some of
+these concepts.
+</div>
+
+<script language="JavaScript" src="end.js" type="text/javascript"></script>
+</BODY>
+
+</HTML>

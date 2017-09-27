@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+</HEAD>
+<body>
+
+<script language="JavaScript" src="menubar.js" type="text/javascript"></script>
+
+<div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
+
+<h3>Unit 11:  Consolidation of Previous Units.
+</h3>
+
+<div>
+To finish, we have a Unit headed as above: A consolidation of previous units.  This means there is primarily an exercise to do, and not much new material, but we finish, before going to the exercise, by pointing to some useful things
+</div>
+<div>
+The Units have introduced some useful concepts and useful features of the Fortran language, but they have not been exhaustive.  The <a href="glossary/glossary.html">Glossary</a> has details of more features, such as the <tt><a href="glossary/random_number.html">RANDOM_NUMBER</a></tt> instrinsic subroutine, which generates sequences of random numbers, a method for creating arrays with a size not decided until execution time (via the <tt><a href="glossary/allocate.html">ALLOCATE</a></tt> statement), and details of how to use <tt><a href="glossary/complex.html">COMPLEX</a></tt> numbers.  It is worth being aware that all these things can be done.
+</div>
+
+<div>
+The other thing to mention, which helps when writing larger codes, and codes with user-defined data types, is that you can encapusulate data and code in <tt>MODULES</tt>.  If you define a data type, or some constants, some variables, or subprograms in one <tt>MODULE</tt> you can access them elsewhere by having a <tt>USE</tt> statement, as in the example below, using the same <tt>element</tt> type we used in <a href="unit4.html">Unit 4</a>
+</div>
+<pre class="bluecolor">
+MODULE elements
+
+  ! define the data type in the module
+  TYPE element
+    CHARACTER(LEN=2) :: symbol
+    INTEGER :: atomic_number
+    REAL :: atomic_mass
+  END TYPE element
+
+  ! and some constants
+  TYPE(element), PARAMETER :: hydrogen = element("H",1,1.00794)
+  TYPE(element), PARAMETER :: helium = element("He",2,4.002602)
+
+  ! we can also include subprograms in the module, after a "contains"
+  ! statement:
+  CONTAINS
+
+    SUBROUTINE write_element(elem)
+      IMPLICIT NONE
+      TYPE(element), INTENT(IN) :: elem
+      
+      WRITE(6,'(a,a,a,i3,a,f8.3)') "Element ",elem%symbol,&
+           " has atomic number ",elem%atomic_number,&
+           " and atomic mass ",elem%atomic_mass
+    END SUBROUTINE write_element
+
+END MODULE elements
+
+PROGRAM element_test
+  USE elements
+  IMPLICIT NONE
+
+  TYPE(element) :: hypothetical_element
+
+  hypothetical_element%symbol = "Xx"
+  hypothetical_element%atomic_number = 310
+  hypothetical_element%atomic_mass = 875.105
+  
+  CALL write_element(hydrogen)
+  CALL write_element(helium)
+  CALL write_element(hypothetical_element)
+
+END PROGRAM element_test
+</pre>
+<div>
+Here, note that the <tt>MODULE</tt> defines a <tt>TYPE</tt>, creates two constants (with <tt>PARAMETER</tt>) of that type, and <tt>CONTAINS</tt> a <tt>SUBROUTINE</tt>.  Any <tt>PROGRAM</tt>, or indeed <tt>FUNCTION</tt> or <tt>SUBROUTINE</tt> that <tt>USE</tt>s the module (with the <tt>USE</tt> statement before the <tt>IMPLICIT NONE</tt>) will have access to the information in the module.  Note that it is not necessary to write the <tt>INTERFACE</tt> block to tell your program about functions or subroutines accessed via the <tt>USE</tt> statement.  The <tt>MODULE</tt> must occur before the <tt>PROGRAM</tt> in your file.
+</div>
+
+<script language="JavaScript" src="end.js" type="text/javascript"></script>
+</BODY>
+
+</HTML>

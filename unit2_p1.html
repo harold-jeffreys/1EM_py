@@ -1,0 +1,446 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
+<link rel="STYLESHEET" type="text/css" href="styles.css">
+<link rel="stylesheet" href="prism.css" data-noprefix />
+
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+</HEAD>
+<body>
+
+<script language="JavaScript" src="menubar.js" type="text/javascript"></script>
+
+
+<div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
+
+<h2>Unit 2, Part 1 - Variables : Declarations and native types.</h2>
+
+<h3>Introduction</h3>
+
+<p>One of the most common tasks of a computer program is to perform calculations.  To do this, the programmer must define <B>variables</B>. In mathematics, variables are usually single characters, such as <code>x</CODE> or <code>t</CODE> or <code>i</CODE> etc.  When programming, however, you have the flexibility to give your variables names which reflect their meaning. So, you could use <code>x_coordinate</CODE> or <code>time</CODE> or <code>radius</CODE> or <code>counter</CODE>.</p>
+
+<p>You can create a variable by <strong>assigning</strong> a value to it. This is done by using the <code>=</code> operator. For instance, if we want to create a variable named <code>my_value</code> where we will store the value <code>13.5</code> we will use the following command :</p>
+<pre><code>my_value = 13.5</pre></code>
+
+<p>Variable declaration must obey a few rules :
+  <ol>
+    <li>First of all, you cannot use a reserved keyword as a variable name. For instance, trying to declare a variable called <code>if</code> or <code>while</code>, Python will stop and give you an error.</li>
+    <li>Variable names must be only made of alpha-numeric characters (lecodeers and numbers). There cannot be any special character or blank spaces. So <code class="language-python">x coordinate = 5.0</code> will not work while <code class="language-python">x_coordinate = 5.0</code> will.</li>
+    <li>Variables names cannot start with a number.</li>
+  </ol>
+</p>
+
+<p> 
+Python provides natively datatypes that can be used to build programs : 
+</p>
+<div>
+<ul>
+  <li><a href="#numbers">Numbers</a></li>
+  <li><a href="#lists">Lists</a></li>
+  <li><a href="#tuples">Tuples</a></li>
+  <li><a href="#strings">Strings</a></li>
+  <li><a href="#dict">Dictionaries</a></li>
+  <li>Sets</li>
+</ul>
+
+<hr>
+
+<a name="numbers"></a><h3>Numeric types :</h3>
+<p>Although sets are really useful, we will not be seeing these in the course. We will mainly focus on the other ones. First and foremost, <strong>numbers</strong>. There are two types representing numbers in Python :
+  <ul>
+    <li> <code>int</code> That are used to represent integer values. </li>
+    <li> <code>float</code> That are used to represent real/floating point values.</li>
+  </ul>
+
+  Now Python is a <strong>dynamical and weak typed language</strong> that means that the type of variables is automatically determined by Python, and that conversions are made implicitly whenever possible. So if we try to add an int with a float, the resulting type will always be the most permissive one : a float. For instance, try to run the following commands :
+</p>
+
+<pre><code class="language-python">a = 10
+b = 5.2
+type(a)   # int
+type(b)   # float
+type(a+b) # float</code></pre>
+
+<p>
+  The <code>type()</code> function gives you the type of the expression you feed it as parameter. As you can see in the above example, <code>type(a)</code> returns <code>int</code>, <code>type(b)</code> returns <code>float</code> and <code>type(a+b)</code> returns <code>float</code>.
+</p>
+
+<p>
+  Real types also support scientific notation. You only need to use the <code>e</code> suffix :
+</p>
+
+<pre><code>a = 1.0e3 # => 1 000
+b = 5.0e-2 # => 0.05</pre></code>
+
+<p>
+  All standard arithmetic operations are also available in Python. Let's imagine we have two integers <code>a=10</code> and <code>b=3</code> :
+</p>
+
+<p class="indexlink">
+<table>
+  <tr>
+    <td><strong>Command</strong></td>
+    <td><strong>Meaning</strong></td>
+    <td><strong>Example result</strong></td>
+  </tr>
+  
+  <tr>
+    <td><code>a+b</code></td>
+    <td>Addition</td>
+    <td><code>13</code></td>
+  </tr>
+
+  <tr>
+    <td><code>a-b</code></td>
+    <td>Subtraction</td>
+    <td><code>7</code></td>
+  </tr>
+
+  <tr>
+    <td><code>a*b</code></td>
+    <td>Multiplication</td>
+    <td><code>30</code></td>
+  </tr>
+
+  <tr>
+    <td><code>a/b</code></td>
+    <td>Division</td>
+    <td><code>3.333333...</code></td>
+  </tr>
+
+  <tr>
+    <td><code>a//b</code></td>
+    <td>Integer division</td>
+    <td><code>3</code></td>
+  </tr>
+
+  <tr>
+    <td><code>a%b</code></td>
+    <td>Modulo (remainder of the integer division of <code>a</code> by <code>b</code>)</td>
+    <td><code>1</code></td>
+  </tr>
+</table>
+</p>
+
+
+<hr>
+<a name="lists"></a><h3>Lists :</h3>
+
+<p>
+  Lists are among the most useful and used types in Python. They are <strong>collections</strong> of variables of any type, that can be modified over time (the computer-sciency term is <strong>mutable</strong>). You can think about lists as an array of values in which you can add, remove and modify values. Let's see a few examples of lists :</p>
+
+<pre><code class="language-python"># We can create an empty list using [] :
+a = []
+
+# A list can also be created by feeding it directly values :
+b = [1, 2, 3, 4]
+
+# A list can hold any type of data :
+c = ['abc', 12, 10.4, True] # We will see later what 'abc' and True are
+
+# We can use the len function to get the length of a list :
+print(len(a), len(b), len(c))
+
+# We can also print the whole list easily :
+print(b)</code></pre>
+
+<p>
+  Lists are indexed-collections. That means we can access any element by using its position in the list. Positions of elements in a list are numbered from 0. We access an element by using the <code>[]</code> operator. So if we take the example of <code>b</code> above, <code>b[0]</code> will access the first element of the list.
+</p>
+
+<pre><code># Printing the first value of the list
+print(b[0])
+    
+# Changing the value of the 3rd element :
+b[2] = 7
+
+# Trying to access an element that doesn't exist will generate an error :
+a[0] = 5 # IndexError: list assignment index out of range</code></pre>
+
+<p>
+  As with anything in Python, you can find a precise list of all the properties and functions associated with lists by reading the <a href="hcodeps://docs.python.org/3/tutorial/datastructures.html#more-on-lists">official documentation</a>. As you can see, lists have a lot of <strong>methods</strong> : functions associated to the list type. The most useful are the following :
+  <ul>
+    <li> <code>append(x)</code> : adds <code>x</code> at the end of the list.</li>
+    <li> <code>insert(i, x)</code> : inserts <code>x</code> at the i-th position in the list.</li>
+    <li> <code>clear()</code> : removes all elements in the list.</li>
+    <li> <code>pop(i)</code> : removes the element at position <code>i</code> and returns it.</li>
+  </ul>
+
+  Here are a few example of these functions :
+</p>
+
+<pre><code>a = [1, 2, 4, 5]
+
+# Inserting the missing 3 (at position 2) :
+a.insert(2, 3)    
+
+# Appending an element at the end of the list
+a.append(6)
+
+# Printing the result :
+print(a)
+# [1, 2, 3, 4, 5, 6]
+
+# Removing the first element and printing it :
+value = a.pop(0)
+print(value) # 1
+print(a) # [2, 3, 4, 5, 6]
+
+# Clearing the list
+a.clear()    
+print(a) # []</code></pre>
+
+<hr>
+
+<p>
+  Lists are very powerful objects. There are three other properties that are very useful for lists users : negative indexing, slicing and concatenation.
+</p>
+
+<p>
+  <strong>Negative indexing</strong> allows you to access the list by its end. If we have a list <code>a</code> and want to access the last element for instance, we might be tempted to do something like :
+</p>
+
+<pre><code>a[len(a)-1]</code></pre>
+
+<p>
+  This is a very complicated way of coding a simple behaviour. Python allows us to use negative index to mean "from the end". So we would do :
+</p>
+
+<pre><code>a[-1]</code></pre>
+
+<p>
+  This way is a lot simpler. <code>-1</code> corresponds to the last element, <code>-2</code> to the one before, etc.
+</p>
+
+<p>
+  <strong>Slicing</strong> allows us to extract subsets of a list easily. To slice a list, we use the formalism <code>a[start:end]</code>. This extracts the values of <code>a</code> from the index <code>start</code> to the index <code>end</code> (excluded). Here are a few examples of slicing :
+</p>
+
+<pre><code>a = [6, 3, 9, 1, -7, 10, 12, -3]
+
+# Basic slicing
+print(a[1:3]) # [3, 9]
+
+# Removing start will take 0 as an implicit value :
+print(a[:3]) # [6, 3, 9]
+
+# Removing end will take len(a) as an implicit value :
+print(a[4:]) # [-7, 10, 12, -3]
+
+# You can also use negative indexing in slices:
+print(a[-3:]) # [10, 12, -3]
+
+# Slicing can be used to assign elements :
+a[2:4] = [5, 8] # We say that elements 2 and 3 of a must become 5 and 8
+    print(a) # [6, 3, 5, 8, 1, -7, 10, 12, -3]</code></pre>
+
+<p>
+  Finally, <strong>Concatenation</strong> allows to glue two lists together to form a bigger list. For this we use the <code>+</code> operator :
+</p>
+
+<pre><code>a = [1, 2, 3, 4]
+b = [5, 6, 7, 8]
+
+# Concatenation
+print(a+b) # [1, 2, 3, 4, 5, 6, 7, 8]
+print(b+a) # [5, 6, 7, 8, 1, 2, 3, 4]
+
+# You can also use the * operator to duplicate a list :
+c = a*4 # Duplicates 4 times the original list, and concatenates them together
+print(c) # [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]</code></pre>
+
+<p> The last important thing to know about lists is that lists are <strong>referenced</strong> objects. That means they are not copied explicitly. To understand what that means, let's see an example :</p>
+
+<pre><code>a = [1, 2, 3, 4]
+
+# Creating a new variable that has the same value as a :
+b = a
+print(b) # [1, 2, 3, 4]
+    
+# b does not have a copy of all the elements of the list. b references a.
+# That means that if b is modified, a is modified.
+print(a) # [1, 2, 3, 4]
+b[1] = 5
+print(b) # [1, 5, 3, 4]
+print(a) # [1, 5, 3, 4]</code></pre>
+
+<p>If you want to create a copy that does not modify the original list, you must use the <code>copy</code> operator : </p>
+
+<pre><code>a = [1, 2, 3, 4]
+b = a.copy()
+
+b[1] = 5
+print(b) # [1, 5, 3, 4]
+print(a) # [1, 2, 3, 4]</code></pre>
+
+<hr>
+<a name="tuples"></a><h3>Tuples :</h3>
+
+<p><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Tuples</a> are really similar to lists. They also are collections, but this time they are <strong>immutable</strong>. That means there is no way to modify their content. We cannot add anything to them, nor remove. They are meant to be static collections of objects.</p>
+
+<pre><code>a = (1, 2, 3, 4) # Creating a tuple
+
+# We can access the tuple in the same way as a list :
+print(a[1])  # 2
+print(a[1:]) # (2, 3, 4)
+
+# But we cannot modify them
+a[1] = 5 # TypeError: 'tuple' object does not support item assignment
+
+# The only way to "modify" a tuple, is by replacing it by another one :
+a = (1, 5, 2, 3) # This works    
+</code></pre>
+
+<p>
+  Although they look pretty useless and redundant with lists at first glance, tuples are really useful when you want to describe a static collection of objects. Also note that it is possible to convert from list to tuple and vice-versa using the <code>list</code> and <code>tuple</code> functions :
+</p>
+
+<pre><code># Converting from tuple to list :
+a = (1, 2, 3, 4)
+b = list(a)
+print(b) # [1, 2, 3, 4]   
+b[1] = 5
+print(b) # [1, 5, 3, 4]    
+
+# Converting from list to tuple :
+a = [1, 2, 3, 4]
+b = tuple(a)
+print(b) # (1, 2, 3, 4)
+
+# Note that a conversion is NOT a reference, so modifying one won't modify the other
+a[1] = 5
+print(a) # [1, 5, 3, 4]
+print(b) # (1, 2, 3, 4)
+</code></pre>
+
+<p>
+  Finally tuples can also be concatenated or duplicated as lists do.
+</p>
+
+<hr>
+<a name="strings"></a><h3>Strings :</h3>
+
+Strings are tuples storing character sequences. They are mainly used to store and describe text. We can create a string by using simple quotes (<code>'</code>), or double quotes (<code>&quot;</code>). If the text we want to describe holds more than one line, we can use "triple-quotes" (<code>&quot;&quot;&quot;</code> or <code>'''</code>) :
+
+<pre><code>a = 'Hello'
+b = "Double quotes are fine as well"
+
+print(a)
+print(b)    
+
+c = ''' Text
+on
+multiple
+lines '''
+print(c)
+</code></pre>
+
+<p>
+  Strings have the exact same properties has tuples, so you can't modify them (<code>a[4] = 'b'</code> will return an error), but you can duplicate them, slice them or concatenate them :
+</p>
+
+<pre><code>a = 'I '
+b = 'love '
+c = 'Python'
+print(a + b + c) # 'I love Python'</code></pre>
+
+<p>
+  Note that a string holding numbers still behaves like a string :
+</p>
+
+<pre><code>a = '1'
+b = '24'
+
+print(a+b) # '124'</code></pre>
+
+<p>
+  So if you want to convert a string to an int or a float, you need to use the <code>int()</code> and <code>float()</code> functions :
+</p>
+
+<pre><code>a = '1'
+b = '24'
+
+# Converting and replacing both values to integers :
+print(a) # '1'    
+a = int(a) # a becomes the integer contained in the string a
+print(a) # 1  -> Note that the quotes have disappeared
+    
+b = int(b) # Same for b
+print(a+b) # 25    
+
+# Same thing for float :
+c = '5.0'
+c = float(c)
+print((a+b) / c) # 5.0</code></pre>
+
+<p>
+  Trying to convert to int or float strings that are not int or float will generate an error :
+</p>
+
+<pre><code>a = 'Hello'
+a = int(a) # ValueError: invalid literal for int() with base 10: 'Hello'</code></pre>
+<hr>
+<a name="dict"></a><h3>Dictionaries :</h3>
+
+<p>
+  Dictionaries are among the most useful and powerful native structures of Python. They are collections of objects that associates a <strong>key</strong> and a <strong>value</strong>. The keys can be of any type (although, due to technical considerations, you should never use real values as keys). Values can be of any type without exception. Let's see an example to understand what that means :
+</p>
+
+<pre><code># We create an empty dictionary :
+a = {}
+
+# Now we can store any type of value associated with any other type :
+a[10] = 'Hello' # 10 is the key, 'Hello' is the value
+a['test'] = 0.5
+
+# Printing the dictionary will give us a list of keys and values :
+print(a) # {10: 'Hello', 'test': 0.5}
+
+# Note that, the way the dictionary is printed is also the way to create a non-empty dictionary :
+nobel_prizes = {'Richard Feynman' : 'Physics', 'Marie Curie' : 'Chemistry'}
+print(nobel_prizes['Richard Feynman']) # 'Physics'</code></pre>
+
+<p>
+  As you can imagine, the keys are unique, if you assign a value to an already existing key, the previous value in the dictionary will be overwritten :
+</p>
+
+<pre><code>a = {}
+a['This is a key'] = 1
+a['This is a key'] = 10
+print(a['This is a key']) # 10</code></pre>
+
+<p>
+  You can extract the list of all the keys stored in a dictionary using the <code>keys</code> method. In the same fashion, you can use the <code>values</code> method to extract all the values of the dictionary.
+</p>
+
+<pre><code>a = {'key 1' : 5, 'aaa' : 10, -4 : 'test'}
+print(a.keys()) # [-4, 'key 1', 'aaa']
+print(a.values()) # ['test', 5, -4]</code></pre>
+
+<p>
+  Note that the order printed is not the same as the one we entered the values. This is because of the way dictionaries are coded in Python. However, you can also note that although the order of storing is modified, the two lists still correspond.
+</p>
+
+<p>
+  Dictionaries are complex objects and it is out of the scope of this course to describe all the methods available. You can find more information (once again) on the <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">official documentation</a>
+</p>
+
+<hr>
+
+<p>
+  Now that we have seen all these data structures, let's practice with some <a href="exercise2_p1.html">exercices</a>
+</p>
+
+<!--<script language="JavaScript" src="end.js" type="text/javascript"></script>-->
+</BODY>
+
+<!-- Syntax highlighting -->
+<script language="JavaScript" src="prism.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('code').addClass('language-python');
+</script>
+
+
+</HTML>

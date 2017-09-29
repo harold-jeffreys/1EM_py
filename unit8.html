@@ -3,7 +3,12 @@
 <HEAD>
 <TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
+<link rel="stylesheet" href="prism.css" data-noprefix />
+
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </HEAD>
 <body>
 
@@ -11,91 +16,137 @@
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
 
-<h3>Unit 8: Debugging:  Development of techniques to fix coding problems
+<h3>Unit 8: I/O
 </h3>
 
-<div>
-While it would be nice if every program you write works first time,
-this is rarely the case.  Planning the structure in advance can help
-write better code, but being able to fix non-working problems, or
-&quot;debugging&quot; is a useful skill to develop.  This unit
-introduces some methods of debugging.
-</div>
-<div>
-  <h4>Problem 1: In case of non-compilation</h4>
 
-  If your code does not run, i.e. the python interpreter throws up
-some errors when you try to run, the key point is to look at
-the <i>first</i> error.  This can often be the only error, and the
-confusion it causes can cause it to complain of other spurious
-errors. Try typing in each of the following lines into
-the <tt>python3</tt> interpreter, and look at the errors they produce.
+<div>
+  Now that you can perform some calculations it may be important to
+  store the results by writing them to a file. Similarly you might
+  need to input some initial conditions by reading them from the user,
+  or from a data file. You have already met the <code>input</code>
+  function for getting information from the user.
 </div>
 
+<h4>Reading and Writing a file</h4>
+<div>
+  You can open a file using the built-in <code>open</code> function
+  available in python. The program below shows how to open a file, and
+  write to it.
+</div>
 <pre>
-  <tt>
-    1/0
-
-    import nump as np
-
-    abs('-3')
-
-    a = [1,2,3]; a[3]
-    
-    b = [1,2,3)
-
-    b[0]
-  </tt>
+  <code>
+file_object = open("outputfile.txt", "w")
+file_object.write("Hello, World\n")
+file_object.close()
+  </code>
 </pre>
 
 <div>
-  Common errors that you should be aware of include
-<ul>
-<li>  Syntax errors (you
-  typed the command incorrectly e.g. <tt> abs 3</tt>),
-<li> Import errors
-  (python cannot find the module you are attempting to import),
-<li> Attribute errors (python cannot find the method you are attempting to
-  use e.g. <tt>np.atan(3)</tt>),
-<li> Index errors (you are trying to use an
-  array element that lies outside the range of the list),
-<li> Type errors (you are trying to use the wrong sort of
-  argument -- a literal string instead of a number
-  e.g. <tt>abs('3')</tt>)
-</ul>
-But there are of course many more error types than this!
+  When we use the open command we must specify what we plan to do with
+  the file -- read <code>r</code>, write <code>w</code>, or append <code>a</code>
+  to add new content to an existing file. The open command returns an
+  file object that we can later use the write when we wish to output
+  to it. We can read in data from the file we just created in a
+  similar way.
 </div>
-<h4>Problem 2: You get the wrong answer</h4> If you get the wrong
-answer out of your program, it can often be difficult to understand
-why.  Often you will be able to tell that your answer is wrong,
-because, for example, it makes no physical sense, or you've been told
-what the correct answer is.
-</div>
-<div>
-  <h5>solution 2.1: be your own python interpreter</h5> One solution,
-  especially if your program is not too long, is to go through an work
-  out what values all the variables will have as your code executes.
-  If that's not enough to see where the problem is, you can combine it
-  with:
-<h5>solution 2.2: Use a lot of print statements</h5> If you think you
-know what value a variable should be while your program is running,
-you can use a <tt>print</tt> statement to print it to the screen to
-check it.  If you put such statements at various points in the code to
-check that you get what you think you should have, you can hopefully
-locate the place at which values start deviating from what you expect.
-If you have a loop, do you have the write answer after the first time
-through?  Still after the second?
-<h5>solution 2.3: Check your logic</h5>
-If your program is giving an honest answer based on the code you've written, have you understood the algorithm properly?  If you didn't plan your code according to the methods of <a href="unit7.html">Unit 7</a>, consider going back and doing so.
-<h5>solution 2.4: Strip things down</h5> If you still can't figure out
-what is wrong, take small sections of your code - a few lines,
-perhaps, and check that it works thoroughly, by e.g. pasting them into
-a separate program with some data to go with it.  Vary the range of
-sample data you give sections of your code so that it works for all
-sensible values that it might ever come across.
-</div>
-<div>Now move on to <a href="exercise8.html">Exercise 8</a>, where you can test some of these techniques.</div>
-<script language="JavaScript" src="end.js" type="text/javascript"></script>
-</BODY>
 
+<pre>
+  <code>
+file_object = open("outputfile.txt", "r")
+line = file_object.readline()
+print(line)
+file_object.close()
+  </code>
+</pre>
+
+<div>
+  Sometimes it is difficult to know how much data there is in a
+  particular file. In this case we need use a loop to read the data
+  until the file is finished. The <code>readline</code> command returns an
+  empty string if there is nothing more to be read from a file. This
+  makes it easy to loop over a file as follows.
+</div>
+
+<pre>
+  <code>
+#first we will write a series of numbers to our file
+file_object = open("outputfile2.txt", "w")
+
+for x in range(0,10):
+    file_object.write(str(x) + ", " + str( x**2)+"\n")
+
+file_object.close()
+
+#Now open the file for reading
+file_object = open("outputfile2.txt", "r")
+
+line = file_object.readline()
+while line != "":
+    #print current line
+    print(line)
+    #get the next line
+    line = file_object.readline()
+
+file_object.close()
+  </code>
+    
+</pre>
+
+<div>
+  In this program we first write out the squares of the numbers 0 to 9
+  using a for loop. We then reopen the same file for reading, and keep
+  reading each line until the file is empty, and printing out the
+  result. An alternative way to do the same operation is via a for
+  loop as follows.
+</div>
+
+<pre>
+  <code>
+file_object = open('outputfile2.txt', 'r')
+for line in file_object:
+    print line
+f.close()
+  </code>
+</pre>
+
+<h4>Reading csv data using numpy</h4>
+<div>
+If we want to read data in from a file to a numpy array, then it can
+be useful to do this directly using the numpy package.
+</div>
+<pre>
+  <code>
+import numpy as np
+
+squares = np.genfromtxt("outputfile2.txt", delimiter=",")
+
+print(squares)
+
+x_coordinate = squares[:,0]
+y_coordinate = squares[:,1]
+print(x_coordinate)
+print(y_coordinate)
+    
+  </code>
+</pre>
+
+<div>
+  Here we use the <code>genfromtxt</code> function to read in the data
+  from the comma separated variable (csv) file. We can then manipulate
+  the data and reprocess it, or to plot it for example.
+</div>
+
+
+    <div>
+      <br>
+When you have read through this Unit, it's time for <a href="exercise8.html">exercise 8</a>.
+</div>
+</BODY>
+<!-- Syntax highlighting -->
+<script language="JavaScript" src="prism.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('code').addClass('language-python');
+</script>
 </HTML>

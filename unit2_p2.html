@@ -16,26 +16,18 @@
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
 
-<h2>Unit 3 - Conditional statements.</h2>
+<h2>Unit 2, Part 2 - Conditional statements.</h2>
 
 <h3>Introduction</h3>
 
 <p>
-  Until now, all the programs we have written were sequential and
-  linear : the sequence of instruction executed was always the same,
-  regardless of the data. In programming, it is very often required to
-  execute different instruction depending on the data we have. Let's
-  take a very simple example, imagine we want to convert length units
-  between millimetres and inches. We can imagine how the program might
-  be structured:
+  Until now, all the programs we have written were sequential and linear : the sequence of instruction executed was always the same, regardless of the data. In programming, it is very often required to execute different instruction depending on the data we have. Let's take a very simple example, imagine we want to convert length units between millimetres and inches. We can imagine how the program would go :
 
 <ol>
-  <li>Ask the user if they have a value in units of inches or
-  millimetres.
-  <li>Ask the user a value.
-  <li>If the conversion is from inches, display the value converted in
-  millimitres.
-  <li>Else, display the value converted in inches.
+  <li>Ask the user if they want to convert from inches or from millimetres
+  <li>Ask the user a value</li>
+  <li>If the conversion is from inches, display the value converted in mm</li>
+  <li>Else, display the value converted in inches</li>
 </ol>
 </p>
 
@@ -52,20 +44,11 @@
 else:
   do_something_else
 </code></pre>
-<p>
-  Note the indentation here!</p>
+
 <hr>
 <h3>Boolean values</h3>
 <p>
-  Let us analyse the components of the <code>if</code>
-  statement. The <code>condition</code> has a very specific type that
-  we have not yet covered about until now : it is called
-  a <strong>boolean</strong>. A boolean can only take two
-  values: <code>True</code> or <code>False</code>. When writing an
-  expression that resolves (i.e. results in) to a boolean type, Python
-  evaluates the truth of the statement and returns
-  either <code>True</code> or <code>False</code>. Let's see an example
-  of condition :
+  There are multiple things to say about this small code example. First of all, the condition. The condition has a very specific type that we have not spoken about until now : it is called a <strong>boolean</strong>. A boolean is a truth value, it can only take two values : <code>True</code> or <code>False</code>. When writing an expression that resolves to a boolean, Python evaluates the truth of the statement and returns either <code>True</code> or <code>False</code>. Let's see an example of condition :
 </p>
 
 <pre><code>a = 10
@@ -92,7 +75,7 @@ print(a != 3)  # True</pre></code>
     </tr>
     <tr>
       <td><code>a != b</code></td>
-      <td>Not equal to </td>
+      <td>Different than</td>
       <td></td>
     </tr>
     <tr>
@@ -186,7 +169,7 @@ print('Basic addition : ', a, ' + ', b, ' = ', a+b)</pre></code>
 
 <p> Now that we know all of this, we can write our unit converter in Python : </p>
 
-<pre><code>conversion = input('Converting from mm or from in [mm/in]? ')
+<pre><code>conversion = input('Converting from mm or from in ? ')
 value = float(input('Value to convert : '))
 
 mm_to_inches = 0.039 # We create a variable to hold the conversion factor
@@ -240,7 +223,7 @@ else:
 
 <hr>
 <p>
-  With all these information, you are ready to deal with the next batch of exercises on <a href="exercise3.html">conditions</a>.
+  With all these information, you are ready to deal with the next batch of exercises on <a href="exercise2_p2.html">conditions</a>.
 </p>
   
 <!--<script language="JavaScript" src="end.js" type="text/javascript"></script>-->

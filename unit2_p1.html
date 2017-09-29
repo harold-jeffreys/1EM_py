@@ -14,18 +14,11 @@
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
 
-<h2>Unit 2, Variables : Declarations and native types.</h2>
+<h2>Unit 2, Part 1 - Variables : Declarations and native types.</h2>
 
 <h3>Introduction</h3>
 
-<p>One of the most common tasks of a computer program is to perform
-calculations.  To do this, the programmer must
-define <B>variables</B>. In mathematics, variables are usually single
-characters, such as <code>x</CODE> or <code>t</CODE> or <code>i</CODE>
-etc.  When programming, however, you have the flexibility to give your
-variables names which reflect their meaning. So, you could
-use <code>x_coordinate</CODE> or <code>time</CODE>
-or <code>radius</CODE> or <code>counter</CODE>.</p>
+<p>One of the most common tasks of a computer program is to perform calculations.  To do this, the programmer must define <B>variables</B>. In mathematics, variables are usually single characters, such as <code>x</CODE> or <code>t</CODE> or <code>i</CODE> etc.  When programming, however, you have the flexibility to give your variables names which reflect their meaning. So, you could use <code>x_coordinate</CODE> or <code>time</CODE> or <code>radius</CODE> or <code>counter</CODE>.</p>
 
 <p>You can create a variable by <strong>assigning</strong> a value to it. This is done by using the <code>=</code> operator. For instance, if we want to create a variable named <code>my_value</code> where we will store the value <code>13.5</code> we will use the following command :</p>
 <pre><code>my_value = 13.5</pre></code>
@@ -33,7 +26,7 @@ or <code>radius</CODE> or <code>counter</CODE>.</p>
 <p>Variable declaration must obey a few rules :
   <ol>
     <li>First of all, you cannot use a reserved keyword as a variable name. For instance, trying to declare a variable called <code>if</code> or <code>while</code>, Python will stop and give you an error.</li>
-    <li>Variable names must be only made of alpha-numeric characters (letters and numbers). There cannot be any special character or blank spaces. So <code class="language-python">x coordinate = 5.0</code> will not work while <code class="language-python">x_coordinate = 5.0</code> will.</li>
+    <li>Variable names must be only made of alpha-numeric characters (lecodeers and numbers). There cannot be any special character or blank spaces. So <code class="language-python">x coordinate = 5.0</code> will not work while <code class="language-python">x_coordinate = 5.0</code> will.</li>
     <li>Variables names cannot start with a number.</li>
   </ol>
 </p>
@@ -60,7 +53,6 @@ Python provides natively datatypes that can be used to build programs :
   <ul>
     <li> <code>int</code> That are used to represent integer values. </li>
     <li> <code>float</code> That are used to represent real/floating point values.</li>
-    <li> <code>complex</code> That are used to represent complex numbers (more of these in your EM lectures first!).
   </ul>
 
   Now Python is a <strong>dynamical and weak typed language</strong> that means that the type of variables is automatically determined by Python, and that conversions are made implicitly whenever possible. So if we try to add an int with a float, the resulting type will always be the most permissive one : a float. For instance, try to run the following commands :
@@ -77,7 +69,7 @@ type(a+b) # float</code></pre>
 </p>
 
 <p>
-  Real number types (<code>float</code>) also support scientific notation. You only need to use the <code>e</code> suffix :
+  Real types also support scientific notation. You only need to use the <code>e</code> suffix :
 </p>
 
 <pre><code>a = 1.0e3 # => 1 000
@@ -138,12 +130,7 @@ b = 5.0e-2 # => 0.05</pre></code>
 <a name="lists"></a><h3>Lists :</h3>
 
 <p>
-  Lists are among the most useful and used types in Python. They
-  are <strong>collections</strong> of variables of any type, that can
-  be modified later in the program (the computer-sciency term
-  is <strong>mutable</strong>). You can think about lists as an array
-  of values in which you can add, remove and modify values. Let's see
-  a few examples of lists :</p>
+  Lists are among the most useful and used types in Python. They are <strong>collections</strong> of variables of any type, that can be modified over time (the computer-sciency term is <strong>mutable</strong>). You can think about lists as an array of values in which you can add, remove and modify values. Let's see a few examples of lists :</p>
 
 <pre><code class="language-python"># We can create an empty list using [] :
 a = []
@@ -161,7 +148,7 @@ print(len(a), len(b), len(c))
 print(b)</code></pre>
 
 <p>
-  Lists are indexed-collections. That means we can access any element by using its position in the list. <strong>Positions of elements in a list are numbered from 0</strong>. We access an element by using the <code>[]</code> operator. So if we take the example of <code>b</code> above, <code>b[0]</code> will access the first element of the list.
+  Lists are indexed-collections. That means we can access any element by using its position in the list. Positions of elements in a list are numbered from 0. We access an element by using the <code>[]</code> operator. So if we take the example of <code>b</code> above, <code>b[0]</code> will access the first element of the list.
 </p>
 
 <pre><code># Printing the first value of the list
@@ -294,7 +281,7 @@ print(a) # [1, 2, 3, 4]</code></pre>
 
 <p><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Tuples</a> are really similar to lists. They also are collections, but this time they are <strong>immutable</strong>. That means there is no way to modify their content. We cannot add anything to them, nor remove. They are meant to be static collections of objects.</p>
 
-<pre><code>a = (1, 2, 3, 4) # Creating a tuple -- NOTE THE PARENTHESES!
+<pre><code>a = (1, 2, 3, 4) # Creating a tuple
 
 # We can access the tuple in the same way as a list :
 print(a[1])  # 2
@@ -444,7 +431,7 @@ print(a.values()) # ['test', 5, -4]</code></pre>
 <hr>
 
 <p>
-  Now that we have seen all these data structures, let's practice with some <a href="exercise2_p1.html">exercises</a>.
+  Now that we have seen all these data structures, let's practice with some <a href="exercise2_p1.html">exercices</a>
 </p>
 
 <!--<script language="JavaScript" src="end.js" type="text/javascript"></script>-->

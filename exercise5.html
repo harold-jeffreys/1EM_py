@@ -3,6 +3,19 @@
 <HEAD>
 <TITLE>University of Surrey, Physics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </HEAD>
 
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
@@ -10,41 +23,39 @@
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
 <div align="center"><h1>1EM - Essential Mathematics / Computing</h1></div>
 <P>
-<H2>Exercise 5: Matplotlib</H2>
+<H2>Exercise 5: Functions and Modules</H2>
 </P>
 
 
 <P>
 Make sure you have read unit 5 before attempting the following exercise.
 </P>
-
-
 <div>
-The aim of this exercise is to find the area of a circle. We will do
-this by using uniformly distributed random numbers.
-  
-</div>
 <ol>
-  <li>Create a plot showing a square with corners at (-1,-1) and
-    (-1,1), (1,1) and (1,-1).
-  <li> Add to this plot a circle of radius 1.
-  <li> Create an array of uniformly distributed random numbers that fall within the square, and add them to your plot.
-  <li> Calculate the fraction of the points that lie within the
-  circle, and use this information to find the area of the circle. How
-  does your answer compare to the accurate value?
-  <li> Calculate the percentage error in your value for the circle
-  area, and plot how this error changes as the number of random points
-  is increased.
+  <li>
+
+Write a python function to convert a temperature in Fahrenheit to its
+equivalent value in Celsius.
+
+The mathematical relationship between the temperature in Celsius and
+in Fahrenheit is $C=(5/9)(F-32)$ where $C$ is
+the Celsius temperature, and $F$ is the Fahrenheit temperature.
+
+  <li>Write another function to convert a temperature in Celsius to Fahrenheit.
+  <li>Write two more functions to convert temperature in Celsius to Kelvin, and Kelvin to Celsius.
 </ol>
-  
+
+Create a module containing the functions you have written. Using your
+module write a program that prints out a temperature conversion table
+from Celsius to Fahrenheit and Kelvin from $0^\circ$C to $100^\circ$C.
 
 
+</div>
 
-<P>
-When you have had a try at this exercise you should you progress
-to <a href="unit6.html">unit 6</a>.
+
+<p>
+ When you are happy with the output from the program, it's time to move on to <a href="unit6.html">unit 6</a>.
 </P>
-
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>

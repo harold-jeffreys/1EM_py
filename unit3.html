@@ -3,140 +3,253 @@
 <HEAD>
 <TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
+<link rel="stylesheet" href="prism.css" data-noprefix />
+
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 </HEAD>
 <body>
 
+<!-- Everything for syntax highlighting -->
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
+<!-- -->
+
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
 
-<h3>Unit 3: Functions and modules
-</h3>
+<h2>Unit 3 - Conditional statements.</h2>
 
-<div>
-Functions are self-contained pieces of code that do a specific task
-and help structure programs in a neat way, and allow pieces of code to
-be more easily re-used in future programs that you write. You have
-already met one function -- <tt> print()</tt>. You can also define
-your own functions. Let's say that you are working on a program which
-needs to calculate the area of triangles a lot, and you know the
-length of the sides of the triangles. You could write a function to
-calculate the area, given the length of the sides. Let's see how that
-would look. Some points about how the function & program combination
-work follow the example:
-</div>
+<h3>Introduction</h3>
 
-<pre>
-  <tt>
-# Calculate the area of a triangle, given the side lengths a, b and c
-# We make use of <a href="http://en.wikipedia.org/wiki/Heron's_formula">Heron's Formula</a>
-def  tri_area(a, b, c):
-    from math import sqrt 
-    s = (a+b+c)/2.0
-    return sqrt(s*(s-a)*(s-b)*(s-c))
+<p>
+  Until now, all the programs we have written were sequential and
+  linear : the sequence of instruction executed was always the same,
+  regardless of the data. In programming, it is very often required to
+  execute different instruction depending on the data we have. Let's
+  take a very simple example, imagine we want to convert length units
+  between millimetres and inches. We can imagine how the program might
+  be structured:
 
-print("Unit equilateral triangle area: ", tri_area(1,1,1))
-</tt>
-</pre>
-<div>
-  The definition of the of the function is started by the keyword <tt>
-  def</tt>. The function name then follows this keyword, followed by
-  parentheses that enclose the list of arguments -- in this case the
-  three numbers <tt> a, b </tt> and <tt> c </tt>, and then a
-  colon <tt>:</tt>. The indented block of code is then executed when
-  the function is called. If the function returns a value or an
-  object, then it is done by using the <tt>return</tt> keyword. In
-  this case returning the area of the triangle.
-<div>
-	    
-<h4>Modules</h4>
-<div>
-If you have a collection of functions then it can be useful to group
-them all together in a module. For example you might have a few
-functions that calculate the area of some geometric shapes. Create a
-file called <tt>areas.py</tt>, with a few functions to calculate the
-areas of shapes as follows
-</div>
-<pre>
-<tt>
-def  tri_area(a, b, c):
-    """This function takes 3 arguments a,b, and c for the lengths of the side
-    of a triangle. It then returns the area of the triangle"""
-    from math import sqrt 
-    s = (a+b+c)/2.0
-    return sqrt(s*(s-a)*(s-b)*(s-c))
+<ol>
+  <li>Ask the user if they have a value in units of inches or
+  millimetres.
+  <li>Ask the user a value.
+  <li>If the conversion is from inches, display the value converted in
+  millimitres.
+  <li>Else, display the value converted in inches.
+</ol>
+</p>
 
-def square_area(a,b):
-    """This function takes 2 arguments a, b for the
-    lengths of the sides of a square, and returns the area of the
-    square"""
-    return a*b
-</tt>
-</pre>
+<p>
+  With what we learned before, we should be able to do everything except the if/else part. This is what we call <strong>conditional statements</strong> in computer science. For that, we will use the <code>if</code>, <code>else</code> and <code>elif</code> statements in Python. You can learn more on the <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements">official documentation</a>.
+</p>
 
+<p>
+  The general form of a conditional statement is the following in Python :
+</p>
 
-  <div>
-    Once you have created this module you can use it in another python
-    program by importing the functions it contains. You can use the
-    statement <tt>import areas</tt> to import all the contents of this
-    module. You can then access the contents of this module as follows
+<pre><code>if condition:
+  do_something
+else:
+  do_something_else
+</code></pre>
+<p>
+  Note the indentation here!</p>
+<hr>
+<h3>Boolean values</h3>
+<p>
+  Let us analyse the components of the <code>if</code>
+  statement. The <code>condition</code> has a very specific type that
+  we have not yet covered about until now : it is called
+  a <strong>boolean</strong>. A boolean can only take two
+  values: <code>True</code> or <code>False</code>. When writing an
+  expression that resolves (i.e. results in) to a boolean type, Python
+  evaluates the truth of the statement and returns
+  either <code>True</code> or <code>False</code>. Let's see an example
+  of condition :
+</p>
 
-  </div>
+<pre><code>a = 10
+print(a &gt 0)   # True
+print(a &lt 0)   # False
+print(a == 10) # True
+print(a != 3)  # True</pre></code>
 
-  <pre class="bluecolor">
+<p>
+  There are a few testing operators that allow you to create conditions with any kind of variables. Here are the most common ones :
+</p>
 
-    import areas
+<p class="indexlink">
+  <table>
+    <tr>
+      <td><strong>Operator</strong></td>
+      <td><strong>Meaning</strong></td>
+      <td><strong>Comment</strong></td>
+    </tr>
+    <tr>
+      <td><code>a == b</code></td>
+      <td>Equality testing</td>
+      <td>Be careful not to mistake this with <code>a = b</code> which is the assignment operator. <code>a = b</code> will give <code>a</code> the same value as <code>b</code> while <code>a == b</code> will return <code>True</code> if <code>a</code> and <code>b</code> are equal.
+    </tr>
+    <tr>
+      <td><code>a != b</code></td>
+      <td>Not equal to </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &lt b</code></td>
+      <td>Less than</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &lt= b</code></td>
+      <td>Less or equal</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &gt b</code></td>
+      <td>Greater than</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a &gt= b</code></td>
+      <td>Greater or equal</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>a in b</code></td>
+      <td>Belongs to</td>
+      <td>If <code>b</code> is a collection (list, tuple, string, dictionary), then <code>a in b</code> will return <code>True</code> if the value of <code>a</code> can be found in the collection (the list of keys for a dictionary).</td>
+    </tr>
+  </table>
+</p>
 
-    print("Area of unit equilateral triangle ", areas.tri_area(1,1,1))
-    print("Area of unit square ", areas.square_area(1,1))
-</pre>
+<p>
+  It is possible to combine boolean expressions to form more complex tests. Consider we have two boolean values <code>a</code> and <code>b</code>, we can combine them to form another boolean value with the following operators :
+</p>
 
+<p class="indexlink">
+  <table>
+    <tr>
+      <td><strong>Operator</strong></td>
+      <td><strong>Meaning</strong></td>
+    </tr>
+    <tr>
+      <td><code>not a</code></td>
+      <td>Inverts the value of <code>a</code>. If <code>a</code> is <code>True</code> it becomes <code>False</code> and vice versa.</td>
+    </tr>
+    <tr>
+      <td><code>a or b</code></td>
+      <td>Returns <code>True</code> if either or both <code>a</code> or <code>b</code> are <code>True</code></td>
+    </tr>
+    <tr>
+      <td><code>a and b</code></td>
+      <td>Returns <code>True</code> if both <code>a</code> and <code>b</code> are <code>True</code></td>
+    </tr>
+  </table>
+</p>
 
-<div>
-Note that the functions are preceded with the module
-name <tt>areas</tt>. This will prevent you from using existing
-functions that you may have already defined within your program. Some
-modules contain a lot of content, so it is useful to just import the
-parts of the module that you need. This can be done using the <tt>
-from</tt> statement as show below. In this case the function can be
-called directly.
-</div>
+<p>
+  With these operators we are ready to tackle every single condition testing.
+</p>
 
-  <pre class="bluecolor">
+<hr>
 
-    from areas import tri_area
+<h3>Blocks of code :</h3>
 
-    print("Area of unit equilateral triangle ", tri_area(1,1,1))
+<p>
+  As you can see on the example (and might remember from unit 1) : after stating the condition, we have shifted the code to the right by adding a few spaces before. This is what we call <strong>indentation</strong>. In lots of programming language, indentation is only a cosmetic feature, helping you to read the code. But in Python, it has also a syntactic meaning : indenting creates a <strong>block</strong> of code. Python then knows what you want to be executed in your conditional statement, and what's to be executed after the conditional statement. Let's take two very simple examples to show you what blocks are :
+</p>
 
-</pre>
+<h4>Example 1</h4>
+<pre><code>a = int(input('Enter an integer value : '))
+b = int(input('Enter another integer value : '))
 
-  <div>
-    Note in this example we have only imported the function of the
-    calculation of the area of a triangle. We can access this function
-    without the <tt>areas</tt> prefix. If we try and access
-    the <tt>square_area</tt> function then the interpreter will
-    complain that the function is not defined.
-</div>
+if a &lt b:
+  print(a, ' is indeed less than ', b)
+  print('Basic addition : ', a, ' + ', b, ' = ', a+b)</pre></code>
 
-  <div>
-    We have also included some useful information about what our
-    functions do using triple quotes <tt>"""</tt> at the start of the
-    definition. We can access this using the <tt>help()</tt> function
-    available in python. To see this start an instance of the python
-    interpreter at the command prompt by typing <tt>
-    python3</tt>. Then import our new module by typing <tt> import
-    areas</tt>. Finally ask for help on our new functions by
-    typing <tt>help(areas.tri_area)</tt>. You should see a print out
-    of the text at the start of the function definition. 
-    </div>
+<h4>Example 2</h4>
+<pre><code>a = int(input('Enter an integer value : '))
+b = int(input('Enter another integer value : '))
+
+if a &lt b:
+  print(a, ' is indeed less than ', b)
+print('Basic addition : ', a, ' + ', b, ' = ', a+b)</pre></code>
+
+<p>
+  In the first example, the two print statements belong to the block of code of the if-statement. So they will be executed only if <code>a</code> is less than <code>b</code>. In the second example, you can see that the print displaying the sum of <code>a</code> and <code>b</code> is at the original indentation level. That means that this print statement will be executed regardless of the truth value of <code>a &lt b</code>, after the condition.
+</p>
+
+<hr>
+
+<h3>Back to the example</h3>
+
+<p> Now that we know all of this, we can write our unit converter in Python : </p>
+
+<pre><code>conversion = input('Converting from mm or from in [mm/in]? ')
+value = float(input('Value to convert : '))
+
+mm_to_inches = 0.039 # We create a variable to hold the conversion factor
+    
+if conversion == 'mm':
+  print(value, 'mm ~', value * mm_to_inches, 'in')
+else:
+  print(value, 'in ~', value / mm_to_inches, 'mm')</code></pre>
+
+<hr>
+
+<h3>The <code>elif</code> statement</h3>
+
+<p>
+  As you can see, we execute different versions of our code depending on the value of <code>conversion</code>. Now this is not completely satisfying. If the user enters <code>'km'</code> for instance, the code will still treat the unit as inches. We want our user to only enter <code>'mm'</code> or <code>'in'</code>. That means we need a third condition :
+  <ul>
+    <li> If <code>conversion</code> is <code>'mm'</code> do something</li>
+    <li> If <code>conversion</code> is <code>'in'</code> do something else</li>
+    <li> If <code>conversion</code> is none of the above, then print an error message</li>
+  </ul>
+</p>
+
+<p>
+  The <code>elif</code> statement allows us to do so by chaining condition tests :
+</p>
+
+<pre><code>if condition_1:
+  # Do something if condition_1 is True
+elif condition_2:
+  # Do something if condition_1 is False but condition_2 is True
+elif condition_3:
+  # etc.
+else:
+  # Do something if all of the above are False</code></pre>
+
+<p>
+  Knowing this, our code can now be completed :
+</p>
+
+<pre><code>conversion = input('Converting from mm or from in ? ')
+value = float(input('Value to convert : '))
+
+mm_to_inches = 0.039 # We create a variable to hold the conversion factor
+    
+if conversion == 'mm':
+  print(value, 'mm ~', value * mm_to_inches, 'in')
+elif conversion == 'in':
+  print(value, 'in ~', value / mm_to_inches, 'mm')
+else:
+  print('Error, the conversion unit should be either mm or in')</code></pre>
+
+<hr>
+<p>
+  With all these information, you are ready to deal with the next batch of exercises on <a href="exercise3.html">conditions</a>.
+</p>
   
-
-</div>
-Now try <a href="exercise3.html">Exercise 3</a>
-</div>
-
-<script language="JavaScript" src="end.js" type="text/javascript"></script>
+<!--<script language="JavaScript" src="end.js" type="text/javascript"></script>-->
 </BODY>
 
+<!-- Syntax highlighting -->
+<script language="JavaScript" src="prism.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('code').addClass('language-python');
+</script>
 </HTML>

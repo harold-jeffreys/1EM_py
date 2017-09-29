@@ -4,6 +4,18 @@
 <TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </HEAD>
 <body>
 
@@ -11,66 +23,46 @@
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
 
-<h3>Unit 11:  Consolidation of Previous Units.
-</h3>
+<h3>Unit 11: Fitting experimental data</h3>
 
 <div>
-To finish, we have a Unit headed as above: A consolidation of previous units.  This means there is primarily an exercise to do, and not much new material, but we finish, before going to the exercise, by pointing to some useful things
+  This exercise follows chapter 4 of <a href = "http://www.physics.upenn.edu/biophys/PMLS/Student/">Kinder and Nelson "A student's
+  guide to Python for Physical Modeling"</a>.
 </div>
 <div>
-The Units have introduced some useful concepts and useful features of the Fortran language, but they have not been exhaustive.  The <a href="glossary/glossary.html">Glossary</a> has details of more features, such as the <tt><a href="glossary/random_number.html">RANDOM_NUMBER</a></tt> instrinsic subroutine, which generates sequences of random numbers, a method for creating arrays with a size not decided until execution time (via the <tt><a href="glossary/allocate.html">ALLOCATE</a></tt> statement), and details of how to use <tt><a href="glossary/complex.html">COMPLEX</a></tt> numbers.  It is worth being aware that all these things can be done.
-</div>
-
-<div>
-The other thing to mention, which helps when writing larger codes, and codes with user-defined data types, is that you can encapusulate data and code in <tt>MODULES</tt>.  If you define a data type, or some constants, some variables, or subprograms in one <tt>MODULE</tt> you can access them elsewhere by having a <tt>USE</tt> statement, as in the example below, using the same <tt>element</tt> type we used in <a href="unit4.html">Unit 4</a>
-</div>
-<pre class="bluecolor">
-MODULE elements
-
-  ! define the data type in the module
-  TYPE element
-    CHARACTER(LEN=2) :: symbol
-    INTEGER :: atomic_number
-    REAL :: atomic_mass
-  END TYPE element
-
-  ! and some constants
-  TYPE(element), PARAMETER :: hydrogen = element("H",1,1.00794)
-  TYPE(element), PARAMETER :: helium = element("He",2,4.002602)
-
-  ! we can also include subprograms in the module, after a "contains"
-  ! statement:
-  CONTAINS
-
-    SUBROUTINE write_element(elem)
-      IMPLICIT NONE
-      TYPE(element), INTENT(IN) :: elem
-      
-      WRITE(6,'(a,a,a,i3,a,f8.3)') "Element ",elem%symbol,&
-           " has atomic number ",elem%atomic_number,&
-           " and atomic mass ",elem%atomic_mass
-    END SUBROUTINE write_element
-
-END MODULE elements
-
-PROGRAM element_test
-  USE elements
-  IMPLICIT NONE
-
-  TYPE(element) :: hypothetical_element
-
-  hypothetical_element%symbol = "Xx"
-  hypothetical_element%atomic_number = 310
-  hypothetical_element%atomic_mass = 875.105
+A patient with HIV has had an antiretroviral drug administered. We'd
+like to model the viral load -- that is the number of virions in the
+blood of the patient. One model for the viral load $V(t)$ a time $t$
+after treatment is
   
-  CALL write_element(hydrogen)
-  CALL write_element(helium)
-  CALL write_element(hypothetical_element)
+$$V(t) = A \textrm{exp}(-\alpha t) + B \textrm{exp}(-\beta t)$$
 
-END PROGRAM element_test
-</pre>
-<div>
-Here, note that the <tt>MODULE</tt> defines a <tt>TYPE</tt>, creates two constants (with <tt>PARAMETER</tt>) of that type, and <tt>CONTAINS</tt> a <tt>SUBROUTINE</tt>.  Any <tt>PROGRAM</tt>, or indeed <tt>FUNCTION</tt> or <tt>SUBROUTINE</tt> that <tt>USE</tt>s the module (with the <tt>USE</tt> statement before the <tt>IMPLICIT NONE</tt>) will have access to the information in the module.  Note that it is not necessary to write the <tt>INTERFACE</tt> block to tell your program about functions or subroutines accessed via the <tt>USE</tt> statement.  The <tt>MODULE</tt> must occur before the <tt>PROGRAM</tt> in your file.
+The four parameters $A$, $\alpha$, $B$ and $\beta$ are constants that
+control the model.
+<ol>
+<li>Start by creating a function to evaluate this model of the viral
+load. Then create a few plots of this function for different values of
+  the model parameters.</li>
+<li>Now have a look at some experimental data. The details of the
+experimental data are <a href="README.txt">here</a>, and the data
+itself is <a href="HIVseries.txt">here</a>. Import this data into an
+array <tt>hiv_data</tt>. Separate this data into two arrays and plot
+it (we did this in <a href="unit6.html">unit 6</a> using numpy's <tt>
+genfromtxt</tt> function).
+</li>
+<li>Superimpose the experimental data points on a plot of the
+model. Adjust the four parameters until you can fit the data to the
+model. This is quite difficult to do with four parameters! Perhaps try
+the following: assume that $\beta>\alpha$. How does the trial solution
+behave at long times? If the data fits this then we can find two of
+the four constants, then hold them fixed whil adjusting the other two?
+We can get a better idea about the remaining two by looking at the
+$t=0$ behaviour.</li>
+<li>The latency period of HIV is about ten years. Based on your
+results how does the inverse of the T-cell infection rate $1/\alpha$
+compare to the latency period?</li>
+</ol>
+
 </div>
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>

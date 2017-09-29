@@ -3,9 +3,8 @@
 <HEAD>
 <TITLE>University of Surrey, Physics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+<link rel="stylesheet" href="prism.css" data-noprefix />
+
 </HEAD>
 
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
@@ -13,55 +12,87 @@
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
 <div align="center"><h1>1EM - Essential Mathematics / Computing</h1></div>
 <P>
-<H2>Exercise 4: Numpy</H2>
+<H2>Exercise 4: Using integers and reals</H2>
 </P>
 
 
 <P>
-Make sure you have read unit 4 before attempting the following exercises.
+Make sure you have read unit 4 before attempting the following exercise.
 </P>
-<ol>
-  <li>
 <div>
-A one-dimensional array can be thought of as a vector, and there are
-supporting functions in numpy to deal with arrays as vectors. Using
-the python <tt>help</tt> command find out about the function <tt>dot</tt>.
-Initialise two vectors of the same dimension with any numbers you
-choose. Use this function to calculate the dot product of your two
-vectors, but check (on pen and paper) that the result agrees with the
-formula for dot products:
+  <ol>
+    <li> Using a loop write a program that prints out every number
+      that divides by 3 between 1 and 100.
+    <li> Calculate the sum of these numbers.
+    <li> The following piece of code creates a list of random
+    integers <code>data_list</code>. We will cover more of the
+    commands used here in later units. Write a program to calculate
+    the mean and standard deviation of the numbers in this list by
+    using a for loop over the list.
+<pre>
+      <code>
+import numpy as np
+num_points = 20
+data_list = np.random.randint(30,size=num_points)
+      </code>
+      </pre>
+  </ol>
 </div>
-$$ \left(\begin{array}{c}a\\b\\c\end{array}\right)\cdot\left(\begin{array}{c}d\\e\\f\end{array}\right)=ad+be+cf $$
 
-
-<li><div>Here's a technique to work out the number &pi; to many decimal places.  <a href="http://en.wikipedia.org/wiki/Machin-like_formula">You can show that</a> &pi; can be expressed exactly as
-$$
-\pi=16\tan^{-1}\frac{1}{5} - 4\tan^{-1}\frac{1}{239}.
-$$
-The inverse tangent functions can be evaluated as their Taylor series as
-$$
-\tan^{-1}(x) = x - \frac{1}{3}x^3 + \frac{1}{5}x^5 - \frac{1}{7}x^7 + \cdots
-$$
-</div>
 
 <div>
-
-This means that the inverse tangent of 1/5 can be written as
-$$
-\tan^{-1}\frac{1}{5} \approx \left(\frac{1}{5}\right) - \frac{1}{3}\left(\frac{1}{5}\right)^3+\frac{1}{5}\left(\frac{1}{5}\right)^5 - \frac{1}{7}\left(\frac{1}{5}\right)^7 + \cdots
-$$
-and similarly for the inverse tangent of 1/239.
-<br><br> Write a program using python to calculate an approximate
-value of $\pi$ using this method, and compare it with the in-built
-value of <tt>np.pi</tt>.
+  The following code illustrates a sorting algorithm used by card
+  players. Pick out the second card and then put it in order with
+  respect to the first, then pick out the third card and insert it
+  into the sequence, and so on until the last card. This algorithm
+  uses a list of values and the two types of loops discussed in unit
+  2. See if you can be your own python interpreter and run this code.
+  
 </div>
-</ol>
 
-<p>
- When you are happy with your program, it's time to go on to <a href="unit5.html">Unit 5</a>.
+
+<pre >
+  <code>
+#first generate a list of 20 random integers
+#We will come back to this later in the course  
+import numpy as np
+num_points = 20
+data_list = np.random.randint(30,size=num_points)
+
+print("Starting list of numbers")
+print(data_list)
+
+for j in range(1, num_points):
+    a = data_list[j]
+    i = j
+    while (i > 0 and data_list[i-1] > a):
+        data_list[i] = data_list[i-1]
+        i = i -1
+    data_list[i] = a
+
+print("Final list of numbers")
+print(data_list)
+</code>
+</pre>
+
+
+
+
+
+
+
+<BR><BR>
+<P>
+
+ When you understand  the output from the program, it's time to move on to <a href="unit5.html">unit 5</a>.
 </P>
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>
-
+<!-- Syntax highlighting -->
+<script language="JavaScript" src="prism.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('code').addClass('language-python');
+</script>
 </HTML>

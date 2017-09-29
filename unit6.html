@@ -3,6 +3,8 @@
 <HEAD>
 <TITLE>University of Surrey, Physics: Essential Mathematics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
+<link rel="stylesheet" href="prism.css" data-noprefix />
+
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -14,153 +16,176 @@
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
 
-<h3>Unit 6: I/O
+<h3>Unit 6: Data Structures and scientific computing tools in Numpy
 </h3>
 
 <div>
-  Now that you can perform some calculations it may be important to
-  store the results by writing them to a file. Similarly you might
-  need to input some initial conditions by reading them from the user,
-  or from a data file.
+  So far we have looked at some of the basic aspects of the python
+  language.  Python in itself does not contain many functions required
+  for performing mathematical calculations, or creating
+  matrices. There are pieces of python code that have been created for
+  performing scientific calculations. In this course we will focus on
+  one package in particular: <a href="http://www.numpy.org/">
+  numpy</a>, for which there is a quick
+  tutorial <a href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html">here</a>. We
+  will go over some of the main points in this unit.
 </div>
+<div>  
+  Often, in a physical problem, we might want one object to be
+  represented by many numbers - e.g. the components of a vector or the
+  displacement of a taut string at various points along its length, or
+  we might just want to collect related data together, such as
+  multiple measurements in an experiment.  We could define a variable
+  with a different name for each value we wish to store, but a neater
+  solution is to use an <i>array</i>.
 
-<h4>Reading and Writing a file</h4>
-<div>
-  You can open a file using the built-in <tt>open</tt> function
-  available in python. The program below shows how to open a file, and
-  write to it.
-</div>
-<pre>
-  <tt>
-file_object = open("outputfile.txt", "w")
-file_object.write("Hello, World\n")
-file_object.close()
-  </tt>
-</pre>
-
-<div>
-  When we use the open command we must specify what we plan to do with
-  the file -- read <tt>r</tt>, write <tt>w</tt>, or append <tt>a</tt>
-  to add new content to an existing file. The open command returns an
-  file object that we can later use the write when we wish to output
-  to it. We can read in data from the file we just created in a
-  similar way.
-</div>
+  We can create an array for the spatial point (1.1,1.3,12.3) as
+  follows.
+  </div>
 
 <pre>
-  <tt>
-file_object = open("outputfile.txt", "r")
-line = file_object.readline()
-print(line)
-file_object.close()
-  </tt>
-    
-  </tt>
-</pre>
-
-<div>
-  Sometimes it is difficult to know how much data there is in a
-  particular file. In this case we need use a loop to read the data
-  until the file is finished. The <tt>readline</tt> command returns an
-  empty string if there is nothing more to be read from a file. This
-  makes it easy to loop over a file as follows.
-</div>
-
-<pre>
-  <tt>
-#first we will write a series of numbers to our file
-file_object = open("outputfile2.txt", "w")
-
-for x in range(0,10):
-    file_object.write(str(x) + ", " + str( x**2)+"\n")
-
-file_object.close()
-
-#Now open the file for reading
-file_object = open("outputfile2.txt", "r")
-
-line = file_object.readline()
-while line != "":
-    #print current line
-    print(line)
-    #get the next line
-    line = file_object.readline()
-
-file_object.close()
-  </tt>
-    
-</pre>
-
-<div>
-  In this program we first write out the squares of the numbers 0 to 9
-  using a for loop. We then reopen the same file for reading, and keep
-  reading each line until the file is empty, and printing out the
-  result. An alternative way to do the same operation is via a for
-  loop as follows.
-</div>
-
-<pre>
-  <tt>
-file_object = open('outputfile2.txt', 'r')
-for line in file_object:
-    print line
-f.close()
-  </tt>
-</pre>
-
-<h4>Reading csv data using numpy</h4>
-<div>
-If we want to read data in from a file to a numpy array, then it can
-be useful to do this directly using the numpy package.
-</div>
-<pre>
-  <tt>
+<code>
 import numpy as np
 
-squares = np.genfromtxt("outputfile2.txt", delimiter=",")
-
-print(squares)
-
-x_coordinate = squares[:,0]
-y_coordinate = squares[:,1]
-print(x_coordinate)
-print(y_coordinate)
-    
-  </tt>
+r_coordinate = np.array([1.1,1.3,12.3])
+print("r_coordinate is: ", r_coordinate)
+</code>
 </pre>
 
 <div>
-  Here we use the <tt>genfromtxt</tt> function to read in the data
-  from the comma separated variable (csv) file. We can then manipulate
-  the data and reprocess it, or to plot it for example.
+  These arrays are much like python's intrinsic list type. However, we
+can perform linear algebra operations on them. Note
+the <code>import</code> statement here has been used to provide a short
+hand for the numpy package -- <code>np</code>. This will make the code
+more readable later. Also note the square brackets to define the
+elements of the array, and the parentheses enclosing the argument of
+the function <code>array</code>. Different shaped arrays can be created,
+as well as several standard initialisations of array shown below.
 </div>
 
-<h4>Reading from the user</h4>
+
+<pre>
+<code>
+import numpy as np
+
+twod_array = np.array([[1.1,1.3], [2.3,1.2]])
+print("twodarray is: ", twod_array)
+
+array_a = np.zeros( (2,2) )
+print("Array of zeros: ", array_a)
+
+array_b = np.ones( (3,5) )
+print("Array of ones: ", array_b)
+
+array_c = np.empty( (2,2) )
+print("Empty array: ", array_c)
+
+array_d = np.arange(0,3, 0.1)
+print("List of numbers: ", array_d)
+</code>
+</pre>
+
 <div>
-  We can read from the screen by using the built-in function <tt>
-  input</tt> as follows.
+Here you can see the function <code>np.arange</code>. It is used here to
+create an array of numbers starting from zero in steps of 0.1 until
+the last value less than 3.
+</div>
+<div>
+    We can use these arrays in a for loop and perform calculations
+  over each element of the list. For example
 </div>
 
 <pre>
-  <tt>
-x = input("Please enter a file name: ")
-  </tt>
+
+  <code>
+import numpy as np
+
+x_coordinates = np.arange(0,10,0.1)
+print("x_coordinate, x_coordinate**2")<br>
+for x in x_coordinates:
+    print("%5.2f, %5.2f" % (x,x**2))
+  </code>
+
 </pre>
+<div>
+Note here we have used the <code>print</code> command to format the output
+of our operations. You can read more about the syntax of this
+command <a href="https://www.python-course.eu/python3_formatted_output.php">
+here</a>. Essentially we have specified that we want a floating point
+number <code>f</code>, with <code>5</code> characters , <code>2</code> of which
+appear after the decimal place.
+</div>
 
 <div>
-  The information read in from the user is them put in the
-  variable <tt>x</tt>. Note that this could be a string or an integer,
-  so we should be careful how we use this input. If we want to use it
-  for a numerical calculation then it may be necessary to convert it
-  to the appropriate type, for example <tt>float(x)</tt>.
+  Individual elements of an array, or particular slices of an array
+  can be accessed by using square brackets [ ] to specify the elements
+  we require. Note that the numbering of the elements of the array
+  starts from 0. For example
+  </div>
+<pre>
+  <code>
+    import numpy as np
+    a = np.arange(1,100,1)
+    print("The first element of a ", a[0])
 
-  <div>
+    print("The first 10 elements of a ", a[0:10])
 
-    <div>
-      <br>
-When you have read through this Unit, it's time for <a href="exercise6.html">exercise 6</a>.
+    #shape a into a 2 row 50 column array
+    b = a.reshape(2,50)
+    print("The first column of b is ", b[:,0])
+  </code>
+</pre>
+
+
+<div>
+
+  Numpy also gives us access to many mathematical functions including
+  many that you are familiar with, such as trigonometric functions,
+  and many that are less familiar
+  listed <a href="https://docs.scipy.org/doc/numpy-dev/genindex.html#">here</a>.
+
+  We can use these to illustrate operating on a whole array of numbers
+  together, rather than looping over all the elements in the
+  array. This will be a useful operation later when we come to plot
+  functions.
+
+</div>
+<pre>
+
+  <code>
+import numpy as np
+
+#create an array of points for the x coordinate
+#this creates 100 points
+x_points = np.linspace(0,6, 100)
+
+#create the y coordinates
+y_points = np.sin(x_points)
+
+#print out the results
+for i in range(100):
+    print("%5.2f, %5.2f" % (x_points[i],y_points[i]))
+  </code>
+  
+</pre>
+<h4><code>help</code> and <code>dir</code></h4>
+<div>
+You can find out more about the functions available from numpy by
+using the <code>dir</code> and <code>help</code> commands at the interactive
+prompt. Simply type <code>python3</code> at the command prompt, then you
+can list the functions available in the package
+using <code>dir(numpy)</code> once you have imported it. You can then ask the help function to describe one of the functions, e.g. <code>help(np.sin)</code>
+  </div>
+<div>
+Now go on to <a href="exercise6.html">Exercise 6</a>.
 </div>
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>
-
+<!-- Syntax highlighting -->
+<script language="JavaScript" src="prism.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('code').addClass('language-python');
+</script>
 </HTML>
+

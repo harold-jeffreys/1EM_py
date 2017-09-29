@@ -3,6 +3,8 @@
 <HEAD>
 <TITLE>University of Surrey, Physics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
+<link rel="stylesheet" href="prism.css" data-noprefix />
+
 </HEAD>
 
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
@@ -10,40 +12,38 @@
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
 <div align="center"><h1>1EM - Essential Mathematics / Computing</h1></div>
 <P>
-<H2>Exercise 8: Debugging</H2>
+<H2>Exercise 8: I/O</H2>
 </P>
 
 
 <P>
-Look back at some of your previous code, and see if you have generated
-any error messages other than those listed in unit 8. Make a short
-example to illustrate the problem they are telling you about.
+Make sure you have read unit 6 before attempting the following exercise.
 </P>
-<p>
-  Try and debug the following program to calculate the factorial of an integer.
-</p>
-
-<pre>
-  <tt>
-def fact(n):
-    """Return the factorial of a given number. ""
-    r = 2
-    while n > 4
-        r = r * n
-        n = n - "2"
-    return r
-
-N = inputt("Input an integer: ")
-print "N! is ", fact(int( N )))
-
-  </tt>
-</pre>
 <div>
-It is time to move on to <a href="unit9.html">Unit 9</a>.
+  <ol>
+  <li><ul>
+  <li>Write a python program to create a file with the numbers 1 to 10
+    inside.
+  <li>Read this file and print the contents back to the user.
+  <li>Now ask the user for a number to append to the end of the file,
+    and append the number to the file.</ul>
+    <li> Numpy offers a a way to read from a file --
+      the <code>np.loadtxt('filename')</code> function. Read the help
+      instructions for this function, and construct an example of how
+      to use it.
 
-</div>
+</ol>
+<div>
+  When you have done this exercise, it's time for <a href="unit9.html">unit 9</a>.
+  </div>
+
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>
-
+<!-- Syntax highlighting -->
+<script language="JavaScript" src="prism.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('code').addClass('language-python');
+</script>
 </HTML>

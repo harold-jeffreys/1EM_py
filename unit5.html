@@ -63,10 +63,13 @@ areas of shapes as follows
 </div>
 <pre>
 <code>
+#Make the sqrt function available to our module
+from math import sqrt 
+
 def  tri_area(a, b, c):
     """This function takes 3 arguments a,b, and c for the lengths of the side
     of a triangle. It then returns the area of the triangle"""
-    from math import sqrt 
+
     s = (a+b+c)/2.0
     return sqrt(s*(s-a)*(s-b)*(s-c))
 

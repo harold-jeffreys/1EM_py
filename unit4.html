@@ -15,65 +15,181 @@
 
 <h3>Unit 4: Loops.
 </h3>
-  
-<div>
-So far, our example programs have executed each line in turn through
-the program until the end of the program is reached. Sometimes it is
-useful to be able to go back and use the same parts of code over and
-over (e.g. with a new value of a variable) or conditionally execute
-code based on some test (e.g. testing if a number a user has typed in
-is in a sensible range). There are a few different ways of doing this,
-which we will now discuss.
-</div>
 
+<h4>Introduction</h4>
+<p>
+So far, our example programs have executed each line in turn through the program until the end of the program is reached. Sometimes it is useful to be able to go back and use the same parts of code over and over (e.g. with a new value of a variable). Fortunately, Python provides us very convenient ways of repeating code : <strong>Loops</strong>.</p>
 
-<h4>while loops</h4>
-<div>
-The simplest type of loop is a while loop. This is executed while a
-particular condition is true. For example you might like to loop over
-all lines in a file while there is still data, or continue a
-simulation while an end condition has not been met.
-</div>
-<DIV CLASS="codelink">
-  <pre>
-  <code>
-time  = 0
-while time < 10:
-     print(time)
-     time = time + 1
-print("Exited while loop.")
-	     </code>
-  </pre>
-</DIV>
-<div>
-Note that the block of code that is executed inside the loop is all
-indented by the same amount. The next part of the code to be executed
-after the loop has finished is not indented.
-</div>
+<p> Before introducing the syntax of loops, let's take a simple example we will try to code in different ways. Let's imagine we want to get all the even numbers between 0 and 10 and put them in a list. How should we do this ? A very basic way would be : </p>
 
-<h4>for loops</h4>
-<div>
-  A more frequently used type of loop is the for loop. In this case we
-  have a list of objects to loop over. A simple way to create a list
-  is by using
-  the <a href="http://pythoncentral.io/pythons-range-function-explained/"><code>range()</code></a>
-  function. If this function is given a single integer as an argument
-  then it generates a list of integers starting from 0 upto but not
-  including this value. This function creates a list For example:
-</div>
-<DIV CLASS="codelink">
-<pre>
-<code>
-for x in range(10):
-    print("Loop number ", x)
+<pre><code>even_numbers = [0, 2, 4, 6, 8, 10]
+print(even_numbers)
+</code></pre>
 
-letters = ("a", "b", "c","d")
-for x in letters:
-    print(x)
- </code>
-  </pre>
+<p> This works perfectly as long as we know in advance that we want to go from 0 to 10. If we extend the exercise, and want to generate a list that will hold all even numbers from a value <code>a</code> to a value <code>b</code>, both entered by the user. How should we do ? You see that we cannot <strong>hardcode</strong> (ie, enter them manually) the values of the list anymore. Fortunately, loops are here to help us.</p>
 
-</DIV>
+<hr>
+
+<h4>The <code>while</code> statement</h4>
+<p>
+  The simplest type of loop is a <code>while</code> loop. This type of loop will execute code while a certain condition is met. The condition is, as we have seen in the previous unit, a boolean expression. One execution of the loop is called an <strong>iteration</strong>. The general form of a <code>while</code> statement will thus be :
+</p>
+
+<pre><code>while condition:
+    do_something
+    do_more_things
+    etc.
+</code></pre>
+
+<p>We can now translate our example and have a functional even number generator :</p>
+
+<pre><code>even_numbers = [] # Initialisation
+
+a = input('Enter the value of a :')
+b = input('Enter the value of b :')
+
+# We keep track of which number we have viewed previously, using a counter variable i.
+i=a
+
+# We check that a is even, if not we add 1 to i
+if a%2 == 1:
+   i=i+1    
+    
+while i <= b: # We iterate while we are under (or equal to) b
+   even_numbers.append(i) # Adding i to the even number list
+   i=i+2	              # Going to the next even number
+	  
+print(even_numbers)</code></pre>
+
+<p>As for <code>if</code> statements, the code inside the <code>while</code> statement must be indented so that Python recognizes which code belongs to the loop and which code does not.</p>
+
+<p>Let's push the example a little bit further. Now we have a list <code>even_numbers</code>, imagine if we wanted to make another list holding the squared values of each value in <code>even_numbers</code>. Using <code>while</code> statement, we would do :</p>
+
+<pre><code>square_values = []
+i = 0
+while i < len(even_numbers):
+   square_values.append(even_numbers[i]**2)
+   i=i+1
+	  
+print(square_values)</code></pre>
+
+<p>Let's break it down. First we initialise <code>i</code> to <code>0</code>. This variable will not account for a general position in the list. So it will go from <code>0</code> to <code>len(even_numbers)-1</code> included. So if we have four elements in <code>even_numbers</code>, <code>i</code> will take the values 0, 1, 2, 3. This is exactly what we are testing in the condition : as long as <code>i</code> is smaller than the size of the list, we keep going, and during each iteration, we add 1 to <code>i</code> (<code>i=i+1</code>). Then, for each iteration, we take the current even number (<code>even_number[i]</code>), square it (<code>**2</code>) and store it in <code>square_values</code>.</p>
+
+<p>This is very convenient, but a bit long to write. Fortunately, we have another way to write this : <code>for</code> loops </p>
+
+<hr>
+	  
+<h4>The <code>for</code> statement</h4>
+
+<p><a href="https://docs.python.org/3/tutorial/controlflow.html#for-statements"><code>for</code></a> statements are loops just like <code>while</code> statements, but instead of iterating until a certain condition becomes false, these loops iterate on the values of a list. Let's take a very simple example to see what we mean :</p>
+
+<pre><code>my_list = [1, 3, 9, 10, 'a', 'b', 7.5]
+
+for value in my_list:
+  print(value)</code></pre>
+
+<p>If we execute this piece of code, we should end up with 7 lines of result, each one with the value of an element of <code>my_list</code>. The <code>for</code> statement will create a temporary variable that you can use inside the loop. More, generally, <code>for</code> statements are writtent :</p>
+
+<pre><code>for variable in enumerable:
+  do_something</pre></code>
+
+<p>The variable will automatically take the type of what is stored in the enumerable. Note that we indicated <code>enumerable</code> and not <code>list</code> this is because you can use a <code>for</code> loop to iterate on the element of any enumerable : a list, a tuple, a dictionary, a string, etc.</p>
+ 
+<p>Thanks to <code>for</code> loops, we can directly use the values of our list <code>even_numbers</code> in the loop statement. Let's rework our squared numbers example :</p>
+
+<pre><code>square_values = []
+
+for value in even_numbers:
+  square_values.append(value**2)
+
+print(square_values)</code></pre>
+
+<p>This is a lot shorter !</p>
+
+<p>As said before, for loops can iterate on anything : a list, a tuple, a dictionary or even a string. Try running the following lines :</p>
+
+<pre><code>my_list = [1, 2, 3, 4]
+for v in my_list:
+    print(v)
+    
+my_tuple = ('a', 'b', 'c', 'd')
+for v in my_tuple:
+    print(v)
+
+my_dict = {'a':1, 'b':2, 'c':3}
+for v in my_dict:
+    print(v, my_dict[v])
+
+my_str = 'hello'
+for v in my_str:
+    print(v)</code></pre>
+
+<p>One interesting thing is that we can iterate on multiple objects at the same time. For instance, imagine we have a list of couples :</p>
+
+<pre><code>my_list = [(1, 2),
+    (3, 4),
+    (5, 6),
+    (7, 8)]
+
+for v in my_list:
+    # We assign v[0] to a, v[1] to b
+    a, b = v 
+    print(b, a) 
+
+# This loop will do exactly the same
+for a, b in my_list:
+    print(b, a)</code></pre>
+
+<p>But what if we want something simpler, as iterating on a serie of increasing integers as <code>1, 2, 3, 4, 5, ...</code> ? Fortunately for us, Python provides us with a few very useful functions we can use to make our lives simpler </p>
+
+<hr>
+
+<h4>The <code>range</code> function</h4>
+
+<p>The first function we are going to see that can help us is the <code>range</code> function. <code>range</code> allows us to construct a "list" (it is actually not really a list, but behaves as such in a for loop). There are three ways to use the <code>range</code> function : </p>
+
+<pre><code>range(end)
+range(start, end)
+range(start, end, step)</code></pre>    
+
+<p>In the first form, <code>range</code> will build a list that will span from <code>0</code> to <code>end</code> excluded. Hence, running a for loop on <code>range(4)</code> will iterate on the values <code>0</code>, <code>1</code>, <code>2</code> and <code>3</code>.</p>
+
+<p>The second form will allow you to provide a starting value (included). For instance <code>range(2, 5)</code> will span : <code>2</code>, <code>3</code>, <code>4</code>.</p>
+
+<p>Finally, the last form allows to specify a step size if you want to iterate differently. For instance, <code>range(2, 8, 2)</code> will span : <code>2</code>, <code>4</code>, <code>6</code>. You can also use a step size of <code>-1</code> to iterate in reverse order. Thus, <code>range(4, 0, -1)</code> will yield : <code>4</code>, <code>3</code>, <code>2</code>, <code>1</code>.</p>
+
+<p>Let's use this in an example and try to recode our base example : getting the square of all even numbers between two values provided by the user. This should be simple now that we have the <code>range</code> function :</p>
+
+<pre><code>a = input('Enter the value of a :')
+b = input('Enter the value of b :')
+
+if a%2 == 1:
+    a=a+1
+
+squares = []
+    
+for value in range(a, b+1, 2):
+    squares.append(value**2)
+
+print(squares)</code></pre>
+
+<p>Note that we use <code>b+1</code> in the range because the end value is excluded. We use a step of <code>2</code> to jump from an even value to the next.</p>
+
+<hr>
+
+<h4>Other builtin functions</h4>
+
+<p>Just as the <code>range</code> function, there are two other functions we can use to make things simpler : <code>zip</code> and <code>enumerate</code>.</p>
+
+<p><code>zip</code> is going to "glue" two lists together. These list can then be used in a for loop as we have seen previously :</p>
+
+<pre><code>list_1 = ['a', 'b', 'c', 'd']
+list_2 = [1, 2, 3, 4]
+
+for a, b in zip(list_1, list_2):
+    print(a, b)</code></pre>
+
+<p></p>
 
 
 <div>

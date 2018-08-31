@@ -189,12 +189,47 @@ list_2 = [1, 2, 3, 4]
 for a, b in zip(list_1, list_2):
     print(a, b)</code></pre>
 
-<p></p>
+<p>Using the <code>zip function</code> allows you to concentrate on the objects you wish to iterate on, instead of having to iterate on a range of indices and extract each object manually.</p>
 
+<p><code>enumerate</code> is a function that creates a zipped list with indices from a parameter. It is generally used to iterate on objects while keeping track of their indices. For instance, imagine you have a list of strings and want, for each element of the list, to print its value as well as its index in the list. The naive solution is to do :</p>
 
-<div>
-Now try <a href="exercise4.html">Exercise 4</a>.
-</div>
+<pre><code>my_list = ['hello', 'how', 'are', 'you ?']
+for i in range(len(my_list)):
+    print(i, my_list[i])</code></pre>
+
+<p><code>enumerate</code> makes things simpler :</p>
+<pre><code>my_list = ['hello', 'how', 'are', 'you ?']
+for i, value in enumerate(my_list):
+    print(i, value)</code></pre>
+
+<hr>
+<h4>List comprehensions</h4>
+
+<p>The last thing we will see in this unit are <strong>list comprehensions</strong>. Comprehensions are a general term in Python denoting a way of creating and initializing data structures in a very dense way.</p>
+
+<p>Imagine we have a list <code>list_a</code> filled with integers and we want to initialise another list <code>list_b</code> that will hold the square of all the values in <code>list_a</code>. Up until now, we would create this list using a <code>for</code> loop :</p>
+
+<pre><code>list_b = []
+for value in list_a:
+    list_b.append(value**2)</code></pre>
+
+<p>List comprehensions allow us to write all of this in a single line :</p>
+
+<pre><code>list_b = [value**2 for value in list_a]</code></pre>
+
+<p>The general anatomy of a list comprehension is the following :</p>
+
+<pre><code>result = [expression for element in base_list]</code></pre>
+
+<p>Comprehensions are a general concept in Python and are not limited to lists but also apply to tuples or dictionaries. For instance, the following expressions are valid comprehensions :</p>
+<pre><code>my_tuple = tuple(x+y for x, y in zip(list_a, list_b)) # We have to explicity mention we want a tuple for this.
+my_dict = {i : v for i, v in enumerate(list_a)}</code></pre>
+
+<p>Comprehensions are not easy to write at first but save a lot of time when mastered. You can practice writing list comprehensions versions of previous examples of this unit. Finally, you can also add conditions to list comprehensions to make them more complex. For instance, if we wanted to construct <code>list_b</code> in such a way that we would only store squares of even values of <code>list_a</code> we could write :</p>
+
+<pre><code>list_b = [value**2 for value in list_a if value%2 == 0]</code></pre>
+
+<p>Make sure you have read, coded and understood all of the above. Then try to solve the <a href="exercise4.html">exercises</a>.</p>
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>

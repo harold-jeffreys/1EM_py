@@ -24,7 +24,7 @@ are no doubt familiar with many computer programs already - web
 browsers, word processors, and so on.  In this course you will learn
 how to write your own programs.  They will be simple programs, but
 nonetheless programs that could then be run by anyone you share them
-with.  The language we'll be using is called <i>Python</i>.  It is
+with. The language we'll be using is called <i>Python</i>.  It is
 language that was conceived in the 1980s, but has undergone recent
 revision which has resulted in the more recent version Python 3.0 not
 being backward compatible with older versions, so beware!
@@ -34,11 +34,11 @@ being backward compatible with older versions, so beware!
 There are many different computing languages that we could use to
 teach scientific computing, such as Fortran or C/C++. Python has some
 advantages as it has a large community supporting the language
-development, and a many widely used libraries for data science. It is
-an interpreted language, and can be run on many different machines
-with different operating systems and hardware architectures. However,
-for many high performance computing systems it can be desirable to use
-Fortran or a C/C++.
+development, and a many widely used libraries for data science and
+scientific computing. It is an interpreted language, and can be run on
+many different machines with different operating systems and hardware
+architectures. However, for many high performance computing systems it
+can be desirable to use Fortran or a C/C++.
 </div>
 
 <div>
@@ -48,7 +48,7 @@ We'll do this before learning how to actually write the programs
 themselves - we'll use a short sample program to learn the details.
 Follow the steps below to write your first program.  If anything
 doesn't appear to work, or you need help, please ask a demonstrator
-for assitance.</div>
+for assistance.</div>
 
 <div>
 <ol>
@@ -59,9 +59,11 @@ your programs.  To open the terminal, go to the <i>Applications</i>
 menu at the top of the screen, then select the &quot;Accessories&quot;
 item, then &quot;Terminal&quot;.  A window should open with a prompt
 that is waiting for you to type commands.</li>
-<li>Now, to learn some basic commands (You might want to also work
-through this <a href="http://www.ee.surrey.ac.uk/Teaching/Unix/">Unix
-Tutorial</a>, to get more familiar with the operating system).</li>
+<li>Now, to learn some basic commands. If you haven't used linux
+before then you are strongly advised to work through
+this <a href="http://www.ee.surrey.ac.uk/Teaching/Unix/">Unix
+Tutorial</a> up to the end of Tutorial Two, to get more familiar with
+the operating system commands.</li>
 <ul>
 <li>Type <tt class="bluecolor">pwd</tt> in the Terminal, and press
 return (from now on, we won't tell you to type return - it will be
@@ -120,12 +122,18 @@ computer, and gedit is a text editor).
 name <tt class="bluecolor">firstprogram.py</tt>.  You should use the file
 extension <tt class="bluecolor">.py</tt> as this is the default file
 extension for python programs.
-<li>Now to run your program. Python is an interpreted language. To
-invoke the interpreter: Go to the Terminal, and
-type <tt class="bluecolor">python3 firstprogram.py</tt> (Note here we
-are using version 3 of python. If you type <tt>python
-firstprogram.py</tt> you will be using version 2 of python, which will
-give different results for some programs).
+<li>Now to run your program. Python is an interpreted language, so we
+need to use an interpreter to run the progrm. There are a few
+different ways to do this, but we will use <tt class =
+"bluecolor">ipython3</tt> to run python commands. Type <tt class =
+"bluecolor">ipython3</tt> in a terminal to start the interpreter. Note
+that there several important distinctions between python version 2.X
+and python version 3.X which can make programs incompatible. If you
+use <tt class = "bluecolor">ipython</tt> then you may get a version
+2.X interpreter. This course is focussed on version 3.X. You can type
+in any commands into the interpreter, or use some specific commands to
+run programs. In our case we want to use <tt class = "bluecolor">run
+firstprogram.py</tt> to look at the output of our code.
 </ol>
 </div>
 <div>
@@ -135,28 +143,34 @@ a comment. Comments are ignored by the interpreter and are just there
 for the benefit of both you and anyone else reading your code.  It is
 good practice to put comments in to explain the purpose of the
 program, and to comment on sections of the code that may not seem
-obvious.  The key question to ask is &quot;will I still understand how
+obvious. The key question to ask is &quot;will I still understand how
 this section of code works when I take a look at it in six months
 time?&quot; If you think the answer is <i>no</i>, then a comment is
-probably in order.
+probably in order. It is also possible to include docstrings (enclosed
+in triple quotes) to explain the results of your code, but we will
+come to this later.
 </div>
 <div>
 The line <tt class="bluecolor">print("My first python program")</tt>
-prints the text to the screen. The next few lines define two objects
-with names <tt class="bluecolor">a</tt>
-and <tt class="bluecolor">b</tt>. Python then assigns an integer to
-<tt>a</tt> and a floating point number to <tt>b</tt>. Note you should
-be careful of the variable names you chose for your quantities. It is
-possible to use variable names that overwrite built-in functions,
-however there are some reserved words that you cannot use for variable
-names. It is good practice to use meaningful names, rather than
-algebraic names like <tt class="bluecolor">a</tt>. Variable names are
-case sensitive, and blanks spaces and full stops are not allowed.
+prints the text to the screen. The next few lines define two
+identifiers with names <tt class="bluecolor">a</tt>
+and <tt class="bluecolor">b</tt>. Python then points the identifier
+<tt>a</tt> to an integer and <tt>b</tt> to a floating point
+number. You can check the type of object associated with an identifier
+using the <tt class="bluecolor">type</tt>
+command. Try <tt class="bluecolor">type(a)</tt> at your ipython3
+prompt. Note you should be careful of the variable names you chose for
+your quantities. It is possible to use variable names that overwrite
+built-in functions, however there are some reserved words that you
+cannot use for variable names. It is good practice to use meaningful
+names, rather than algebraic names
+like <tt class="bluecolor">a</tt>. Variable names are case sensitive,
+and blanks spaces and full stops are not allowed.
 </div>
 <div>
-Now that we have run our first programme we will finish by performing
-some basic calculator functions with python. You can enter numerical
-values such as integers <tt class="bluecolor">123</tt> floating
+Now that we have run our first programme let's perform some basic
+calculator functions with python. You can enter numerical values such
+as integers <tt class="bluecolor">123</tt> floating
 points <tt class="bluecolor">1.2e3</tt> and complex
 numbers <tt class="bluecolor">1+2j</tt> (note this is a j, not a
 letter i!). More on these types of variables later. Python stores
@@ -175,12 +189,38 @@ print("2+3-2**3 = ", c)
 </pre>
 </div>
 <div>
+You might find that after writing a program it does not run quite how
+you expect. For example suppose you made an error with the variable
+name, or the type of bracket in your code:
+<pre>
+<code>
+print(avariable)
+</code>
+</pre>
+
+The result is an error from the compiler:
+
+<pre>
+  <code>
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-11-f0d30866b381> in <module>()
+----> 1 print(avariable)
+
+NameError: name 'avariable' is not defined
+    </code>
+    </pre>
+
+You will come across several different types of these error messages
+during this course. We will discuss the details of them in a <a href="unit10.html">unit 10</a>.
+</div>
+<div>
 Finally, we end with a few of useful tips: In the Terminal, you will
 find yourself wanting to type the same things over and over again.  An
 easy way to do this is to press the up arrow repeatedly to retrieve
-previous commands.  Also, if you start typing the name of a file, then
+previous commands. Also, if you start typing the name of a file, then
 the tab key, it will autocomplete the whole name of the file, or as
-much as it can if there are two similarly named files.  Finally, gedit
+much as it can if there are two similarly named files. Note that gedit
 will save backups of your programs with a tilde (<tt>~</tt>) at the
 end. Be careful not to edit these files. You can just ignore them, but
 if you edit them the real file will not get updated.

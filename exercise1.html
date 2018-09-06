@@ -26,11 +26,11 @@ perform some basic calculations.
       way to investigate the effect of commands is to use the invoke
       the interactive python interpreter.
       <ul><li>Open a terminal window, and
-	start the python interpreter by typing <tt>python3</tt>.
+	start the python interpreter by typing <tt>ipython3</tt>.
 	<li> Enter the print command <code>print("hello world!")</code>
 	<li> Define two integers <code> a = 3</code>, and <code> b = 2</code>.
 <br>	<em>  [Note that python3 returns a floating point for two numbers that are
-  not divisible. This is not the case for many programming languages.]</em>
+  not divisible. This is not the case for many programming languages. If you require integer division then you must use //.]</em>
 
 	<li> Calculate results the division and multiplication of these integers.
 	  <li> Now try some basic arithmetic with floating point
@@ -40,7 +40,9 @@ perform some basic calculations.
 	  <li> Look up the precedence of the operations -- in what
 	    order are the operations calculated?
 	    <li> Is the result accurate? What has happened to the
-	    precision?
+	      precision?
+	      <li> Check the type of your variables using
+	      the <code>type()</code> function.
     </ul>
 
   <li> Now we will use python by running it on a file containing a
@@ -65,9 +67,9 @@ while b < 20:
 	 
 </code>
    </pre>
-   Run this program by typing <tt>python3 fibonacci.py</tt> in the
-   terminal window. Try to understand what it does. We will return to
-   loops later in the course.
+   Run this program by typing <tt>run fibonacci.py</tt> in the
+   ipython3 interpreter. Try to understand what it does. We will
+   return to loops later in the course.
   </ol>
 </div>
 

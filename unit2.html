@@ -63,17 +63,23 @@ Python provides natively datatypes that can be used to build programs :
     <li> <code>complex</code> That are used to represent complex numbers (more of these in your EM lectures first!).
   </ul>
 
-  Now Python is a <strong>dynamical and weak typed language</strong> that means that the type of variables is automatically determined by Python, and that conversions are made implicitly whenever possible. So if we try to add an int with a float, the resulting type will always be the most permissive one : a float. For instance, try to run the following commands :
+  Now Python is a <strong>dynamically and weakly typed
+  language</strong> that means that the type of variables is
+  automatically determined by Python, and that conversions are made
+  implicitly whenever possible. So if we try to add an int with a
+  float, the resulting type will always be the most permissive one : a
+  float. For instance, try to run the following commands using <code>
+  ipython3</code>:
 </p>
 
 <pre><code class="language-python">a = 10
 b = 5.2
 type(a)   # int
 type(b)   # float
-type(a+b) # float</code></pre>
+type(a + b) # float</code></pre>
 
 <p>
-  The <code>type()</code> function gives you the type of the expression you feed it as parameter. As you can see in the above example, <code>type(a)</code> returns <code>int</code>, <code>type(b)</code> returns <code>float</code> and <code>type(a+b)</code> returns <code>float</code>.
+  The <code>type()</code> function gives you the type of the expression you feed it as parameter. As you can see in the above example, <code>type(a)</code> returns <code>int</code>, <code>type(b)</code> returns <code>float</code> and <code>type(a + b)</code> returns <code>float</code>.
 </p>
 
 <p>
@@ -84,7 +90,7 @@ type(a+b) # float</code></pre>
 b = 5.0e-2 # => 0.05</pre></code>
 
 <p>
-  All standard arithmetic operations are also available in Python. Let's imagine we have two integers <code>a=10</code> and <code>b=3</code> :
+  All standard arithmetic operations are also available in Python. Let's imagine we have two integers <code>a = 10</code> and <code>b = 3</code> :
 </p>
 
 <p class="indexlink">
@@ -96,37 +102,37 @@ b = 5.0e-2 # => 0.05</pre></code>
   </tr>
   
   <tr>
-    <td><code>a+b</code></td>
+    <td><code>a + b</code></td>
     <td>Addition</td>
     <td><code>13</code></td>
   </tr>
 
   <tr>
-    <td><code>a-b</code></td>
+    <td><code>a - b</code></td>
     <td>Subtraction</td>
     <td><code>7</code></td>
   </tr>
 
   <tr>
-    <td><code>a*b</code></td>
+    <td><code>a * b</code></td>
     <td>Multiplication</td>
     <td><code>30</code></td>
   </tr>
 
   <tr>
-    <td><code>a/b</code></td>
+    <td><code>a / b</code></td>
     <td>Division</td>
     <td><code>3.333333...</code></td>
   </tr>
 
   <tr>
-    <td><code>a//b</code></td>
+    <td><code>a // b</code></td>
     <td>Integer division</td>
     <td><code>3</code></td>
   </tr>
 
   <tr>
-    <td><code>a%b</code></td>
+    <td><code>a % b</code></td>
     <td>Modulo (remainder of the integer division of <code>a</code> by <code>b</code>)</td>
     <td><code>1</code></td>
   </tr>
@@ -213,10 +219,13 @@ print(a) # []</code></pre>
 </p>
 
 <p>
-  <strong>Negative indexing</strong> allows you to access the list by its end. If we have a list <code>a</code> and want to access the last element for instance, we might be tempted to do something like :
+  <strong>Negative indexing</strong> allows you to access the list
+  starting from its end. If we have a list <code>a</code> and want to
+  access the last element for instance, we might be tempted to do
+  something like :
 </p>
 
-<pre><code>a[len(a)-1]</code></pre>
+<pre><code>a[len(a) - 1]</code></pre>
 
 <p>
   This is a very complicated way of coding a simple behaviour. Python allows us to use negative index to mean "from the end". So we would do :
@@ -248,21 +257,23 @@ print(a[-3:]) # [10, 12, -3]
 
 # Slicing can be used to assign elements :
 a[2:4] = [5, 8] # We say that elements 2 and 3 of a must become 5 and 8
-    print(a) # [6, 3, 5, 8, 1, -7, 10, 12, -3]</code></pre>
+print(a) # [6, 3, 5, 8, 1, -7, 10, 12, -3]</code></pre>
 
 <p>
-  Finally, <strong>Concatenation</strong> allows to glue two lists together to form a bigger list. For this we use the <code>+</code> operator :
+  Finally, <strong>Concatenation</strong> allows us to glue two lists
+  together to form a bigger list. For this we use the <code>+</code>
+  operator :
 </p>
 
 <pre><code>a = [1, 2, 3, 4]
 b = [5, 6, 7, 8]
 
 # Concatenation
-print(a+b) # [1, 2, 3, 4, 5, 6, 7, 8]
-print(b+a) # [5, 6, 7, 8, 1, 2, 3, 4]
+print(a + b) # [1, 2, 3, 4, 5, 6, 7, 8]
+print(b + a) # [5, 6, 7, 8, 1, 2, 3, 4]
 
 # You can also use the * operator to duplicate a list :
-c = a*4 # Duplicates 4 times the original list, and concatenates them together
+c = a * 4 # Duplicates 4 times the original list, and concatenates them together
 print(c) # [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]</code></pre>
 
 <p> The last important thing to know about lists is that lists are <strong>referenced</strong> objects. That means they are not copied explicitly. To understand what that means, let's see an example :</p>
@@ -279,7 +290,15 @@ print(a) # [1, 2, 3, 4]
 b[1] = 5
 print(b) # [1, 5, 3, 4]
 print(a) # [1, 5, 3, 4]</code></pre>
+<p>
+So the names <code> a</code> and <code> b</code> refer to the same
+object. We can use either name to refer to the object and modify it,
+so that when we print out the object using either name we can see the
+modification.
+</p>
 
+
+  </p>
 <p>If you want to create a copy that does not modify the original list, you must use the <code>copy</code> operator : </p>
 
 <pre><code>a = [1, 2, 3, 4]
@@ -292,7 +311,13 @@ print(a) # [1, 2, 3, 4]</code></pre>
 <hr>
 <a name="tuples"></a><h3>Tuples :</h3>
 
-<p><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Tuples</a> are really similar to lists. They also are collections, but this time they are <strong>immutable</strong>. That means there is no way to modify their content. We cannot add anything to them, nor remove. They are meant to be static collections of objects.</p>
+<p><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">Tuples</a>
+are really similar to lists. They also are collections, but this time
+they are <strong>immutable</strong>. That means there is no way to
+modify their content. We cannot add anything to them, nor remove an
+item from them. They are meant to be static collections of
+objects. The syntax for these is very similar to lists, only we use
+brackets (or parentheses) <code> ()</code> to create them.</p>
 
 <pre><code>a = (1, 2, 3, 4) # Creating a tuple -- NOTE THE PARENTHESES!
 
@@ -330,13 +355,19 @@ print(b) # (1, 2, 3, 4)
 </code></pre>
 
 <p>
-  Finally tuples can also be concatenated or duplicated as lists do.
+  Finally tuples can also be concatenated or duplicated as we did with
+  lists, using the <code> + </code> and <code> * </code> operators.
 </p>
 
 <hr>
 <a name="strings"></a><h3>Strings :</h3>
 
-Strings are tuples storing character sequences. They are mainly used to store and describe text. We can create a string by using simple quotes (<code>'</code>), or double quotes (<code>&quot;</code>). If the text we want to describe holds more than one line, we can use "triple-quotes" (<code>&quot;&quot;&quot;</code> or <code>'''</code>) :
+Strings are tuples storing character sequences. They are mainly used
+to store and describe text. We can create a string by using simple
+quotes (<code>'</code>), or double quotes (<code>&quot;</code>). If
+the text we want to describe holds more than one line, we can use
+"triple-quotes" (<code> &quot;&quot;&quot; </code> or <code>'''</code>)
+:
 
 <pre><code>a = 'Hello'
 b = "Double quotes are fine as well"
@@ -358,7 +389,9 @@ print(c)
 <pre><code>a = 'I '
 b = 'love '
 c = 'Python'
-print(a + b + c) # 'I love Python'</code></pre>
+print(a + b + c) # 'I love Python'
+print(c[0:2]) # 'Py'
+</code></pre>
 
 <p>
   Note that a string holding numbers still behaves like a string :
@@ -367,10 +400,12 @@ print(a + b + c) # 'I love Python'</code></pre>
 <pre><code>a = '1'
 b = '24'
 
-print(a+b) # '124'</code></pre>
+print(a + b) # '124'</code></pre>
 
 <p>
-  So if you want to convert a string to an int or a float, you need to use the <code>int()</code> and <code>float()</code> functions :
+  So if you want to convert a string to an int or a float, you need to
+  use the <code>int()</code> and <code>float()</code> functions to
+  convert them (or cast them as the appropriate type) :
 </p>
 
 <pre><code>a = '1'
@@ -382,12 +417,12 @@ a = int(a) # a becomes the integer contained in the string a
 print(a) # 1  -> Note that the quotes have disappeared
     
 b = int(b) # Same for b
-print(a+b) # 25    
+print(a + b) # 25    
 
 # Same thing for float :
 c = '5.0'
 c = float(c)
-print((a+b) / c) # 5.0</code></pre>
+print((a + b) / c) # 5.0</code></pre>
 
 <p>
   Trying to convert to int or float strings that are not int or float will generate an error :
@@ -399,7 +434,13 @@ a = int(a) # ValueError: invalid literal for int() with base 10: 'Hello'</code><
 <a name="dict"></a><h3>Dictionaries :</h3>
 
 <p>
-  Dictionaries are among the most useful and powerful native structures of Python. They are collections of objects that associates a <strong>key</strong> and a <strong>value</strong>. The keys can be of any type (although, due to technical considerations, you should never use real values as keys). Values can be of any type without exception. Let's see an example to understand what that means :
+  Dictionaries are among the most useful and powerful native
+  structures of Python. They are collections of objects that
+  associates a <strong>key</strong> and a <strong>value</strong>. The
+  keys can be of any type (although, due to technical considerations,
+  you should never use real values as keys -- integers, or strings are
+  fine though). Values can be of any type without exception. Let's see
+  an example to understand what that means :
 </p>
 
 <pre><code># We create an empty dictionary :
@@ -434,7 +475,11 @@ print(a.keys()) # [-4, 'key 1', 'aaa']
 print(a.values()) # ['test', 5, -4]</code></pre>
 
 <p>
-  Note that the order printed is not the same as the one we entered the values. This is because of the way dictionaries are coded in Python. However, you can also note that although the order of storing is modified, the two lists still correspond.
+  Note that the order printed is not the same as that in which we
+  entered the values. This is because of the way dictionaries are
+  coded in Python. However, do note that although the order of storing
+  is modified, the two lists (of keys and values) are output in a
+  consistent order!
 </p>
 
 <p>

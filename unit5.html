@@ -43,12 +43,12 @@ print("Unit equilateral triangle area: ", tri_area(1,1,1))
 </code>
 </pre>
 <div>
-  The definition of the of the function is started by the keyword <code>
+  The definition of the function is started by the keyword <code>
   def</code>. The function name then follows this keyword, followed by
   parentheses that enclose the list of arguments -- in this case the
   three numbers <code> a, b </code> and <code> c </code>, and then a
-  colon <code>:</code>. The indented block of code is then executed when
-  the function is called. If the function returns a value or an
+  colon <code>:</code>. The indented block of code is then executed
+  when the function is called. If the function returns a value or an
   object, then it is done by using the <code>return</code> keyword. In
   this case returning the area of the triangle.
 <div>
@@ -92,22 +92,19 @@ def square_area(a,b):
 
   <pre>
 <code>
-    import areas
+    from areas import *
 
-    print("Area of unit equilateral triangle ", areas.tri_area(1,1,1))
-    print("Area of unit square ", areas.square_area(1,1))
+    print("Area of unit equilateral triangle ", tri_area(1,1,1))
+    print("Area of unit square ", square_area(1,1))
     </code>
 </pre>
 
 
 <div>
-Note that the functions are preceded with the module
-name <code>areas</code>. This will prevent you from using existing
-functions that you may have already defined within your program. Some
-modules contain a lot of content, so it is useful to just import the
-parts of the module that you need. This can be done using the <code>
-from</code> statement as show below. In this case the function can be
-called directly.
+Some modules contain a lot of content, so it is useful to just import
+the parts of the module that you need. This can be done using
+the <code> from</code> statement as show below. In this case the
+function can be called directly.
 </div>
 
   <pre>
@@ -120,26 +117,55 @@ called directly.
 
   <div>
     Note in this example we have only imported the function of the
-    calculation of the area of a triangle. We can access this function
-    without the <code>areas</code> prefix. If we try and access
+    calculation of the area of a triangle. If we try and access
     the <code>square_area</code> function then the interpreter will
     complain that the function is not defined.
 </div>
 
   <div>
     We have also included some useful information about what our
-    functions do using triple quotes <code>"""</code> at the start of the
-    definition. We can access this using the <code>help()</code> function
-    available in python. To see this start an instance of the python
-    interpreter at the command prompt by typing <code>
+    functions do using triple quotes <code>"""</code> at the start of
+    the definition. We can access this using the <code>help()</code>
+    function available in python. To see this start an instance of the
+    python interpreter at the command prompt by typing <code>
     python3</code>. Then import our new module by typing <code> import
     areas</code>. Finally ask for help on our new functions by
-    typing <code>help(areas.tri_area)</code>. You should see a print out
-    of the text at the start of the function definition. 
+    typing <code>help(tri_area)</code>. You should see a print out of
+    the text at the start of the function definition. It is good
+    programming practice to include this short description
+    (doc_string) at the start of your function definitions.
     </div>
-  
 
-</div>
+
+  <div>
+    A problem that occurs in importing a new module is you might have
+    duplicates of the names of your functions -- we might already have
+    defined functions using the same name to perform a different
+    operation. To avoid this problem we can use <code> import </code> as follows:
+    
+  <pre>
+<code>
+    import areas
+
+    print("Area of unit equilateral triangle ", areas.tri_area(3,4,5))
+</code>
+</pre>
+
+    The functions contained within the areas.py module are now
+    accessible only by using the <code>areas.</code> prefix for their
+    names. We might like to shorten this prefix, or redefine it completely for convenience, in which case we can use:
+
+    <pre>
+<code>
+    import areas as A
+
+    print("Area of unit equilateral triangle ", A.tri_area(3,4,5))
+</code>
+</pre>
+    
+  </div>
+
+<div>
 Now try <a href="exercise5.html">Exercise 5</a>
 </div>
 

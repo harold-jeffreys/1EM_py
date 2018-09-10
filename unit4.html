@@ -202,6 +202,29 @@ for i in range(len(my_list)):
 for i, value in enumerate(my_list):
     print(i, value)</code></pre>
 
+<p>
+The functions <code>zip</code> and <code>enumerate</code> create new
+objects that you might like to look at. For example if you look at the
+output for <code>enumerate(my_list)</code>, then you will get something like 
+<code> &lt enumerate at 0x7fc61f4ae168 &gt</code>, and a similar
+result for <code>zip</code>. You can investigate this further by
+reading <code>help zip</code>, where you will find that each one of
+these objects has a method called <code>__next__</code>. You can use
+this to request the next value of the enumerate object outside of a
+loop:
+<pre>
+<code>
+my_list = ['hello', 'how', 'are', 'you ?']
+en_list = enumerate(my_list)
+next(en_list)
+next(en_list)
+</code>
+</pre>
+This takes the first two items from our enumerate object. Try the same
+exercise with a zip object.
+  
+  </p>
+
 <hr>
 <h4>List comprehensions</h4>
 

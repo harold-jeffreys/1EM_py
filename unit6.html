@@ -26,9 +26,13 @@
   matrices. There are pieces of python code that have been created for
   performing scientific calculations. In this course we will focus on
   one package in particular: <a href="http://www.numpy.org/">
-  numpy</a>, for which there is a quick
-  tutorial <a href="https://docs.scipy.org/doc/numpy/user/quickstart.html">here</a>. We
-  will go over some of the main points in this unit.
+  numpy</a>, for which there is a &quotquickstart&quot
+  tutorial <a href="https://docs.scipy.org/doc/numpy/user/quickstart.html">here</a>. You
+  might also like to read <a href=
+  "https://www.cambridge.org/core/books/python-for-scientists/E5CBE088065279A607A18673622AD89D">Chapter
+  4</a> in Python for Scientists that gives an alternative
+  introduction to numpy. We will go over the main points of the usage
+  of numpy in this unit.
 </div>
 <div> Often, in a physical problem, we might want one object to be
   represented by many numbers - e.g. the components of a vector or the
@@ -37,10 +41,11 @@
   multiple measurements in an experiment.  We could define a variable
   with a different name for each value we wish to store, but a neater
   solution is to use an <i>array</i>. This is a basic object in Numpy
-  -- the ndarray. It contains muliple objects <strong>all of the same
-  data type</strong>.
+  -- the ndarray. It contains multiple objects <strong>all of the same
+  data type</strong> (i.e. integers, complex numbers, floating point
+  numbers ...).
 <br>
-  We can create an array for the spatial point (x,y,z) = (1.1,1.3,12.3) as
+  We can create an array for the spatial point (x,y,z) = (3,4,5) as
   follows.
   </div>
 
@@ -48,23 +53,36 @@
 <code>
 import numpy as np
 
-r_coordinate = np.array([1.1,1.3,12.3])
+r_coordinate = np.array([3,4,5])
 print("r_coordinate is: ", r_coordinate)
+print("r_coordinate is of type ", type(r_coordinate))
 </code>
 </pre>
 
 <div>
-  These arrays are much like python's intrinsic list type. However, we
-can perform linear algebra operations on them. Note
-the <code>import</code> statement here has been used to provide a short
-hand for the numpy package -- <code>np</code>. This will make the code
-more readable later. Also note the square brackets to define the
-elements of the array, and the parentheses enclosing the argument of
-the function <code>array</code>. Different shaped arrays can be created,
-as well as several standard initialisations of array shown below.
+There are a few things to notice here: first we import the numpy
+package and give it an abbreviation (<code>np</code> by
+convention). This will reduce typing to use numpy functions, and make
+our code more readable. Then we create an array by
+passing <code>np.array</code> a list of the components. We can
+investigate the new object by again using the <code>type</code>
+function -- the result is numpy.ndarray. Numpy includes many more
+functions which you can see by typing <code>np.</code> and then tab to
+see a list of completions in ipython3 (alternatively you can
+use <code>dir(np)</code> to list the available functions in the
+package). You can also look up a particular function by using
+the <code>np.lookfor()</code> function. For example you might like to
+look for functions to help with square root: <code> np.lookfor('square
+root')</code>. You can look at the documentation for a numpy function
+using help e.g. <code>help(np.sqrt)</code>. This will give you details
+of the usage of a particular function.
+
 </div>
 
-
+<div>
+There are many different ways to create a numpy array. Some examples
+of these are given in the code below.
+  </div>
 <pre>
 <code>
 import numpy as np
@@ -83,6 +101,12 @@ print("Empty array: ", array_c)
 
 array_d = np.arange(0,3, 0.1)
 print("List of numbers: ", array_d)
+
+array_e = np.linspace(0, 10, num = 25)
+
+array_f = np.arange(1,10, dtype = complex)
+
+array_g = np.array([x for x in range(10)], dtype = int)
 </code>
 </pre>
 
@@ -169,14 +193,6 @@ for i in range(100):
   </code>
   
 </pre>
-<h4><code>help</code> and <code>dir</code></h4>
-<div>
-You can find out more about the functions available from numpy by
-using the <code>dir</code> and <code>help</code> commands at the interactive
-prompt. Simply type <code>python3</code> at the command prompt, then you
-can list the functions available in the package
-using <code>dir(numpy)</code> once you have imported it. You can then ask the help function to describe one of the functions, e.g. <code>help(np.sin)</code>
-  </div>
 <div>
 Now go on to <a href="exercise6.html">Exercise 6</a>.
 </div>

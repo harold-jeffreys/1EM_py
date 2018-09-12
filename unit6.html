@@ -86,113 +86,176 @@ of these are given in the code below.
 <pre>
 <code>
 import numpy as np
+#list converted to an array, specifying the type
+list_array1 = np.array([1, 2, 3], dtype = int)
+list_array2 = np.array([1.5, 2.5, 3], dtype = float)
 
-twod_array = np.array([[1.1,1.3], [2.3,1.2]])
-print("twodarray is: ", twod_array)
+#two dimensional array from a list
+twod_array = np.array([[1, 0], [0, 1]])
 
-array_a = np.zeros( (2,2) )
-print("Array of zeros: ", array_a)
+#array of zeros with a tuple defining the shape
+array_a = np.zeros( (5, 27), dtype = float )
 
-array_b = np.ones( (3,5) )
-print("Array of ones: ", array_b)
+#array of ones with a tuple defining the shape
+array_b = np.ones( (3,5), dtype = int )
 
+#an empty array where the elements are not initialised
 array_c = np.empty( (2,2) )
-print("Empty array: ", array_c)
-
-array_d = np.arange(0,3, 0.1)
-print("List of numbers: ", array_d)
-
-array_e = np.linspace(0, 10, num = 25)
-
-array_f = np.arange(1,10, dtype = complex)
-
-array_g = np.array([x for x in range(10)], dtype = int)
 </code>
 </pre>
 
 <div>
-Here you can see the function <code>np.arange</code>. It is used here to
-create an array of numbers starting from zero in steps of 0.1 until
-the last value less than 3.
-</div>
-<div>
-    We can use these arrays in a for loop and perform calculations
-  over each element of the list. For example
-</div>
+When we come to creating plots it will be useful to have an array of
+equally spaced points to define the intervals on the axes. If we want
+to make a list of points from 0 to 10 with spacing 0.1 there are a few
+different ways of doing this shown below.
 
 <pre>
-
   <code>
 import numpy as np
 
-x_coordinates = np.arange(0,10,0.1)
-print("x_coordinate, x_coordinate**2")<br>
-for x in x_coordinates:
-    print("%5.2f, %5.2f" % (x,x**2))
-  </code>
+#List comprehension converted to an array
+xvalues1 = np.array([x*0.1 for x in range(101)])
 
+#arange works much like range. Note we need to extend the stop value to include the end point
+xvalues2 = np.arange(start = 0, stop = 10.01, step = 0.1)
+
+#linspace creates a set number of points (num) including the endpoint
+xvalues3 = np.linspace(start = 0, stop = 10, num = 101, endpoint = True)
+  </code>
 </pre>
+</div>
+
+
 <div>
-Note here we have used the <code>print</code> command to format the output
-of our operations. You can read more about the syntax of this
+Now that we have an array we can select components of the array, or
+array slices in the same way that we did for lists. The array indexing
+again starts from 0.
+<pre>
+  <code>
+import numpy as np
+
+#create an array to work with
+array1 = np.array([x for x in range(101)], dtype = float)
+
+#Print out the first component with a field width 5, and 2 decimal places
+print("%5.2f" % array1[0])
+
+#a slice of the first 10 elements
+print(array1[0:10])
+
+#a slice of the last 2 elements
+print(array1[-1:])
+  </code>
+</pre>
+Remember that if we use negative indices then we are counting from the
+end of our array, just as with lists. If we omit a component of the
+slice then it refers to the first element if it is before the :, or
+the last element if it is at the end. We have used
+the <code>print</code> command to format the output of our
+operations. You can read more about the syntax of this
 command <a href="https://www.python-course.eu/python3_formatted_output.php">
 here</a>. Essentially we have specified that we want a floating point
-number <code>f</code>, with <code>5</code> characters , <code>2</code> of which
-appear after the decimal place.
+number <code>f</code>, with <code>5</code> characters , <code>2</code>
+of which appear after the decimal place.
 </div>
-
 <div>
-  Individual elements of an array, or particular slices of an array
-  can be accessed by using square brackets [ ] to specify the elements
-  we require. Note that the numbering of the elements of the array
-  starts from 0. For example
-  </div>
+Another way to select elements in a numpy array is by using an array
+of logical values -- True if we wish to select the element and False
+if we wish to omit them. This is a great way to filter an array for
+just the components that we are interested in. For example:
 <pre>
-  <code>
-    import numpy as np
-    a = np.arange(1,100,1)
-    print("The first element of a ", a[0])
-
-    print("The first 10 elements of a ", a[0:10])
-
-    #shape a into a 2 row 50 column array
-    b = a.reshape(2,50)
-    print("The first column of b is ", b[:,0])
-  </code>
-</pre>
-
-
-<div>
-
-  Numpy also gives us access to many mathematical functions including
-  many that you are familiar with, such as trigonometric functions,
-  and many that are less familiar
-  listed <a href="https://docs.scipy.org/doc/numpy-dev/genindex.html#">here</a>.
-
-  We can use these to illustrate operating on a whole array of numbers
-  together, rather than looping over all the elements in the
-  array. This will be a useful operation later when we come to plot
-  functions.
-
-</div>
-<pre>
-
   <code>
 import numpy as np
 
-#create an array of points for the x coordinate
-#this creates 100 points
-x_points = np.linspace(0,6, 100)
+#initialise our array of integers again
+array1 = np.array([x for x in range(101)], dtype = float)
 
-#create the y coordinates
-y_points = np.sin(x_points)
+#create a logical array to select only those elements greater than 20
+array2 = array1>20
 
-#print out the results
-for i in range(100):
-    print("%5.2f, %5.2f" % (x_points[i],y_points[i]))
-  </code>
-  
+#use the array of logical values to select the values we want
+array1[array2]
+
+#We can do this in one line
+array1[array1>20]
 </pre>
+</code>
+</div>
+<div>
+  We can work with the values in an array by using a loop as follows:
+
+  <pre>
+    <code>
+import numpy as np
+
+array1 = np.array([x for x in range(100)], dtype = float)
+
+#loop over values of array
+for element in array1:
+    print("Value :", element)
+
+#alternatively we can use create an iterator and then loop over all elements
+for element in np.nditer(array1):
+    print("Value :", element)
+
+#this works for 2-d arrays as well
+#first we create a 2-d array
+array2 = array1.reshape((10,10))
+
+#now loop over all the elements in the array
+for element in np.nditer(array2):
+    print("Value :", element)
+    </code>
+    </pre>
+</div>
+
+<div>
+  We could perform operations on each element of the array and store
+  the result, but generally it is usually more efficient to try and
+  work with the whole array at once, i.e. use vectorised code. For
+  example if we want to create a plot of some common functions we
+  could proceed as follows:
+
+  <pre>
+    <code>
+import numpy as np
+
+#values for x axis
+xvalues1 = np.array([x*0.1 for x in range(101)])
+
+#values for y axis for y = x**2
+yvalues1 = xvalues1**2
+
+#values for y axis for y = x* sin(x)
+yvalues2 = xvalues1 * np.sin(xvalues1)
+    </code>
+    </pre>
+
+</div>
+
+
+
+<div>
+  There are many other functions included in numpy that you might like
+  to investigate. Some examples are given below.
+  <pre>
+    <code>
+import numpy as np
+
+sequence = np.array([1.0/x for x in range(101)])
+
+print("The sequence sum is :", np.sum(sequence))
+
+print("The sequence average is : ", np.average(sequence))
+
+print("The sequence variance is : ", np.var(sequence))
+      
+    </code>
+  </pre>
+  </div>
+
+
 <div>
 Now go on to <a href="exercise6.html">Exercise 6</a>.
 </div>

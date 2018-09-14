@@ -17,44 +17,62 @@
 </h3>
 
 <div>
-  There are python packages available to visualise data that you have
-  created, or manipulated (and indeed other comonly used plotting
-  programs such
-  as <a href="http://www.gnuplot.info/">gnuplot</a>). One of these
-  is <a href="https://matplotlib.org/">matplotlib</a>. There are many
-  tutorials for using this
-  package <a href="https://matplotlib.org/resources/index.html">here</a>.
-  
-  Let us start by looking at an example of how to plot some
-  trigonometric functions. 
+  There are many plotting packages to visualise and manipulate data
+  that you are interested in (e.g. from experiments, or from a
+  simulation). The plots from these packages vary in their quality --
+  some might be suitable to get a rough idea of your data, and others
+  are more appropriate for producing high quality plots for
+  publications. One commonly used program available for scientific
+  plotting is as <a href="http://www.gnuplot.info/">gnuplot</a>, which
+  can be used to make high quality graphics. Within python
+  the <a href="https://matplotlib.org/">matplotlib</a> package can
+  produce some excellent results. There are many tutorials for using
+  this
+  package <a href="https://matplotlib.org/resources/index.html">here</a>,
+  and indeed in <a href=
+  "https://www.cambridge.org/core/books/python-for-scientists/E5CBE088065279A607A18673622AD89D">Chapter
+  5</a> of Python for Scientists.
+  <br>
+  <br>
+  Here we will look at the main features of the matplotlib package to
+  get you started with plotting data in python. You will learn more
+  about different possibilities of plots as you continue to use this
+  package with different data sets. To plot your data you will need to
+  use the ndarray from numpy, which are then plotted using Matplotlib.
 </div>
 <pre>
   <code>
-    import numpy as np, matplotlib.pyplot as plt
+#make sure we load numpy and matplotlib
+import numpy as np, matplotlib.pyplot as plt
 
-    num_points = 100
-    x_min , x_max = 0, 10*np.pi
 
-    x_values = np.linspace(x_min, x_max, num_points)
-    y1_values = x_values*np.sin(x_values)
-    plt.plot(x_values, y1_values)
+#This code is for setting up the np array
+num_points = 100
+x_min , x_max = 0, 10*np.pi
 
-    plt.show()
+x_values = np.linspace(x_min, x_max, num_points)
+y1_values = x_values*np.sin(x_values)
+
+#Now we can create a plot
+plt.plot(x_values, y1_values)
+
+#Note nothing is on the screen until we show the plot!
+plt.show()
   </code>
 </pre>
 
 <div>
-  There are a few new things to look through in this code. First of
-all we are importing a new package -- <code>matplotlib</code>. We are also
-specifying an array of points in a new way
-using <code>linspace</code>. Here we give a start and an end point, and
-then ask for <code>num_points</code> linearly spaced points. We have also
-used the <code>sin</code> function from numpy here. You can look up the
-details of this funciton using the in-built <code>help</code> function.
-When you run this code you should see a plot window appear with the
-function plocodeed. Note that the two arrays that you supply
-to <code>plt.plot()</code> must be the same length. You can check the
-lengths of you arrays using the <code>len</code> function.
+  There are a few things to look through in this code. First of all we
+imported a new package -- <code>matplotlib</code>. We specified an
+array of points using <code>linspace</code>. Here we give a start and
+an end point, and then ask for <code>num_points</code> linearly spaced
+points. We have also used the <code>np.sin</code> function from
+numpy. Remember you can look up the details of this function using the
+in-built <code>help</code> function. When you run this code you should
+see a plot window appear with the function plotted. Note that the
+two arrays that you supply to <code>plt.plot()</code> must be the same
+length. You can check the lengths of you arrays using
+the <code>len</code> function.
 </div>
 
 <div>
@@ -76,33 +94,44 @@ y1_values = x_values*np.sin(x_values)
 y2_values = x_values
 y3_values = -x_values
 
-plt.plot(x_values, y1_values, color = 'red', linewidth=2.5 )
+#here we specify a thick red curve
+plt.plot(x_values, y1_values, color = 'red', linewidth = 2.5 )
 
-plt.plot(x_values, y2_values, color = 'blue', linewidth=1.5, linestyle="--" )
-plt.plot(x_values, y3_values, color = 'blue', linewidth=1.5, linestyle = "--" )
+#here we specify a dashed blue curve for the remaining two plots
+plt.plot(x_values, y2_values, color = 'blue', linewidth = 1.5, linestyle = "--" )
+plt.plot(x_values, y3_values, color = 'blue', linewidth = 1.5, linestyle = "--" )
 
+#here we can start to adjust the axes
 ax = plt.gca()
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 
+#use the show function to see our plot
 plt.show()
   </code>
 </pre>
 
 <div>
   This code plots three lines, whose points are stored
-  in <code>y1_values, y2_values</code> and <code>y3_values</code>. Each plot
-  is created, with some optional formatting to improve the
-  comprehension of the plot. The <code>color</code> keyword can be used to
-  select the line color, and the <code>linestyle</code> keyword can be
-  used to select the type of line drawn. The plot is an object in
-  python. To modify the labels of the axes we have to first create a
-  link to the plot object. This is done with the <code>ax =
-  plt.gca()</code> command, where gca denotes <em>get current axes</em>. Once we
-  have a link to this object we can use some methods to modify it. For
-  example the <code>set_xlabel</code> method can be used to modify the
-  label on the x axis. Once we have finished adding to our plot, we
-  can show it using <code>plt.show()</code>.
+  in <code>y1_values, y2_values</code>
+  and <code>y3_values</code>. Each plot is created, with some optional
+  formatting to improve the comprehension of the
+  plot. The <code>color</code> keyword can be used to select the line
+  color (note there are many colour abbreviations we could use -- b
+  (default blue), g (green), r (red), k (black) ...), and
+  the <code>linestyle</code> keyword can be used to select the type of
+  line drawn (- (solid), -- (dashed), : (dotted) ...). The plot is
+  another object in python. To modify the labels of the axes we have
+  to first create a link to the plot object. This is done with
+  the <code>ax = plt.gca()</code> command, where gca denotes <em>get
+  current axes</em> (i.e. the plot you are currently working with,
+  before the show command!). Once we have a link to this object we can
+  use some methods to modify it. For example
+  the <code>set_xlabel</code> method can be used to modify the label
+  on the x axis. Once we have finished adding to our plot, we can show
+  it using <code>plt.show()</code>. We could produce these plots in a
+  much more compact line of code e.g. <code>plt.plot(x_values,
+  y1_values, 'g:')</code>, but this is less readable.
 </div>
 
 <div>
@@ -116,18 +145,25 @@ plt.show()
   Suppose we had measured two experimental quantities that we think
   might be related -- the current and voltage of a circuit for
   example. We could plot our current voltage pairs on a scatter plot
-  and determine their relation.
+  and determine their relation. Note here we have used an alternative
+  way to specify the axis labels on the current plot.
 </div>
 <pre>
   <code>
 import numpy as np, matplotlib.pyplot as plt
 
-#first create some data points
+#first create some data points (these are just random points!)
 n = 17
 current = np.random.uniform(0,2,n)
 voltage = np.random.normal(0,2,n)
 
+#This produces our scatter plot
 plt.scatter(current, voltage)
+
+#label the axes and give the plot a title
+plt.xlabel('Current, Amps')
+plt.ylabel('Voltage, V')
+plt.title('Current Voltage characteristics')
 
 plt.show()
   </code>  
@@ -142,18 +178,19 @@ distributed random numbers.
 
 <h4>Histograms</h4>
 <div>
-Our final example of a plot is a histogram. You might need this to
+Our next example of a plot is a histogram. You might need this to
 characterise an experimental system -- perhaps the lengths of polymer
-chains, or the diameters of a population of nanoparticles. After
-making many measurements (or creating an array of random numbers as we
-use for this example!) we can create a histogram.
+chains, the diameters of a population of nanoparticles, or the height
+measurements of a population. After making many measurements (or
+creating an array of random numbers as we use for this example!) we
+can create a histogram.
 </div>
 
 <pre>
   <code>
 import numpy as np, matplotlib.pyplot as plt
 
-# Fixing random state for reproducibility
+# Fixing random seed for reproducibility -- our random number start from the same point each time
 np.random.seed(19680801)
 
 #This draws 1000 random normally distributed samples
@@ -172,6 +209,129 @@ plt.title('Particle size distribution')
 plt.show()
   </code>
   </pre>
+
+
+<h4>Plots with error bars</h4>
+<div>
+A traditional way to indicate uncertainty in experimental measurements
+is by using error bars. Matplotlib includes a plot function to put in
+these error bars. We will give an example here with symmetric error
+bars, but should you need to adjust these errors then look at the
+documentation.
+<pre>
+  <code>
+import numpy as np, matplotlib.pyplot as plt
+
+#These lines create the data for our plots
+num_points = 20
+x_min , x_max = 0, 10 * np.pi
+x_values = np.linspace(x_min, x_max, num_points)
+y_values = x_values*np.sin(x_values)
+
+#These are the error bars
+yerr_values = np.random.randn(num_points)
+xerr_values = np.random.randn(num_points)
+
+#Now make the new type of plot
+plt.errorbar(x_values, y_values,  fmt = 'o:', xerr = xerr_values, yerr = yerr_values)
+
+plt.show()
+    </code>
+  </pre>
+Note that this example illustrates how the error bar plotting function
+works. In practice you would need to put in your physical measured or
+calculated errors (e.g. they might be 10% of your measured values).
+
+</div>
+
+<h4>Contour Plots</h4>
+
+<div>
+You have probably seen a few examples of functions of two
+variables. The most intuitive example are the height contours of a
+surface on a map as a function of position. Matplotlib has some
+utilities to plot these functions, and help visualise them.
+
+<pre>
+  <code>
+import numpy as np, matplotlib.pyplot as plt
+
+xvalues = np.linspace(-2,2, 30)
+yvalues = np.linspace(-2,2,30)
+
+#This line creates two new ndarrays with the coordinates for plotting, X and Y, that cover the whole 2D space
+X, Y = np.meshgrid(xvalues, yvalues)
+
+#We will plot 20 contours
+ncontours = 20
+
+#This calculates our "height" values for plotting
+Z = np.exp(-X**2-Y**2) * np.sin(X)
+
+plt.contour(X, Y, Z, ncontours)
+
+plt.xlabel('X axis')
+plt.ylabel('Y axis')
+  </code>
+</pre>
+Note there are many other ways to plot these contours using shading,
+or a color map.
+</div>
+
+
+
+<h4>Compound Plots</h4>
+
+<div>
+  It may be useful to produce a collection of plots so that you can
+  easily see many aspects of your data. To do this you can create a
+  figure, and then add your subplots to the figure. An example of how
+  to do this is given in the code below.
+  <pre>
+    <code>
+import numpy as np, matplotlib.pyplot as plt
+
+xvalues = np.linspace(0,3*np.pi, 30)
+
+#Create a figure for plotting
+fig1 = plt.figure()
+
+#Create a subplot with 2 rows and 2 columns, and then fill the first position
+ax1 = fig1.add_subplot(2,2,1)
+ax1.plot(xvalues, np.sin(xvalues))
+ax1.set_xlabel('x')
+ax1.set_ylabel('y')
+ax1.set_title('SHO no damping')
+
+ax2 = fig1.add_subplot(2,2,2)
+ax2.plot(xvalues, xvalues*np.sin(xvalues))
+ax2.set_xlabel('x')
+ax2.set_ylabel('y')
+ax2.set_title('SHO resonant response')
+
+ax3 = fig1.add_subplot(2,2,3)
+ax3.plot(xvalues, np.exp(-xvalues)-3*np.exp(-2*xvalues))
+ax3.set_xlabel('x')
+ax3.set_ylabel('y')
+ax3.set_title('SHO heavy damping')
+
+
+ax4 = fig1.add_subplot(2,2,4)
+ax4.plot(xvalues,  np.exp(-xvalues)+4*xvalues*np.exp(-xvalues))
+ax4.set_xlabel('x')
+ax4.set_ylabel('y')
+ax4.set_title('SHO critical damping')
+plt.tight_layout(pad = 0.5)
+
+#plt.show()
+#Save this figure as a file to include in our presentation!
+plt.savefig('figure1.pdf')
+    </code>
+  </pre>
+</div>
+
+
+
 <P>
  Now attempt <a href="exercise7.html">Exercise 7</a>.
 </P>

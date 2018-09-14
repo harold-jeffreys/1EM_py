@@ -22,10 +22,11 @@
 
 <div>
   Now that you can perform some calculations it may be important to
-  store the results by writing them to a file. Similarly you might
+  store the results by writing them to a file (a more permanent storage, so we can keep the data after turning off the computer). Similarly you might
   need to input some initial conditions by reading them from the user,
   or from a data file. You have already met the <code>input</code>
-  function for getting information from the user.
+  function for getting information from the user in earlier exercises. We
+  will now look at opening files to read and write your data.
 </div>
 
 <h4>Reading and Writing a file</h4>
@@ -36,8 +37,11 @@
 </div>
 <pre>
   <code>
+#first we create a file object 
 file_object = open("outputfile.txt", "w")
+#This writes a string to the file, and then a new line using the special character \n
 file_object.write("Hello, World\n")
+#It is good practice to close the file after you have finished
 file_object.close()
   </code>
 </pre>
@@ -105,16 +109,120 @@ file_object.close()
   <code>
 file_object = open('outputfile2.txt', 'r')
 for line in file_object:
-    print line
-f.close()
+    print(line)
+file_object.close()
   </code>
 </pre>
 
-<h4>Reading csv data using numpy</h4>
 <div>
-If we want to read data in from a file to a numpy array, then it can
-be useful to do this directly using the numpy package.
+  Or we can do the same loop using <code>with</code>, which will close our
+  file for us afterwards.
+  </div>
+<pre>
+  <code>
+with open('outputfile2.txt', 'r') as file_object:
+for line in iter(file_object.readline,'' ):
+    print(line)
+
+  </code>
+</pre>
+
+
+<h4>Reading and writing data using numpy</h4>
+<div>
+  If we have our data in a numpy array, then there are a few different
+  ways we can write it to a file. We may want to produce a file that is
+  readable by another program (e.g. for plotting), or by a user with a
+  text editor. As a first example suppose we want to output a table of
+  the squares of integers to a file. We could do this as follows:
+  <pre>
+    <code>
+import numpy as np
+
+#Create the data to write out
+intarray = np.array([x for x in range(101)], dtype = int)
+insqr = intarray ** 2
+
+#open the file for writing, and put in a title
+file_object = open("squares.dat", "w")
+file_object.write("The squares of the first one hundred integers are:\n\n")
+
+#loop over the arrays and write them to the file
+for a, b in zip(intarray, insqr):
+     file_object.write("%d squared is %d\n" % (a,b))
+
+#close the file now we have finished
+file_object.close()
+    </code>
+  </pre>
+  Note here that we have used our formatted print statement, and the special
+  character <code>\n</code> for a new line. The zip function is used here to
+  combine the two arrays, so we can loop over them simultaneously.
 </div>
+
+
+<div>
+  Now to read the file back in we can recover the sum of squares as follows:
+  <pre>
+    <code>
+import numpy as np
+
+file_object = open("squares.dat", "r")
+
+#empty lists for the results in the file
+fintegers = []
+fsquares = []
+
+#read the first two lines that contain no data
+file_object.readline()
+file_object.readline()
+
+#now read each line into a list, and take the elements we need
+for line in file_object:
+   words = line.split()
+   fintegers.append(int(words[0]))
+   fsquares.append(int(words[3]))
+
+#close the file
+file_object.close()
+
+#convert the lists to numpy arrays
+intarray = np.array(fintegers, dtype = int)
+sqrarray = np.array(fsquares, dtype = int)
+    </code>
+    </pre>
+</div>
+
+<div>
+  If we want to save, or load a numpy array to/from a file, then
+  the numpy package has several utilities to do this much more easily.
+  Some examples are below.
+<pre>
+  <code>
+import numpy as np
+#create some data to write to a file
+sqrarray = np.array([x**2 for x in range(101)], dtype = int)
+cubearray = np.array([x**3 for x in range(101)], dtype = int)
+fourtharray = np.array([x**4 for x in range(101)], dtype = int)
+
+#save the three arrays to a file (look at this file in a text editor!)
+np.savetxt('powers.dat', (sqrarray, cubearray, fourtharray))
+
+#load them into new arrays (check the result!)
+newsqr, newcube, newfourth = np.loadtxt('powers.dat')
+
+#This method outputs a binary file -- check if you can read it in a text editor
+np.save('squares.npy',sqrarray)
+
+#We can reload the array from the file
+newsqr2 = np.load('squares.npy')
+  </code>
+</pre>
+</div>
+<div>
+  Here we use the <code>genfromtxt</code> function to read in the data
+  from the comma separated variable (csv) file. We can then manipulate
+  the data and reprocess it, or to plot it for example.
 <pre>
   <code>
 import numpy as np
@@ -130,16 +238,16 @@ print(y_coordinate)
     
   </code>
 </pre>
-
-<div>
-  Here we use the <code>genfromtxt</code> function to read in the data
-  from the comma separated variable (csv) file. We can then manipulate
-  the data and reprocess it, or to plot it for example.
+If you find yourself reading and writing lots of data files, then you
+might try looking at some other python packages for data analysi such
+as <a href = "http://pandas.pydata.org">pandas</a>.
+  
 </div>
 
 
-    <div>
-      <br>
+
+<div>  
+  <br>
 When you have read through this Unit, it's time for <a href="exercise8.html">exercise 8</a>.
 </div>
 </BODY>

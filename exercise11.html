@@ -3,48 +3,93 @@
 <HEAD>
 <TITLE>University of Surrey, Physics</TITLE>
 <link rel="STYLESHEET" type="text/css" href="styles.css">
+<link rel="stylesheet" href="prism.css" data-noprefix />
+
 </HEAD>
 
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <body>
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
 <div align="center"><h1>1EM - Essential Mathematics / Computing</h1></div>
 <P>
-<H2>Exercise 11: Prime numbers</H2>
+<H2>Exercise 11</H2>
 </P>
 
-<div>
-  This exercise is intended to give you more programming practice, and
-is in two parts.  The first part is to make sure that you are able to
-make use of functions.  The second part is optional, and is to do
-something neat with the subprogram that you write in the first part.
-</div>
+
+
+<h4>Mandelbrot sets</h4>
 
 <div>
-<h4>Part 1</h4> The objective here is to write a function that takes
-an array of integers, and returns the index of the first non-zero
-element.
+This exercise is based on chapter 5
+of <a href="https://www.cambridge.org/core/books/python-for-scientists/E5CBE088065279A607A18673622AD89D">
+Python for Scientists</a>. You have met complex numbers in your
+Essential mathematics lectures. A complex number $z = x + i y$ can be
+represented by a point $(x,y)$ on the plane. To determine if a point
+belongs to the Mandelbrot set $\mathcal{M}$ the result of the iterated
+sequence $$z_{n+1} = z_n^2 + c$$ is examined. We choose $z_0 = 0$, and
+set the constant $c$ to the point in the plane we are examining. If
+$|z_n|$ remains bounded as $n\rightarrow \infty$ then $c$ lies in
+$\mathcal{M}$. One practical result is that if $|z_n|>2$ for some $n$
+then $c$ lies outside $\mathcal{M}$.
+<ol>
+  <li> Write a function that takes an input of a constant value $c$
+  and carries out the interation described for up to <code>max_iter =
+  256</code> times. It should return the iteration number when
+  $|z_n|>2$. Check your function by showing that $1$ is not in
+  $\mathcal{M}$ but $i$ (i.e. <code>1j</code>) is. We will call this
+  the escape parameter.</li>
+  <li> Now let us create a grid of points as we did for our 2-D plots:
+    <pre>
+      <code>
+import numpy as np
+xmin, xmax = -2.0, 1.0
+ymin, ymax = -1.5, 1.5
+nx, ny = 256, 256
+xvalues = np.linspace(xmin, xmax, nx)
+yvalues = np.linspace(ymin, ymax, ny)
+
+X, Y = np.meshgrid(xvalues, yvalues)
+C = X + 1j * Y
+      </code>
+    </pre>
+By using your function create a new array that contains the escape parameter for each point
+    in the array.</li>
+  <li>
+    You can make a plot of the Mandelbrot set using your escape parameter array:
+     <pre>
+      <code>
+from PIL import Image
+
+picture = Image.fromarray(A) # This makes an image of the array "A"
+picture.show()
+      </code>
+    </pre>
+</ol>
+Have a look at section 5.11 in Python for Scientists, and compare the
+vectorised code there with your code. 
+
+
 </div>
-<div>
-Your function only needs to work for a rank-1 array (i.e. with one
-index, or a vector-type array).  On the other hand, it should work
-with a rank-1 array of any length.
-</div>
-<div>
-Once you have written your function, write a program to go with it
-that calls it with some different arrays, whose first non-zero element
-is at different positions and check that it works correctly. 
-</div>
-<div>
-<h4>Part 2</h4>
+
 <h4>Prime Numbers</h4>
-</div>
+
 
 <div>
-If you get here well before week 9, try this second part of the
-exercise.  The goal here, is to write a program to implement
+The goal of this exercise, is to write a program to implement
 the <i>Sieve of Eratosthenes</i>, a method to determine the prime
-numbers.  I will describe briefly how the method works, though
+numbers. I will describe briefly how the method works, though
 referring to
 the <a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Wikipedia
 entry</a> is also helpful.
@@ -68,21 +113,19 @@ through the whole list (actually you can stop after <i>n/2</i> and
 still get the right answer).
 </div>
 <div>
-Write a program which has a subroutine in it that accepts a
-1-dimensional array of integers, in order (i.e. a(1)=1, a(5)=5 etc),
-implements the sieve of Eratosthenes in such a way that it sets
-non-primes to zero before sending it back to the program.  Depending
-on how you choose to write your algorithm, you might find your
-function from part 1 to be useful.
-
+Write a program which implements this algorithm.
 
 </div>
 <div>
-  Well done, you have reached the end of this self-guided course! You might like to try some of the extra exercises a the bottom of the menubar on the left, or even look at the (non-examinable!) version of the course in Fortran.
+  Well done, you have reached the end of this self-guided course!
   </div>
 
-
-<script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>
+<script language="JavaScript" src="end.js" type="text/javascript"></script>
+<script language="JavaScript" src="prism.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $('code').addClass('language-python');
+</script>
 
 </HTML>

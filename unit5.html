@@ -16,19 +16,39 @@
 <h2>Unit 5: Functions and modules</h2>
 
 <h3>Introduction</h3>
-
-<p> As we have seen with the previous unit, loops are a very useful way to factorize code. However sometimes loops might not be sufficient to encapsulate correctly pieces of code you want to reuse. Or maybe you want to use the same piece of code in two very different places in your program and loops cannot help. That's why we have <strong>functions</strong> and <strong>modules</strong>. Long story short, functions are reusable pieces of code, just as functions in mathematics, that will apply a treatment to input data and return output data. Modules, on the other hand, are collections of functions that you can group together in a single file, and that you can reuse in other python programs.</p>
+<div>
+<p> As we have seen with the previous unit, loops are a very useful
+way to factorize code. However sometimes loops might not be sufficient
+to encapsulate pieces of code you want to reuse. Maybe you want to use
+the same piece of code in two very different places in your program
+and loops cannot help. That's why we have <strong>functions</strong>
+and <strong>modules</strong>. Essentially, functions are reusable
+pieces of code and, much like functions in mathematics, they will
+apply an operation to input data and return output data. Modules, on
+the other hand, are collections of functions that you can group
+together in a single file, and that you can reuse in other python
+programs.</p>
 
 <hr>
 
 <h3>Functions</h3>
 
-<p>As said before, functions are reusable pieces of code that you can <strong>call</strong>. A function takes zero, one or more input parameters and can return a result. You can see functions in programing as their mathematical counterparts. As a matter of fact, a lot of mathematical functions are available in Python for you to use. We have already used functions in previous units, but without explicitly mentionning they were specific objects of Python. For instance, <code>print</code> or <code>enumerate</code> are functions.<p>
+<p>We will use the term function for a reusable piece of code that you
+can <strong>call</strong>. A function takes zero, one or more input
+parameters and can return a result. You can view functions in
+programming as their mathematical counterparts. As a matter of fact, a
+lot of mathematical functions are available for use in Python. We have
+already used functions in previous units, but without explicitly
+mentioning they were specific objects of Python. For
+instance, <code>print</code> or <code>enumerate</code> are
+functions.<p>
 
-<p>Now that tells us how to use a function, but not how to create one. Let's see a very simple example of function that will take two parameters and adds them together :</p>
+<p>We have seen how to use a function, but not how to create
+one. Let's see a very simple example of function that will take two
+parameters and adds them together :</p>
 
 <pre><code>def add(a, b):
-    return a+b
+    return a + b
 
 print(add(10, 12))    # 22
     
@@ -38,15 +58,36 @@ print(add(x, my_var)) # 10
     
 print(add(1, add(2, 3))) # 6</code></pre>
 
-<p>In this example, we use the keyword <strong>def</strong> to create a function. <code>def</code> is a reserved keyword that means you should never use it for something else than defining a function (and especially not as a variable name !). The definition of a function always has the same form :</p>
+<p>In this example, we use the keyword <strong>def</strong> to create
+a function. <code>def</code> is a reserved keyword that means you
+should never use it for something else than defining a function (and
+especially not as a variable name!). The definition of a function
+always has the same form :</p>
 
 <pre><code>def function_name(parameter1, parameter2, ...):</code></pre>
 
-<p>As for any block of code, the contents of the function is indented so that Python knows where the function begins and ends. In the function, we use the special keyword <code>return</code>. This keyword, as the name implies specifies the result of the function. Here, we want <code>add</code> to return the sum of <code>a</code> and <code>b</code>.</p>
+<p>As for any block of code, the contents of the function is indented
+so that Python knows where the function begins and ends. In the
+function, we use the special keyword <code>return</code>. This
+keyword, as the name implies, specifies the result of the
+function. Here, we want <code>add</code> to return the sum
+of <code>a</code> and <code>b</code>.</p>
 
-<p>The following lines show a few ways of using the function. Note that since we are not considering any type in the function, we can add any object for which the addition has been defined. For instance, look at what result <code>add('Hello ', 'World')</code> is giving you ! Functions are a nice way to <strong>abstract</strong> operations and add <strong>semantics</strong> to your code : with functions you group pieces of code with a single intent, explaining clearly what you mean to do. This is important when developing code that is going to be shared to users or other developers</p>
+<p>The following lines show a few ways of using the function. Note
+that since we are not considering any type in the function, we can add
+any object for which the addition has been defined. For instance, look
+at what result <code>add('Hello ', 'World')</code> gives you!
+Functions are a nice way to <strong>abstract</strong> operations and
+add <strong>semantics</strong> to your code: with functions you group
+pieces of code with a single intent, explaining clearly what you mean
+to do. This is important when developing code that is going to be
+shared to users or other developers</p>
 
-<p>Parameters in a function can be provided with a default value. These parameters can be omitted if the user does not want to provide a value different than the default value. If more than a parameter has a default value, the user can specify which parameter is going to take a specific value when calling a function : </p>
+<p>Parameters in a function can be provided with a default
+value. These parameters can be omitted if the user does not want to
+provide a value different than the default value. If more than one
+parameter has a default value, the user can specify which parameter is
+going to take a specific value when calling a function : </p>
 
 <pre><code>def add(a, b, c=0, d=0, e=0):
     return a+b+c+d+e
@@ -55,9 +96,14 @@ print(add(1, 2))
 print(add(1, 2, 3, 4))
 print(add(3, 2, e=6))</code></pre>
 
-<p><strong>Important note</strong> when using default values for parameters, always make sure that all parameters without default are first in the function or Python will return a syntax error. For instance <code>def my_function(a, b=10):</code> is valid while <code>def my_function(a=10, b):</code> is not !</p>
+<p><strong>Important note</strong> when using default values for
+parameters, always make sure that all parameters without a default are
+listed first in the function definition or Python will return a syntax
+error. For instance <code>def my_function(a, b=10):</code> is valid
+while <code>def my_function(a=10, b):</code> is not!</p>
 
-<p>Functions are not limited to two-liners and can be a lot more complex. Consider the following calculation :</p>
+<p>Functions are not limited to two-liners and can be a lot more
+complex. Consider the following calculation :</p>
 
 <pre><code>def factorial(n):
     res = 1
@@ -66,14 +112,26 @@ print(add(3, 2, e=6))</code></pre>
         n = n - 1
     return res</code></pre>
 
-<p>This function calculates the <a href="https://en.wikipedia.org/wiki/Factorial">factorial</a> of an integer. As you can see, we can use any code as before inside the function.</p>
+<p>This function calculates
+the <a href="https://en.wikipedia.org/wiki/Factorial">factorial</a> of
+an integer. As you can see, we can use any code as before inside the
+function.</p>
 
-<p>This example is also a good time to introduce another very important concept in programming : <strong>scope</strong>. The scope defines the longevity of a variable : when it is valid and when it is not. The principle is pretty simple : every variable declared inside a function is valid <strong>only</strong> inside the function. For instance, trying to execute this will end up with a runtime error :</p>
+<p>This function can also provide an illustration of a very important
+concept in programming : <strong>scope</strong>. The scope defines the
+longevity of a variable : when it is valid and when it is not. The
+principle is pretty simple : every variable declared inside a function
+is valid <strong>only</strong> inside the function. For instance,
+trying to execute this will end up with a runtime error :</p>
 
 <pre><code>factorial(10)
 print(res)</code></pre>
 
-<p>Indeed, the <code>res</code> variable has been declared inside the function and has no existence outside of it ! If you need to reuse a variable defined inside a function, make sure you return it. Also note that you can return multiple values, in which case the result will be considered as a tuple :</p>
+<p>Indeed, the <code>res</code> variable has been declared inside the
+function and so does not exist outside of it! If you need to reuse a
+variable defined inside a function, make sure you return it. Also note
+that you can return multiple values, in which case the result will be
+considered as a tuple :</p>
 
 <pre><code>def multiple_returns(a):
     return a, a*2, a*a
@@ -85,7 +143,15 @@ print(res)
 # It is also possible to unpack directly the tuple :
 a, double_a, a_squared = multiple_returns(10)</code></pre>
 
-<p>Now that we have talked about scope, let's add a caution word on the parameters of a function. Parameters in a function are <strong>references</strong>, that means that in some cases modifying the value of a parameter in a function will modify it outside of the function. These cases solely depend on the type of parameters you provide. The types that will NOT be modified are : numbers, strings. All other types, especially lists and tuples WILL be modified outside if modified inside. Consider the following examples :</p>
+<p>Now that we have talked about scope, let's add a cautionary word on
+the parameters of a function. Parameters in a function
+are <strong>references</strong>, that means that in some cases
+modifying the value of a parameter in a function will modify it
+outside of the function. These cases solely depend on the type of
+parameters you provide. The types that will NOT be modified are :
+numbers, strings. All other types, especially lists and tuples WILL be
+modified outside if modified inside. Consider the following examples
+:</p>
 
 <pre><code>def modify1(a):
     a = 12
@@ -103,25 +169,46 @@ my_var = [0, 1, 2, 3, 4]
 b = modify2(my_var)
 print(my_var) # [0, 10, 2, 3, 4] -> my_var has been modified</code></pre>
 
-<p>Remember what we said in <a href="file:///home/md0046/astro/teaching/labs/EM_python_course/git_version/unit2.html#lists">Unit 2</a> about lists and references. If you really need to modify a list in a function, use the <code>copy</code> function to make a copy and modify the copy instead of modifying the original !</p>
+<p>Remember what we said in <a href="unit2.html#lists">Unit 2</a>
+about lists and references. If you really need to modify a list in a
+function, use the <code>copy</code> function to make a copy and modify
+the copy instead of modifying the original !</p>
 
 
 <hr>
 
 <h3>Modules</h3>
 
-<p>If you have a collection of functions then it can be useful to group them all together. That what's behind the concept of <strong>modules</strong> in Python. A module is very roughly a file containing collections of functions and variables that can be <strong>imported</strong> in a Python program. Python has, by default, a collection of modules that are very useful for developing programs. One module you will find unavoidable is the <a href="https://docs.python.org/3/library/math.html">math</a> module. Other very useful modules are <a href="https://docs.python.org/3/library/os.html">os</a> and <a href="https://docs.python.org/3/library/sys.html">sys</a> (to operate on the system, navigate through files, etc.), <a href="https://docs.python.org/3/library/itertools.html">itertools</a> (to do more complex operations on lists). [<strong>Note</strong> : The modules mentioned here are listed for your general knowledge but it is not required that you know and/or use them].</p>
+<p>If you have a collection of functions then it can be useful to
+group them all together. This is the main concept
+of <strong>modules</strong> in Python. A module is, broadly speaking,
+a file containing collections of functions and variables that can
+be <strong>imported</strong> in a Python program. Python has, by
+default, a collection of modules that are very useful for developing
+programs. One module you will find unavoidable is
+the <a href="https://docs.python.org/3/library/math.html">math</a>
+module. Other very useful modules
+are <a href="https://docs.python.org/3/library/os.html">os</a>
+and <a href="https://docs.python.org/3/library/sys.html">sys</a> (to
+operate on the system, navigate through files,
+etc.), <a href="https://docs.python.org/3/library/itertools.html">itertools</a>
+(to do more complex operations on lists). [<strong>Note</strong> : The
+modules mentioned here are listed for your general knowledge but are
+not examinable as part of this course].</p>
 
-<p>Let's first see how to use modules. As said before, when we use modules, we <strong>import</strong> objects. Mostly functions and constants. There are various way to import data from a module. Consider the following commands :</p>
+<p>Let's first see how to use modules. As stated before, when we use
+modules, we <strong>import</strong> their contents. Mostly functions
+and constants. There are various way to import data from a
+module. Consider the following commands :</p>
 
 <pre><code># 1- Importing the whole package :
 import math
 
-# We can now use it by calling math.&lt;object name&gt;
+# We can now use it by using a prefix: math.&lt;object name&gt;
 print(math.pi)
-print(math.sqrt(9))    
+print(math.sqrt(9))
 
-# 2- Importing the objects you need
+# 2- Importing just the objects you need (note no prefix is needed here!)
 from math import cos, sin
 
 # We can use the objects we have imported directly :
@@ -134,52 +221,81 @@ from math import *
 # Everything is usable without the reference to the module anymore :
 print(gcd(10, 3))</code></pre>
 
-<p>All of these ways to import data from a package are useful but you should avoid as much as possible using the third way. Importing everything, when dealing with lots of functions from lots of different modules might have undesirable side-effects (replacing the function of a module by another one for instance).</p>
+<p>All of these ways to import data from a package are useful but you
+should avoid as much as possible using the third way. Importing
+everything, when dealing with lots of functions from lots of different
+modules might have undesirable side-effects (replacing the function of
+a module by another one for instance).</p>
 
-<p>Note that the first method can sometimes be a bit cumbersome. Imagine that you want to use a module called <code>my_very_long_module</code> that has three functions <code>f1</code>, <code>f2</code> and <code>f3</code>. Such a code could be very heavy in no time :</p>
+<p>Note that the first method can sometimes be a bit
+cumbersome. Imagine that you want to use a module
+called <code>my_very_long_module</code> that has three
+functions <code>f1</code>, <code>f2</code> and <code>f3</code>. Such a
+code could be very heavy in no time :</p>
 
 <pre><code>import my_very_long_module
 
 v1 = my_very_long_module.f1(10)
 v2 = my_very_long_module.f2(my_very_long_module.f3(10), 7)</code></pre>
 
-<p>In such a case, Python allows us to <strong>alias</strong> module names with another name to help with the code :</p>
+<p>In such a case, Python allows us to <strong>alias</strong> module
+names with another name to help with the code :</p>
 
 <pre><code>import my_very_long_module as m
 
 v1 = m.f1(10)
 v2 = m.f2(m.f3(10), 7)</code></pre>
 
-<p>Now you might wonder how we create a module ? The answer could not be simpler : you just put functions and constants in a file and that's it. Let's work a simple example. Remember the <code>add</code> function we coded above ? Let's put it in a file called <code>my_module.py</code>. Let's add a <code>sub</code> function to it. So our file <code>my_module.py</code> should look like :</p>
+<p>Now you might wonder how we create a module? The answer could not
+be simpler : you just put functions and constants in a file and that's
+it. Let's work a simple example. Remember the <code>add</code>
+function we coded above? Let's put it in a file
+called <code>my_module.py</code>. Let's add the <code>sub</code>
+function to it. So our file <code>my_module.py</code> should look like
+:</p>
 
 <pre><code>def add(a, b):
-    return a+b
+    return a + b
 
 def sub(a, b):
-    return a-b</code></pre>
+    return a - b</code></pre>
 
-<p>In a different file in the <strong>SAME</strong> folder, now you can import these functions directly. The module name to import will be the name of the file without the <code>.py</code> : </p>
+<p>In a different file in the <strong>SAME</strong> folder, now you
+can import these functions directly. The module name to import will be
+the name of the file without the <code>.py</code> : </p>
 
 <pre><code>from my_module import add, sub
 print(add(7, 10))
 print(sub(10, 7))</code></pre>
 
-<p>When coding modules, you can add documentation to your functions by adding comments at the beginning of the function using triple quotes : <code>'''</code>. For instance :</p>
+<p>When coding modules, you can add documentation to your functions by
+adding comments at the beginning of the function using triple quotes
+: <code>'''</code>. For instance :</p>
 
 <pre><code>def add(a, b):
     ''' This function adds two values and return the result '''
-    return a+b</code></pre>
+    return a + b</code></pre>
 
-<p>These comments, when placed here are called <strong>docstrings</strong>. You will find more information on what you can do with these in the official <a href="https://www.python.org/dev/peps/pep-0257/">documentation</a>. These docstring then appear when you use the <code>help</code> function. Hence <code>help(add)</code> will yield :</p>
+<p>These comments, when placed here are
+called <strong>docstrings</strong>. You will find more information on
+what you can do with these in the
+official <a href="https://www.python.org/dev/peps/pep-0257/">documentation</a>. These
+docstring then appear when you use the <code>help</code>
+function. Hence <code>help(add)</code> will yield :</p>
 
 <pre>Help on function add in module my_module:
 
 add(a, b)
     This function adds two values and return the result</pre>
 
-<p> The <code>help</code> command works for every public module so feel free to use it to find out information on the functions you are using. For instance, you can try to import the math module and type <code>help(math)</code> or <code>help(math.cos)</code>. </p>
+<p> The <code>help</code> command works for every public module so
+feel free to use it to find out information on the functions you are
+using. For instance, you can try to import the math module and
+type <code>help(math)</code> or <code>help(math.cos)</code>. </p>
 
-<p> As a final example, let's see a small program that will use <a href="https://en.wikipedia.org/wiki/Heron%27s_formula">Heron's formula</a> to compute the area of a triangle :</p>
+<p> As a final example, let's see a small program that will
+use <a href="https://en.wikipedia.org/wiki/Heron%27s_formula">Heron's
+formula</a> to compute the area of a triangle :</p>
 
 <pre><code>from math import sqrt # We import the square root function
     
@@ -198,7 +314,7 @@ print('The area of the triangle is : ', tri_area(a, b, c))</code></pre>
 
 
 <p> Once you are finished reading and understanding the example, it is time to move to a series of <a href="exercise5.html">exercises</a></p>
-
+</div>
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>
 <!-- Syntax highlighting -->

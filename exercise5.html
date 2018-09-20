@@ -29,18 +29,21 @@
 <H2>Exercise 5: Functions and Modules</H2>
 </P>
 
-
+<div>
 <P>
-Make sure you have read unit 5 before attempting the following exercise.
+Make sure you have read unit 5 before attempting the following exercises.
 </P>
 
-<h3>Exercise 1 - Simple functions and module</h3>
-
-<p>Write a python function to convert a temperature in Fahrenheit to its equivalent value in Celsius. Your function should take one parameter as input (the temperature in Fahrenheit degrees) and return one value : the temperature in Celcius degrees.</p>
+<h3>1 - Simple functions and module</h3>
+<ol type = a>
+<li><p>Write a python function to convert a temperature in Fahrenheit to
+its equivalent value in Celsius. Your function should take one
+parameter as input (the temperature in Fahrenheit degrees) and return
+one value : the temperature in Celcius degrees.</p>
 
 <p>The mathematical relationship between the temperature in Celsius and in Fahrenheit is $C=(5/9)(F-32)$ where $C$ is the Celsius temperature, and $F$ is the Fahrenheit temperature.</p>
 
-<p>Once you are done with this, write the following functions : </p>
+<li><p>Once you are done with this, write the following functions : </p>
 <ul>
   <li> Conversion from Celcius to Fahrenheit</li>
   <li> Conversion from Celcius to Kelvin</li>
@@ -48,10 +51,10 @@ Make sure you have read unit 5 before attempting the following exercise.
 </ul>
 
 <p>Put all the functions you have written in a module called <code>temperature.py</code>. In a separate program, import this module, then for every temperature between $0^\circ$C and $100^\circ$C, by steps of $5^\circ$C, print the corresponding values in Fahrenheit and Kelvin.</p>
-
+</ol>
 <hr>
 
-<h3>Exercise 2 - Recursivity</h3>
+<h3>2 - Recursivity</h3>
 
 <p>A function is said to be <strong>recursive</strong> if it calls itself in the execution. A recursive function is usually organised as follows :</p>
 
@@ -90,24 +93,33 @@ print(sum_n(10))</code></pre>
 
 <hr>
 
-<h3>Exercise 3 - More functions</h3>
+<h3>3 - More functions</h3>
 
-A ball is placed at $y$ meters from the ground. The ball is dropped with no initial velocity $v_y=0.0 m.s^{-1}$. Knowing that the gravitational force is $g = -9.11 m.s^{-2}$, write a small integrator that will compute the position of the ball over time. To do this, we are going to use a very simple integrator : <a href="https://en.wikipedia.org/wiki/Euler_method">Euler's integration method</a></p>
+A ball is placed at $y$ meters from the ground. The ball is dropped
+with no initial velocity $v_y=0.0\; \rm{ m s}^{-1}$. Using the fact
+that the gravitational acceleration is $g = -9.81 \;\rm{ms}^{-2}$, we
+will write an integrator that will compute the position of the ball
+over time as follows. We are going to use a very simple integrator
+: <a href="https://en.wikipedia.org/wiki/Euler_method">Euler's
+integration method</a></p>
 
-<p>The Euler method will simply compute the velocity and position at time $t+\Delta t$ using the information at time t :</p>
+<p>The Euler method will simply compute the velocity and position at
+time $t+\Delta t$ using the information at time $t$ :</p>
 
 <center>
-  $y(t+\Delta_t)  = y(t)  + \Delta_t \times v_y(t)$ <br/>
-  $v_y(t+\Delta_t) = v_y(t) + \Delta_t \times a$
+  $y(t+\Delta t)  = y(t)  + \Delta t \times v_y(t)$ <br/>
+  $v_y(t+\Delta t) = v_y(t) + \Delta t \times a$
 </center>
 
 <p>To help you, try to code the following instructions</p>
 
 <ol>
-  <li> Consider having two variables <code>y</code> and <code>vy</code> that represent the position and the velocity of the ball at time $t$. Then :
+  <li> Create two variables <code>y</code> and <code>vy</code> that
+  represent the position and the velocity of the ball at time
+  $t$. Then :
     <ul>
-      <li>Code a function <code>new_position</code> that takes three parameters <code>y</code>, <code>v_y</code> and <code>delta_t</code> and returns the value of $y$ at time $t + \Delta_t$</li>
-      <li>Code a function <code>new_velocity</code> that takes two parameters <code>v_y</code> and <code>delta_t</code> and returns the value of $v_y$ at time $t + \Delta_t$</li>
+      <li>Code a function <code>new_position</code> that takes three parameters <code>y</code>, <code>v_y</code> and <code>delta_t</code> and returns the value of $y$ at time $t + \Delta t$</li>
+      <li>Code a function <code>new_velocity</code> that takes two parameters <code>v_y</code> and <code>delta_t</code> and returns the value of $v_y$ at time $t + \Delta t$</li>
     </ul>
   </li>
   <li>Modify the previous functions so that the value of <code>delta_t</code> is by default $1s$.</li>
@@ -115,7 +127,7 @@ A ball is placed at $y$ meters from the ground. The ball is dropped with no init
     <ul>
       <li>Use two variables <code>y</code> and <code>vy</code> to store the current values of position and velocity
       <li>Print the current position and velocity of the ball</li>
-      <li>Compute the new velocity and new position using the previous functions, using a value of $\Delta_t = 1s$</li>
+      <li>Compute the new velocity and new position using the previous functions, using a value of $\Delta t = 1s$</li>
       <li>Update the values of <code>y</code> and <code>vy</code>.</li>
       <li>Using a <code>while</code> loop, repeat the previous operations until the ball reaches the ground ($y\leq 0$)</li>
     </ul>
@@ -124,15 +136,15 @@ A ball is placed at $y$ meters from the ground. The ball is dropped with no init
 
 <hr>
 
-<h3>Exercise 4 - Using the <code>math</code> module</h3>
+<h3>4 - Using the <code>math</code> module</h3>
 
 <p>Import the <code>math</code> module, then do the following operations :</p>
 
-<ul>
+<ol type = a>
   <li> Find the definition of <code>math.nan</code> using a Python command</li>
   <li> Use a while loop to have a variable <code>angle</code> varying from $0$ to $360$ degrees by steps of $20$ degrees. Print the Cartesian coordinates $(x, y)$ of corresponding points on the surface of a circle of radius $7$.</li>
   <li> Find a function in the package to round a real value to the nearest upper integer.</li>
-</ul>
+</ol>
 
 
 <br><br>
@@ -140,7 +152,7 @@ A ball is placed at $y$ meters from the ground. The ball is dropped with no init
 <p>
  When you are happy with the output from the programs, it's time to move on to <a href="unit6.html">unit 6</a>.
 </P>
-
+</div>
 <script language="JavaScript" src="prism.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>

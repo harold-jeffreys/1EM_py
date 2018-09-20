@@ -6,9 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <link rel="stylesheet" href="prism.css" data-noprefix />
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
+
+
 </HEAD>
 <body>
 
@@ -16,73 +27,249 @@
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
 
-<h3>Unit 9: Algorithm Design:  Planning solutions to problems.  Flow Charts.
-</h3>
+<h2>Unit 9: Algorithm Design: Planning solutions to problems.</h2>
 
-<div>
-As you start to write more complicated programs, it is worth planning first on paper how you might want to structure the program to solve the problem at hand.
-</div>
+<h3>Introduction</h3>
 
-<div>
-As an example, let's say we want to write a program to find the real roots of quadratic equations.  You will probably know that the formula for solving quadratic equations of the form $$ax^2+bx+c$$ is $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.$$
-</div>
-<div>
-The nature of the roots will depend on the <a href="http://en.wikipedia.org/wiki/Discriminant">discriminant</a>, <i>&Delta;=b<sup>2</sup>-4ac</i>.
-<ul><li>If <i>&Delta;&gt;0</i> there are two distinct real roots.  
-<li>If <i>&Delta;=0</i> there is a repeated real root. 
-<li>If <i>&Delta;&lt;0</i> there are no real roots.  </ul>
-</div>
-<div>
-To plan the program, we will highlight two methods.  One is using <i>pseudocode</i> and the other is with a <i>flow chart</i>.
-</div>
+<p>An <strong>algorithms</strong> is a serie of operations that a human or a program follow in order to solve a problem. Up until now, solving exercises in these units have involved very simple algorithms. When working on scientific problems (as an example) you might have to develop your own algorithms to find a correct answer.</p>
 
-<h4>Pseudocode</h4>
-<div>
-Pseudocode is the name given to a way of writing, in a very human-readable form, the way a program has to work to achieve the desired result.  It has elements of looking like real computer code, and is a kind of stepping stone between the thought processes about how to solve a problem, and the final result.  We might write pseudocode for the above problem as
-</div>
-<div>
-  <pre>
-    <code>
-print instructions to user
-read user input
-calculate discriminant
-if discriminant is negative 
-  print message saying there are no real roots
-  
-elsif discriminant is zero 
-  calculate repeated real root
-  print message giving repeated real root
-else
-  calculate two separate real roots
-print message giving the two roots
-</code>
-</pre>
-<div>
-As you see, we've used some key words to highlight the structure of
-the desired solution, but this still needs to be actually turned in to
-a real program.  So the next step is to take the elements of your
-pseudocode, and turn it into actual computer code.
+<p>Finding the solution to a problem can be quite challenging and requires a full training in computer science. However, as scientists you will have to solve some problems and are thus required to be able to think algorithmically. This unit will present a simple problem, and will study how to solve it, step by step.</p>
 
-<h4>Flow Charts</h4> Flow charts are graphical ways of representing
- the design of any kind of process, including computer programs.  They
- are like pseudocode, in that the purpose is to think in a quite
- general way about the things that have to occur in your program and
- in what order.  A typical set of flowchart objects are
+<p>Before starting, here is a list of simple rules to help you solve most of the problems you will have when programming systems :</p>
+
 <ul>
-<li>Ovals to indicate the beginning and end of the program
-<li>Rectangles to describe actions
-<li>Diamonds to indicate choices
-<li>Parallellograms to indicate data input and output
+  <li>Try to work a few examples before coding. Find typical cases and extreme examples that might happen.</li>
+  <li>Try to solve the problem on a few examples on <strong>paper</strong> before writing any line of code.</li>
+  <li>While doing so, try to analyse <strong>how</strong> you are solving the problem. Try to write down in english on a piece of paper every step you do mentally to solve the problem. This should give you an outline of your algorithm in what we call <strong>pseudo-code</strong>, ie "code" in english.</li>
+  <li>Also analyze the <strong>what</strong> : what are the inputs, what are the outputs, what are the data structures required for the problem.</li>
+  <li>Once you have all the steps, and made sure that applying these steps on a few examples, try to convert each of the steps into lines of code to make a working program.</li>
 </ul>
-As an example, here is the same process for our real roots program
 
-<div>
-<embed src="realroots.svg" type="image/svg+xml" width="100%" height="1000" />
-</div>
+<p>These are very general rules to solve the problem yourself. But there is ONE rule above all that you should also remember : never reinvent the wheel. Chances are, the problems you are facing in computer science have already been faced by a lot of other people, and there exists an algorithm that does exactly what you want. So if the problem is relatively simple, try to solve it yourself, if the problem is complex look if something doing the job already exists.</p>
 
-<div>
-  When you have read through this Unit, it's time for <a href="exercise9.html">exercise 9</a>
-  </div>
+<hr>
+
+<h3>Case study : The k-means algorithm</h3>
+
+<p>The example we are going to study is the k-means algorithm (you could google and look at the wikipedia page, but we advise you to follow this page first, then look at other documents). The goal of this section is to solve a problem by using a very common algorithm and learn how to code it from a pseudo-code description.</p>
+
+<h4>The problem : Clustering of data</h4>
+
+<p>Imagine you have a set of 2d points such as this :</p>
+
+<center><img src="img/kmeans_original.png"/></center>
+
+<p>This set of points seems arbitrarily random. Now believe me or not, but this set is actually made of 5 different subsets of points. All the points in a given set are located close to each other in the 2d space. So here is the problem : Given that we know that our set is actually made of 5 subsets, can we find which point belongs to which subset ?</p>
+
+<p>This problem is a very common problem in science. It is a <strong>clustering</strong> or <strong>classification</strong> problem : given a set of points and a set of categories, can we find which point belongs in which category ?</p>
+
+<p>Now we could solve this problem by hand easily, but remember that we want to make a program so that we don't have to redo the procedure by hand every time. Moreover, this should be relatively easy to do for 50 points as on the example, but what if the dataset had one million points and instead of being 2d coordinates we were in a space with 10 dimensions. This would be a lot more complicated to do by hand : that's why we want to program an algorithm that will do this for us.</p>
+
+<p>The k-means algorithm is a very simlpe method for clustering in $k$ categories. The idea is the following : </p>
+<ol>
+  <li>Draw $k$ random points, one per category. We will call these points <strong>centroids</strong>, and note them $\mathbf{c}_i$, with $i=1..k$.</li>
+  <li>Assign all points of your sample to the category of the nearest centroid.</li>
+  <li>For each category $C_i$, compute the barycenter $\mathbf{b}_i$ of all points assigned to $C_i$.</li>
+  <li>Assign the barycenter position to the centroids.</li>
+  <li>Repeat from step 2 until the difference between the centroids and the barycenter is lower than a certain threshold value $\epsilon$ : $||\mathbf{b}_i - \mathbf{c}_i|| &lt; \epsilon$.
+</ol>
+
+<p>Let's see how this works in practice. Here is a solution generated in five iterations for the current set of data. The circle dots represent the centroids while the crosses are the original points. The colours indicate which class is assigned to which point.</p>
+
+<center><img src="img/kmeans_ite.gif"/></center>
+
+<p>After five iterations, the algorithm is stable (we say it has <strong>converged</strong> to a solution) : we have successfully classified the data. Let's move on to the coding of the algorith. This might seem complicated, so let's take it slowly and rewrite all parts of the algorithm in pseudo-code first before doing it in Python.</p>
+
+<hr>
+
+<h4>Data and structures</h4>
+
+<p>The first question is <strong>what</strong> : what are the inputs, outputs, and data structures we need ?</p>
+
+<p>The list of points to classify will be given as an input. It will consist in a numpy array with two columns and $N$ line. Let's call this numpy array <code>pts</code>.</p>
+
+<p>As a result of our algorithm, we would like to have a classification, ie a list (or numpy array) with $N$ entries giving the id (a number) of the class for each point. For instance, if $N=8$, we would like to have a result looking like <code>[2, 0, 1, 0, 2, 2, 0, 1]</code>. Let's call this list <code>classes</code>. 
+
+<p>We know that we are going to deal with points in a 2d space, so we can represent every point as tuples $(x, y)$. Then, we know that we will be manipulating centroids and barycenter. Since we have $k$ of these, we will store the centroids and barycenters as two numpy arrays of $k$ points. Let's call them <code>centroids</code> and <code>barycenters</code>.</p>
+
+<p>Finally we will have to iterate while we are not done. Since we only know of while loops to do this kind of work, we will create a boolean variable that will tell us if we are finished or not. Let's call it <code>done</code>.
+
+<p>That's about it for the data and structures ! Let's move on to initial conditions</p>
+
+<h4>Initial conditions</h4>
+
+<p>Next question is : What are the initial values of our datasets ?</p>
+
+<ul>
+  <li><code>k</code> is known by default, this it is a constant. We set it to <code>5</code>.</li>
+  <li><code>pts</code> will be read from a file.</li>
+  <li><code>classes</code> is a result product and thus, does not need any specific initial value</li>
+  <li><code>centroids</code> will be initialised randomly, for this we will use the function <code>numpy.random.rand</code></li>
+  <li><code>barycenters</code> is also a product of the computations, no initialisation required.</li>
+  <li><code>epsilon</code> is a threshold constant, let's take it "small" as <code>1e-6</code></li>
+  <li><code>done</code> will be initialised to <code>False</code>
+</ul>
+
+<p>Now that we have our data and the structure, let's rewrite the algorithm in pseudo code :</p>
+
+<h4>Pseudo-code</h4>
+
+<p>The first step is the initialisation of the data :</p>
+
+<pre><code>Set k=5
+Set epsilon=1.0e-5
+Read pts from a file
+Initialize centroids randomly</code></pre>
+
+<p>Then, we know from step 5 that we will have to iterate while we are not done. Thus we need a loop :</p>
+
+<pre><code>while we are not done :</code></pre>
+
+<p>Inside this, we need have to calculate the distance from each points to each centroid, then assign a category for each point corresponding to the closest centroid</p>
+
+<pre><code>for each point P in pts:
+    c_i = find the closest centroid to P
+    classes[P] = c_i</code></pre>
+
+<p>Then, we have to compute the barycenters of each class. For this, we have to select all the points in the considered class, and compute the barycenter from this selection :</p>
+
+<pre><code>for each class C in 1..k:
+    selection = all points P in pts for which classes[P] = C
+    barycenter[C] = sum(selection) / len(selection)
+<br><br></code></pre>
+
+<p>We have the barycenters and the centroids, it's time to check if the algorithm has finished :</p>
+
+<pre><code>done = (||barycenters - centroids|| &lt; epsilon)</code></pre>
+
+<p>Finally, we update the position of the centroids. Note that we are not doign this before updating the variable <code>done</code>. Otherwise we would be done necessarily after one iteration ... since the two variables would be equal !</p>
+
+<pre><code>centroids = barycenters</code></pre>
+
+<p>Now we finally have our full pseudo-code :</p>
+
+<pre><code>Set k=5
+Set epsilon=1.0e-5
+Read pts from a file
+Initialize centroids randomly
+
+while we are not done:
+    for each point P in pts:
+        c_i = find the closest centroid to P
+        classes[P] = c_i
+
+    for each class C in 1..k:
+        selection = all points P in pts	for which classes[P] = C
+        barycenter[C] = sum(selection) / len(selection)
+    
+    done = (||barycenters - centroids|| &lt; epsilon)
+    centroids = barycenters
+</code></pre>
+
+<h4>Converting the pseudo-code to Python</h4>
+
+<p>All of the hard work is done ! We can now convert all of this to Python. Start by downloading the sample data <a href="http://personal.ph.surrey.ac.uk/~md0046/kmeans_input.dat">here</a>.</p>
+
+<p>For the initialisation part, everything is pretty straightforward. For the random part, we are going to use the <a href="https://docs.scipy.org/doc/numpy-1.14.0/reference/routines.random.html">random module</a> of <code>numpy</code> and more precisely the <a href="https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.random.rand.html#numpy.random.rand"><code>numpy.random.rand</code></a> function. The initial set of points is going to be loaded using the <code>numpy.genfromtxt</code> function that you have seen in the previous unit.</p>
+
+<pre><code># Importing necessary modules
+import numpy as np
+import matplotlib.pyplot as plt
+    
+# Initial conditions
+k       = 5
+epsilon = 1.0e-6
+pts     = np.genfromtxt('kmeans_input.dat')
+done    = False</code></pre>
+
+<p>Then, the loop is going to keep iterating until this variable has a value of <code>True</code> :</p>
+
+<pre><code>while not done:</code></pre>
+
+<p>That was easy. Now for the contents of the loop. First we want to assign a class for every point in <code>pts</code>. We don't have initialized the <code>class</code> list so now is the time : <code>classes = []</code></p>
+
+<p>We are then going to iterate on the points in <code>pts</code>. We need to find which centroid is the closest, for this we are going to use a few temporary variables. First we are going to store the minimum distance to a centroid (<code>min_dist</code>) and the id of the closest centroid (<code>best_class</code>). These are initialised to infinity (<code>numpy.inf</code>) and to an arbitrary value (<code>-1</code>) respectively.</p>
+
+<p>Then we iterate on all the centroids and find the closest. For this, we will have to compute distances between the points. You can either do this manually or use the corresponding numpy function <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.linalg.norm.html"><code>numpy.linalg.norm</code></a>.</p>
+
+<pre><code>for P in pts:
+    # We initialize the minimum distance and best class to arbitrary values :
+    min_dist   = np.inf
+    best_class = -1
+
+    # Then we iterate on the centroids, and keep track of the closest
+    for class_id, C in enumerate(centroids):
+    dist = np.linalg.norm(C - P)
+
+    if dist &lt; min_dist:
+        min_dist = dist
+        best_class = C
+
+    # Finally we store the assigned class to the current point
+    classes.append(best_class)</code></pre>
+
+<p>At this point, <code>classes</code> is a simple list so we need to convert it to a numpy array using the <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html#numpy.array"><code>numpy.array</code></a> function.</p>
+
+<p>Once we have done this, we have a class assigned to every point in <code>pts</code>. It is time to compute the barycenter of each class. As for the <code>classes</code> list, the <code>barycenters</code> variable has not been initialised yet, so let's set it to an empty set now : <code>barycenters = []</code>.</p>
+
+<p>Now we can iterate on each class, select the points assigned to that class (using masks) and calculate the barycenter position for each class. But before doing so, there's a little problem we need to clarify here ! Remember that our pseudo-code indicates here that : </p>
+
+<code>barycenter[C] = sum(selection) / len(selection)</code>
+
+<p>What happens if no point has been assigned to <code>C</code> ? Well, we will be dividing by zero, which is bad. So we are going to program this section so that, if the selection is empty, the barycenter will take the value <code>centroid[C]</code>. In other word, if the selection is empty, we don't move the centroid.</p>
+
+<pre><code># We iterate on each category :
+for C in range(k):
+    # We create a mask to select the points assigned to the class C
+    mask = (classes == C)
+
+    # And we filter the points
+    selection = pts[mask]
+
+    # We compute the number of points in the selection
+    N_pts = selection.shape[0]
+
+    # We compute the barycenter coordinates if necessary
+    if N_pts == 0:
+        bary_pos = centroids[C]
+    else:
+        bary_pos = np.sum(selection, axis=0) / N_pts
+
+    # And we add the barycenter to the list
+    barycenters.append(bary_pos)
+
+# Once all of this is done, we convert the barycenter list to a numpy array :
+barycenters = np.array(barycenters)</code></pre>
+
+<p>We now have the categorisation of points, the barycenter computation. Only things left are : the termination criterion (updating <code>done</code>) and replacing the centroids with their new values. Once again, we are going to use <code>numpy.linalg.norm</code> to compute the distance between the centroids and the barycenters.</p>
+
+<pre><code># We update done
+tot_dist = np.linalg.norm(centroids - barycenters)
+done = (tot_dist &lt; epsilon)
+
+# And we update the centroids
+centroids = barycenters</code></pre>
+
+<p>And we are done with the algorithm ! The only thing left now is to plot the result. For this, we will use the matplotlib function <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html"><code>matplotlib.pyplot.scatter</code></a>. You can use this bit of code to plot the data as shown previously :</p>
+
+<pre><code> # Colors for each class
+colors = ['#000000', '#ff0000', '#008800', '#0000ff', '#880088']
+
+# We assign a color per point depending on the class
+col_pts = [colors[i] for i in classes]
+
+# And we plot
+plt.scatter(pts[:,0], pts[:,1], marker='x', c=col_pts)
+plt.scatter(centroids[:,0], centroids[:,1], marker='o', c=colors)
+plt.show()</code></pre>
+
+<p>If your code is complete, running it should give you a figure close to the one below. If your results seem off, try to restart the program as the k-means algorithm can sometimes fail to converge to an appropriate solution.</p>
+
+<center><img src="img/kmeans_final.png"/></center>
+
+<hr>
+
+<p> When you have read through this Unit and coded the k-means algorithm, it's time for <a href="exercise9.html">exercise 9</a> </p>
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>

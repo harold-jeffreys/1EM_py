@@ -26,32 +26,62 @@
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
-
+<div>
 <h2>Unit 9: Algorithm Design: Planning solutions to problems.</h2>
 
 <h3>Introduction</h3>
 
-<p>An <strong>algorithm</strong> is a serie of operations that a human or a program follow in order to solve a problem. Up until now, solving exercises in these units have involved very simple algorithms. When working on scientific problems (as an example) you might have to develop your own algorithms to find a correct answer.</p>
+<p>An <strong>algorithm</strong> is a series of operations that a human
+or a program follow in order to solve a problem. Up until now, solving
+exercises in these units have involved very simple algorithms. When
+working on scientific problems (as an example) you might have to
+develop your own algorithms to find a correct answer.</p>
 
-<p>Finding the solution to a problem can be quite challenging and requires a full training in computer science. However, as scientists you will have to solve some problems and are thus required to be able to think algorithmically. This unit will present a simple problem, and will study how to solve it, step by step.</p>
+<p>To help you develop the ability to think algorithmically this unit
+will present a simple problem, and will study how to develop an
+algorithm to solve it, step by step.</p>
 
-<p>Before starting, here is a list of simple rules to help you solve most of the problems you will have when programming systems :</p>
+<p>Before starting, here is a list of simple rules to help you solve
+most of the problems you will have when programming systems :</p>
 
 <ul>
-  <li>Try to work a few examples before coding. Find typical cases and extreme examples that might happen.</li>
-  <li>Try to solve the problem on a few examples on <strong>paper</strong> before writing any line of code.</li>
-  <li>While doing so, try to analyse <strong>how</strong> you are solving the problem. Try to write down in english on a piece of paper every step you do mentally to solve the problem. This should give you an outline of your algorithm in what we call <strong>pseudo-code</strong>, ie "code" in english.</li>
-  <li>Also analyze the <strong>what</strong> : what are the inputs, what are the outputs, what are the data structures required for the problem.</li>
-  <li>Once you have all the steps, and made sure that applying these steps on a few examples, try to convert each of the steps into lines of code to make a working program.</li>
+  <li>Work a few examples before coding. Find typical cases and
+  extreme examples that might happen.</li>
+  <li>Solve the problem for a few examples on <strong>paper</strong>
+  before writing any line of code.</li>
+  <li>Analyse <strong>how</strong> you are solving the problem. Write
+  down every step you do to solve the problem. This should give you an
+  outline of your algorithm in what we
+  call <strong>pseudo-code</strong>, i.e. logical steps explained in
+  English.</li>
+  <li>Analyse the <strong>what</strong> : what are the inputs, what
+  are the outputs, what are the data structures required for the
+  problem?</li>
+  <li>Once you have all the steps, and have applied these steps on a
+  few examples, convert each of the steps into lines of code to make a
+  working program.</li>
 </ul>
 
-<p>These are very general rules to solve the problem yourself. But there is ONE rule above all that you should also remember : never reinvent the wheel. Chances are, the problems you are facing in computer science have already been faced by a lot of other people, and there exists an algorithm that does exactly what you want. So if the problem is relatively simple, try to solve it yourself, if the problem is complex look if something doing the job already exists.</p>
+<p>These are very general rules to solve the problem yourself. But
+there is ONE rule above all that you should also remember : never
+reinvent the wheel. Chances are, the problems you are facing in
+computer science have already been faced by a lot of other people, and
+there exists an algorithm that does exactly what you want. So if the
+problem is relatively simple, try to solve it yourself, if the problem
+is complex look for something that already exisits that does the
+job.</p>
 
 <hr>
 
 <h3>Case study : The k-means algorithm</h3>
 
-<p>The example we are going to study is the k-means algorithm (you could google and look at the wikipedia page, but we advise you to follow this page first, then look at other documents). The goal of this section is to solve a problem by using a very common algorithm and learn how to code it from a pseudo-code description.</p>
+<p>The example we are going to study is the k-means algorithm (perhaps
+read Prof. David Mackay's excellent chapter on Clustering from his
+book Inference <a href = "Mackay_clustering.pdf">here</a>, but we
+advise you to follow this page first, then look at other
+documents). The goal of this section is to solve a problem by using a
+very common algorithm and learn how to code it from a pseudo-code
+description.</p>
 
 <h4>The problem : Clustering of data</h4>
 
@@ -59,42 +89,88 @@
 
 <center><img src="img/kmeans_original.png"/></center>
 
-<p>This set of points seems arbitrarily random. Now believe me or not, but this set is actually made of 5 different subsets of points. All the points in a given set are located close to each other in the 2d space. So here is the problem : Given that we know that our set is actually made of 5 subsets, can we find which point belongs to which subset ?</p>
+<p>This set of points seems unstructured -- randomly distributed. They
+were infact generated as 5 different subsets (clusters). All the
+points in a given set are located close to each other in the 2d
+space. So here is the problem : Given that we know that our set is
+actually made of 5 subsets, can we find which point belongs to which
+subset ?</p>
 
-<p>This problem is a very common problem in science. It is a <strong>clustering</strong> or <strong>classification</strong> problem : given a set of points and a set of categories, can we find which point belongs in which category ?</p>
+<p>This problem is a very common problem in science. It is an
+unsupervised learning problem -- <strong>clustering</strong>
+or <strong>classification</strong> problem : given a set of points and
+can we find out which points in the same category ?</p>
 
-<p>Now we could solve this problem by hand easily, but remember that we want to make a program so that we don't have to redo the procedure by hand every time. Moreover, this should be relatively easy to do for 50 points as on the example, but what if the dataset had one million points and instead of being 2d coordinates we were in a space with 10 dimensions. This would be a lot more complicated to do by hand : that's why we want to program an algorithm that will do this for us.</p>
+<p>Now we could solve this problem by hand using our judgement, but if
+we find ourselvs repeating this task, it might save time to write a
+program. Moreover, this should be relatively easy to do for 50 points
+as on the example, but what if the dataset had one million points and
+instead of being 2d coordinates we were in a space with 10 dimensions?
+This would be a lot more complicated to do by hand : so we need to
+program an algorithm that will do this for us.</p>
 
-<p>The k-means algorithm is a very simlpe method for clustering in $k$ categories. The idea is the following : </p>
+<p>The k-means algorithm is a very simlpe method for clustering into
+$k$ categories. The procedure is the following : </p>
 <ol>
-  <li>Draw $k$ random points, one per category. We will call these points <strong>centroids</strong>, and note them $\mathbf{c}_i$, with $i=1..k$.</li>
-  <li>Assign all points of your sample to the category of the nearest centroid.</li>
-  <li>For each category $C_i$, compute the barycenter $\mathbf{b}_i$ of all points assigned to $C_i$.</li>
-  <li>Assign the barycenter position to the centroids.</li>
-  <li>Repeat from step 2 until the difference between the centroids and the barycenter is lower than a certain threshold value $\epsilon$ : $||\mathbf{b}_i - \mathbf{c}_i|| &lt; \epsilon$.
+  <li>Choose $k$ random points, one per category. We will call these
+  points <strong>centroids</strong>, and note them $\mathbf{c}_i$,
+    with $i=1..k$.</li>
+  <li>Find the distance of each sample point to the $k$ centroids.</li>
+  <li>Assign each point of your sample to the nearest centroid.</li>
+  <li>To update the centroids we now look at each category $C_i$, and
+  compute the centre-of-mass (we will call this the barycenter)
+  $\mathbf{b}_i$ of all points assigned to $C_i$.</li>
+  <li>Repeat from step 2 until the difference between the old centroid
+  and the new positon is lower than a certain threshold value
+  $\epsilon$ : $|\mathbf{b}_i - \mathbf{c}_i| &lt; \epsilon$
+  (i.e. very few points are changing to a new classification).
 </ol>
 
-<p>Let's see how this works in practice. Here is a solution generated in five iterations for the current set of data. The circle dots represent the centroids while the crosses are the original points. The colours indicate which class is assigned to which point.</p>
+<p>Let's see how this works in practice. Here is a solution generated
+in five iterations for the current set of data. The circle dots
+represent the centroids while the crosses are the original points. The
+colours indicate which class is assigned to which point.</p>
 
 <center><img src="img/kmeans_ite.gif"/></center>
 
-<p>After five iterations, the algorithm is stable (we say it has <strong>converged</strong> to a solution) : we have successfully classified the data. Let's move on to the coding of the algorith. This might seem complicated, so let's take it slowly and rewrite all parts of the algorithm in pseudo-code first before doing it in Python.</p>
+<p>After five iterations, the algorithm is stable (we say it
+has <strong>converged</strong> to a solution) : we have successfully
+classified the data. Let's move on to the coding of the
+algorithm. This might seem complicated, so let's take it slowly and
+rewrite all parts of the algorithm in pseudo-code first before doing
+it in Python.</p>
 
 <hr>
 
 <h4>Data and structures</h4>
 
-<p>The first question is <strong>what</strong> : what are the inputs, outputs, and data structures we need ?</p>
+<p>The first question is <strong>what</strong> : what are the inputs,
+outputs, and data structures we need ?</p>
 
-<p>The list of points to classify will be given as an input. It will consist in a numpy array with two columns and $N$ line. Let's call this numpy array <code>pts</code>.</p>
+<p>The list of points to classify will be given as an input. It will
+consist in a numpy array with two columns and $N$ lines. Let's call
+this numpy array <code>pts</code>.</p>
 
-<p>As a result of our algorithm, we would like to have a classification, ie a list (or numpy array) with $N$ entries giving the id (a number) of the class for each point. For instance, if $N=8$, we would like to have a result looking like <code>[2, 0, 1, 0, 2, 2, 0, 1]</code>. Let's call this list <code>classes</code>. 
+<p>As a result of our algorithm, we would like to have a
+classification, i.e. a list (or numpy array) with $N$ entries giving
+the number of each cluster to which a point belongs. For instance, if
+we had $N=8$ data points, we would like to have a result <code>[2, 0,
+1, 0, 2, 2, 0, 1]</code>. Let's call this list <code>classes</code>.
 
-<p>We know that we are going to deal with points in a 2d space, so we can represent every point as tuples $(x, y)$. Then, we know that we will be manipulating centroids and barycenter. Since we have $k$ of these, we will store the centroids and barycenters as two numpy arrays of $k$ points. Let's call them <code>centroids</code> and <code>barycenters</code>.</p>
+<p>We know that we are going to deal with points in a 2d space, so we
+can represent every point as tuples $(x, y)$. Then, we know that we
+will be manipulating centroids and barycenter. Since we have $k$ of
+these, we will store the centroids and barycenters as two numpy arrays
+of $k$ points. Let's call them <code>centroids</code>
+and <code>barycenters</code>.</p>
 
-<p>Finally we will have to iterate while we are not done. Since we only know of while loops to do this kind of work, we will create a boolean variable that will tell us if we are finished or not. Let's call it <code>done</code>.
+<p>Finally we will have to iterate while we are not done. Since we
+only know of while loops to do this kind of work, we will create a
+boolean variable that will tell us if we are finished or not. Let's
+call it <code>done</code>.
 
-<p>That's about it for the data and structures ! Let's move on to initial conditions</p>
+<p>That's about it for the data and structures ! Let's move on to
+initial conditions</p>
 
 <h4>Initial conditions</h4>
 
@@ -121,11 +197,14 @@ Set epsilon=1.0e-5
 Read pts from a file
 Initialize centroids randomly</code></pre>
 
-<p>Then, we know from step 5 that we will have to iterate while we are not done. Thus we need a loop :</p>
+<p>Then, we know from step 5 that we will have to iterate while we are
+not done. Thus we need a loop :</p>
 
 <pre><code>while we are not done :</code></pre>
 
-<p>Inside this, we need have to calculate the distance from each points to each centroid, then assign a category for each point corresponding to the closest centroid</p>
+<p>Inside this, we need have to calculate the distance from each
+points to each centroid, then assign a category for each point
+corresponding to the closest centroid</p>
 
 <pre><code>for each point P in pts:
     c_i = find the closest centroid to P
@@ -142,7 +221,10 @@ Initialize centroids randomly</code></pre>
 
 <pre><code>done = (||barycenters - centroids|| &lt; epsilon)</code></pre>
 
-<p>Finally, we update the position of the centroids. Note that we are not doign this before updating the variable <code>done</code>. Otherwise we would be done necessarily after one iteration ... since the two variables would be equal !</p>
+<p>Finally, we update the position of the centroids. Note that we are
+not doing this before updating the
+variable <code>done</code>. Otherwise we would be done necessarily
+after one iteration ... since the two variables would be equal !</p>
 
 <pre><code>centroids = barycenters</code></pre>
 
@@ -162,7 +244,7 @@ while we are not done:
         selection = all points P in pts	for which classes[P] = C
         barycenter[C] = sum(selection) / len(selection)
     
-    done = (||barycenters - centroids|| &lt; epsilon)
+    done = (|barycenters - centroids| &lt; epsilon)
     centroids = barycenters
 </code></pre>
 
@@ -272,6 +354,7 @@ plt.show()</code></pre>
 <p> When you have read through this Unit and coded the k-means algorithm, it's time for <a href="exercise9.html">exercise 9</a> </p>
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
+</div>
 </BODY>
 <!-- Syntax highlighting -->
 <script language="JavaScript" src="prism.js" type="text/javascript"></script>

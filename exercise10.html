@@ -10,39 +10,88 @@
 <body>
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
 <div align="center"><h1>1EM - Essential Mathematics / Computing</h1></div>
-<P>
-<H2>Exercise 10: Debugging</H2>
-</P>
+  
+<h2>Exercise 10: Debugging</h2>
+
+<p>Make sure you have read unit 10 before attempting the following exercises</p>
+
+<h3>1 - Interpreter errors and wrong results</h3>
+
+<p>Correct the following code computing the <a href="https://en.wikipedia.org/wiki/Riemann_zeta_function#Euler_product_formula">Zeta function</a> of a value. The values from <code>scipy</code> are included to check if your value is correct :</p>
+
+<pre><code># Do not modify this
+from scipy.special import zetac
+zeta = lambda x:zetac(x)+1.0
+# -----
+
+def my_zeta(s, n):
+    ''' 
+    Zeta function to order n, in real domain :
+    Summing for i from 1 to n (included) : 1.0/i**s
+    '''
+    tot = 0.0
+    for i in range(n):
+        tot *= 1.0 / i**s
+    return tot
 
 
-<P>
-Look back at some of your previous code, and see if you have generated
-any error messages other than those listed in unit 8. Make a short
-example to illustrate the problem they are telling you about.
-</P>
-<p>
-  Try and debug the following program to calculate the factorial of an integer.
-</p>
+# No modifications after this point
+s1 = 10.0
+s2 = 15.0
 
-<pre>
-  <code>
-def fact(n):
-    """Return the factorial of a given number. ""
-    r = 2
-    while n > 4
-        r = r * n
-        n = n - "2"
-    return r
+print('Original value : ', zeta(s1))
+print('Our value : ', my_zeta(s1, 1000))
+print('Original value : ', zeta(s2))
+print('Out value : ', my_zela(s2, 1000))</code></pre>
 
-N = inputt("Input an integer: ")
-print "N! is ", fact(int( N )))
+<hr>
+<h3>2 - Wrong results : </h3>
 
-  </code>
-</pre>
-<div>
-It is time to move on to <a href="unit11.html">Unit 11</a>.
+<p>Correct the following code computing the Eulerian distance between two points (ax, ay) and (bx, by) :</p>
 
-</div>
+<pre><code>def distance(ax, ay, bx, by):
+    return sqrt(ax-bx*ax-bx-ay-by*ay-by)
+
+# No modifications after this point
+print('Distance between (0, 0) and (5, 0) : ', distance(0, 0, 5, 0))
+print('Distance between (0, 0) and (1, 1) : ', distance(0, 0, 1, 1))</code></pre>
+
+<hr>
+<h3>3 - More wrong results : </h3>
+
+<p>Correct the following code computing the <a href="https://en.wikipedia.org/wiki/Determinant">determinant</a> of a 3x3 Matrix :</p>
+
+<pre><code>import numpy as np
+
+def determinant(X):
+    ''' Computes the determinant of a 3x3 matrix '''
+    return X[0,0]*X[1,1]*X[2,2] - X[0,2]*X[1,2]*X[2,1] + X[0,2]*X[1,0]*X[2,1] - X[0,0]*X[1,2]*X[2,1] - X[0,1]*X[1,0]*X[2,2] - X[0,0]*X[2,1]*X[2,0]
+
+# No modifications after this point
+random_matrix = np.random.rand(3, 3)
+
+print('Correct determinant : ', np.linalg.det(random_matrix))
+print('Our determinant : ', determinant(random_matrix))</code></pre>
+
+<hr>
+<h3>4 - Handling exceptions : </h3>
+
+<p>We are going to use the exceptions handling to code a little guessing game. This is just a toy example to help you understand how <code>try/except</code> works. Start by downloading <a href="guess.py">this module</a>. This module, when loaded, initializes a integer between 0 and 1000 in a variable called <code>secret_val</code>. The module also defines a function <code>guess</code> that takes an integer as parameter. If the integer passed to guess is smaller than <code>secret_val</code> the function will raise an exception of type <code>TooSmallException</code>. Similarly, if the value is too big, it will generate an exception of type <code>TooBigException</code>. Finally if the value is correct, the code will send an exception of type <code>RightValueException</code>. Please note that these exceptions are custom exceptions and are not defined natively in Python. We haven't learnt how to define custom exception because it is out of the scope of this course, however if you are interested in learning how to do so, you can learn the <a href="https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions">appropriate pages</a> in the Python documentation.</p>
+
+<p>The goal of this exercise is to code a simple program that will ask the user an integer number until they find the correct secret value of the program. For this, follow these instructions :</p>
+
+<ol>
+  <li>Start by importing the function and exceptions (but not the secret value !) :
+    <pre><code>from guess import guess, TooSmallException, TooBigException, RightValueException</code></pre></li>
+  <li>Ask the user for a value</li>
+  <li>Call the <code>guess</code> function with this value, and encapsulate the call in a <code>try/except</code> block to catch all three exceptions</li>
+  <li>Depending on the exception, indicate to the user if the secret value is bigger, smaller, or if they have found the correct value</li>
+  <li>Encapsulate all of this in a loop, asking the user and testing the value until they have found the right one</li>
+</ol>
+
+<br><br>
+<hr>
+<p>It is time to move on to <a href="unit11.html">Unit 11</a>.</p>
 
 <script language="JavaScript" src="end.js" type="text/javascript"></script>
 </BODY>

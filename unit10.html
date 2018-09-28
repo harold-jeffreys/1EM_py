@@ -12,20 +12,25 @@
 <script language="JavaScript" src="menubar.js" type="text/javascript"></script>
 
 <div align="center"><h1>1EM - Essential Mathematics / Computational Laboratory</h1></div>
-
+<div>
 <h2>Unit 10: Debugging:  Development of techniques to fix coding problems</h2>
 
 <h3>Introduction</h3>
 
 <p>While it would be nice if every program you write works first time, this is rarely the case.  Planning the structure in advance can help write better code, but being able to fix non-working problems, or &quot;debugging&quot; is a useful skill to develop.  This unit introduces some methods of debugging. </p>
 
-<p>Let's get one thing clear first : Debugging is unavoidable. No matter how good at coding you are, you will always have to spend considerable amount of time debugging codes. This being said, there are ways to help you in debugging and solving the problems you will encounter.</p>
+<p>Let's get one thing clear first : Debugging is unavoidable. No
+matter how good at coding you are, you will always have to spend
+considerable amount of time debugging codes. This being said, there
+are ways to help you in debugging and solving the problems you will
+encounter.</p>
 
 <hr>
 
 <h3>Interpreter messages</h3>
 
-<p>In the previous units, you must have had errors from Python directly. These errors are usually looking like :</p>
+<p>In the previous units, you inevitably have had errors from Python
+directly. These errors are usually looking like :</p>
 
 <pre>ZeroDivisionError: float division by zero</pre>
 
@@ -76,7 +81,11 @@ Traceback (most recent call last):
 
 <h3>Handling exceptions</h3>
 
-<p>From the example we have just seen, we know that as soon as our program goes over an index of 5, it will crash since the list has only 6 elements. Of course this is an error we could easily fix by forbiding the user to enter an invalid value. But for the sake of ther argument, let's imagine we cannot fix things this way.</p>
+<p>From the example we have just seen, we know that as soon as our
+program goes over an index of 5, it will crash since the list has only
+6 elements. Of course this is an error we could easily fix by
+forbidding the user to enter an invalid value. But for the sake of
+ther argument, let's imagine we cannot fix things this way.</p>
 
 <p>Python has a very useful mechanism to handle exceptions when they occur : <code>try</code>/<code>except</code>. The <code>try</code> command starts a new block of code in which exceptions can be <code>caught</code>. That means that if an exception happens in this block of code you can execute another block of code instead of having the program crash. This extra block of code will be defined in an <code>except</code> block right after the <code>try</code> block. Considering the following modification of our <code>print_values</code> function :</p>
 
@@ -99,7 +108,10 @@ Traceback (most recent call last):
 <hr>
 <h3>Multiple exceptions</h3>
 
-<p>The <code>except</code> instruction can be used to catch different types of exceptions. The default behaviour (as we have used above) catches any exception and executes what is inside the <code>except</code>. But consider the following code :</p>
+<p>The <code>except</code> instruction can be used to catch different
+types of exceptions. The default behaviour (as we have used above)
+catches any exception and executes what is inside
+the <code>except</code> block. But consider the following code :</p>
 
 <pre><code>my_list = [1, 2, 3, 4, 5, 6]
 
@@ -134,20 +146,20 @@ except ZeroDivisionError:
     
     <tr>
       <td><code>AttributeError</code></td>
-      <td>When you try to use an attribute that does not exist</td>
+      <td>Trying to use an attribute that does not exist</td>
       <td><pre><code>a = [1, 2, 3, 4]
 a.imaginary_attribute = 12</code></pre></td>
     </tr>
 
     <tr>
       <td><code>ImportError</code></td>
-      <td>When you import a non-existing module</td>
+      <td>Importing a non-existing module</td>
       <td><pre><code>import a_module_that_does_not_exist</code></pre></td>
     </tr>
 
     <tr>
       <td><code>IndexError</code></td>
-      <td>When you access a list or tuple outside of its bounds</td>
+      <td>Accessing a list or tuple outside of its bounds</td>
       <td><pre><code>a = [1, 2, 3]
 b = ('a', 'b', 'c')
 print(a[6], b[12])</code></pre></td>	    
@@ -155,20 +167,20 @@ print(a[6], b[12])</code></pre></td>
 
     <tr>
       <td><code>KeyError</code></td>
-      <td>When you access a disctionary with a key that does not exist</td>
+      <td>Access a dictionary with a key that does not exist</td>
       <td><pre><code>d = {'a':10, 'b':12}
 print(d['c'])</code></pre></td>
     </tr>
 
     <tr>
       <td><code>NameError</code></td>
-      <td>When using a variable that has not been declared before</td>
+      <td>Using a variable that has not been declared before</td>
       <td><pre><code>a = non_declared_variable</code></pre></td>
     </tr>
 
     <tr>
       <td><code>RecursionError</code></td>
-      <td>When a recursive function has been called too many times</td>
+      <td>Recursive function has been called too many times</td>
       <td><pre><code>def recursive(x):
     recursive(x)
 
@@ -177,47 +189,83 @@ recursive(10)</code></pre></td>
 
     <tr>
       <td><code>TypeError</code></td>
-      <td>When using an invalid type for an operation</td>
+      <td>Using an invalid type for an operation</td>
       <td><pre><code>a = 10 + 'abc'</code></pre></td>
     </tr>
 
     <tr>
       <td><code>ValueError</code></td>
-      <td>When using an inappropriate value for a function</td>
+      <td>Using an inappropriate value for a function</td>
       <td><pre><code>from math import sqrt
 print(sqrt(-5.0))</code></pre></td>
     </tr>
 
     <tr>
       <td><code>ZeroDivisionError</code></td>
-      <td>When dividing by zero</td>
+      <td>Dividing by zero</td>
       <td><pre><code>print(1.0 / 0.0)</code></pre></td>
     </tr>
   </table>
 </p>
 
-<p>This list is non exhaustive. If you want the complete list of native exceptions in Python, follow this <a href="https://docs.python.org/3/library/exceptions.html#Exception">link</a></p>
+<p>This list is non exhaustive (there are other Exceptions). If you
+want the complete list of native exceptions in Python, follow
+this <a href="https://docs.python.org/3/library/exceptions.html#Exception">link</a></p>
 
 <hr>
 
 <h3>Other debugging</h3>
 
-<p>Exception handling should cover part of your bugs. Unfortunately, that will be the easiest part : the one where the program crashes. But there is another class of bugs, unfortunately more frequent and a lot more annoying : wrong results.</p>
+<p>Exception handling should cover part of your bugs. Unfortunately,
+these bugs are the easiest to find : the one where the program
+crashes. There is another class of bugs, unfortunately more frequent
+and a lot more annoying : wrong results.</p>
 
-<p>When your program is running perfectly but not giving the right answer, that is when trouble starts, because there is no easy way to debug this. To avoid as much as possible wrong results or to get out of such an error as quickly as possible, here are a few rules to respect :</p>
+<p>When your program is running perfectly but not giving the right
+answer, that is when trouble starts, because there is no easy way to
+debug this. To avoid as much as possible wrong results or to get out
+of such an error as quickly as possible, here are a few rules to
+respect :</p>
 
 <ul>
-  <li><strong>Name your variables explicitely</strong> : Each variable should have a proper name and your code should have as much semantics as possible. By semantics, we mean that your code should be written in a way to be as clear as possible over its intentions : what are we computing, when, how and why.</li>
-  <li><strong>Study the limit cases</strong>.This joins what we were saying in the previous unit : always try to determine which are the cases that might be poorly managed by the algorithms you are using</li>
-  <li><strong>Print, print and more printing</strong>. In these cases, printing is your best friend. You should track the evolution of the main variables of your program so that you make sure that everything evolves as you want it to !</li>
-  <li><strong>More semantics</strong>. You should factor as much code as possible in functions. These functions should represent semantic units that you use in your code making everything clear for you and the other developers that might read the code</li>
-  <li><strong>Unit testing</strong>. Unit testing is a very simple yet very efficient way to make sure your code is flawless. As soon as your code is well segmented and divided in functions, make sure to test each of these functions outside of your program. Each single functionality of your code should come with an extensive list of tests to make sure that everything works accordingly to plan. By doing this, you make sure that every single brick that constitutes your program is sane and well-behaving. You can read more about unit tests in Python <a href="https://docs.python.org/3.5/library/unittest.html">here</a> for the python module and <a href="https://docs.python-guide.org/writing/tests/">here</a> for a tutorial on how to use these modules for your own code.</li>
+  <li><strong>Name your variables explicitly</strong> : Each variable
+  should have a proper name and your code should have as much
+  semantics as possible. By semantics, we mean that your code should
+  be written in a way to be as clear as possible over its intentions :
+  what are we computing, when, how and why.</li>
+  <li><strong>Study the limit cases</strong>.This was covered in the
+  previous unit : always try to determine which are the cases that
+  might be poorly managed by the algorithms you are using</li>
+  <li><strong>Print, print and more printing</strong>. In these cases,
+  printing is your best friend. You should track the evolution of the
+  main variables of your program so that you make sure that everything
+  evolves as you want it to !</li>
+  <li><strong>More semantics</strong>. You should factor as much code
+  as possible in functions. These functions should represent semantic
+  units that you use in your code making everything clear for you and
+  the other developers that might read the code</li>
+  <li><strong>Unit testing</strong>. Unit testing is a very simple yet
+  very efficient way to make sure your code is flawless. As soon as
+  your code is well segmented and divided in functions, make sure to
+  test each of these functions outside of your program. Each single
+  functionality of your code should come with an extensive list of
+  tests to make sure that everything works accordingly to plan. By
+  doing this, you make sure that every single brick that constitutes
+  your program is sane and well-behaved. You can read more about unit
+  tests in
+  Python <a href="https://docs.python.org/3.5/library/unittest.html">here</a>
+  for the python module
+  and <a href="https://docs.python-guide.org/writing/tests/">here</a>
+  for a tutorial on how to use these modules for your own code.</li>
 </ul>
 
-<p>One last thing : debugging takes time and experience. So the more you code, the easier debugging will be.</p>
+<p>One last thing : debugging takes time and experience. So the more
+you code, the easier debugging will be.</p>
 
-<div>Now move on to <a href="exercise10.html">Exercise 10</a>, where you can test some of these techniques.</div>
-<script language="JavaScript" src="end.js" type="text/javascript"></script>
+<div>Now move on to <a href="exercise10.html">Exercise 10</a>, where
+you can test some of these techniques.</div>
+
+</div>
 </BODY>
 <!-- Syntax highlighting -->
 <script language="JavaScript" src="prism.js" type="text/javascript"></script>
